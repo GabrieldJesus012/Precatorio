@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="design/style.css">
+    <link rel="shortcut icon" href="assets/ico.ico" type="image/x-icon">
+    <script src="design/script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Atualização monetária</h1>
+        <img div="icone" src="assets/tjpi.png" alt="">
+    </header>
+    <main>
+        <table class="tabela">
+            <tr><th colspan="2"> DADOS GERAIS</th></tr>
+            <tr>
+                <td><label for="npre">Número do Precatório:</label></td>
+                <td><input type="number" id="npre" placeholder="0000000-00.0000.0.00.0000"></td>
+            </tr>
+            <tr>
+                <td><label for="planoO">Plano Orçamentario:</label></td>
+                <td><input type="number" id="planoO" placeholder="Ex: 2020"></td>
+            </tr>
+            <tr>
+                <td><label for="inome">Exequente:</label></td>
+                <td><input type="text" id="inome"></td>
+            </tr>
+            <tr>
+                <td><label for="inomee">Executado:</label></td>
+                <td><input type="text" id="inomee"></td>
+            </tr>
+            <tr>
+                <td><label for="mes">Data do cálculo homologado:</label></td>
+                <td>
+                    <select id="mes">
+                        <option value="Janeiro">Janeiro</option>
+                        <option value="Fevereiro">Fevereiro</option>
+                        <option value="Março">Março</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Maio">Maio</option>
+                        <option value="Junho">Junho</option>
+                        <option value="Julho">Julho</option>
+                        <option value="Agosto">Agosto</option>
+                        <option value="Setembro">Setembro</option>
+                        <option value="Outubro">Outubro</option>
+                        <option value="Novembro">Novembro</option>
+                        <option value="Dezembro">Dezembro</option>
+                    </select>
+                    /
+                    <input type="number" id="ano" placeholder="Ano">
+                </td>
+            </tr>
+            <tr><th colspan="2"> DADOS DO CALCULO</th></tr>
+            <tr>
+                <td><label for="tipoCalculo">Tipo de Cálculo:</label></td>
+                <td class="tipoCalculo">
+                    <div>
+                        <input type="radio" id="calculoCompleto" name="tipoCalculo" value="completo">
+                        <label class="radioLabel" for="calculoCompleto">Cálculo Completo</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="calculoReduzido" name="tipoCalculo" value="reduzido" checked>
+                        <label class="radioLabel" for="calculoReduzido">Cálculo Simplificado</label>
+                    </div>
+                </td>
+            </tr>
+            <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> MÓDULO SIMPLIFICADO</th></tr>
+            <tr id="principalRow" class="ocultar">
+                <td><label for="valprin">Principal:</label></td>
+                <td><input type="text" id="valprin"></td>
+            </tr>
+            <tr id="jurosRow" class="ocultar">
+                <td><label for="valjur">Juros:</label></td>
+                <td><input type="text" id="valjur"></td>
+            </tr>
+            <tr id="totalRow" class="ocultar">
+                <td><label for="total">Total:</label></td>
+                <td><span id="total">R$ 0,00</span></td>
+            </tr>
+
+            <tr><th colspan="2" id="completoROW" class="ocultarcompl"> MÓDULO COMPLETO</th></tr>
+            <tr>
+                <td><label for="valcomp">Digite os valores:</label></td>
+                <td><button class="button">Adicionar Valor</button></td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

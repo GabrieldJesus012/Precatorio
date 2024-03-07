@@ -1,0 +1,94 @@
+@charset "UTF-8";
+*{
+    margin:0px;
+    padding:0px;
+}
+
+header{
+    text-align: center;
+}
+
+header img {
+    width: 90px; 
+    display: block; 
+    margin: 0 auto; 
+    padding: 5px;
+}
+
+main{
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.418);
+    min-width: 300px;
+    max-width: 1000px;
+    margin: auto; 
+    margin-bottom: 30px;
+    padding: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px
+}
+
+.tabela td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.tabela th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.tabela input,.tabela textarea {
+    width: 98%;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    padding: 5px;
+    text-align: left;
+    border-radius: 5px;
+}
+
+.tabela select {
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    padding: 5px;
+    text-align: left;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.tabela .tipoCalculo {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.button {
+    padding: 5px 10px;
+    font-size: small;
+    border: none;
+    border-radius: 5px;
+    background-color: #012E40; /* Cor de fundo */
+    color: #F2E3D5; /* Cor do texto */
+}
+
+.button:hover {
+    background-color: #3CA6A6; /* Cor de fundo ao passar o mouse */
+    color: #F2E3D5; /* Cor do texto ao passar o mouse */
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #024959; 
+    color: #f8f9fa; 
+}
+
+
