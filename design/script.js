@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const lastRow = tabela.rows[tabela.rows.length - 1]; // Obtém a última linha existente na tabela
         const newRow = tabela.insertRow(lastRow.rowIndex + 1); // Insere a nova linha abaixo da última linha existente
 
-        // Célula para mes e ano
+        // Célula para mês e ano
         const tdMesAno = document.createElement('td');
 
         // Título para mês
@@ -129,7 +129,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectMes = document.createElement('select');
         selectMes.name = 'mes';
         selectMes.id = 'mes';
-        
+        selectMes.style.width = '100px'; 
+        selectMes.style.fontSize = '12px'; 
+        selectMes.style.marginRight = '10px';
+
         // Adiciona a opção "Selecione" desabilitada
         const optionSelecione = document.createElement('option');
         optionSelecione.value = '';
@@ -138,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         optionSelecione.selected = true;
         selectMes.appendChild(optionSelecione);
         
-        // Adiciona opções para os meses
         const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro", "13º Salario", "Férias"];
         meses.forEach(mes => {
             const option = document.createElement('option');
@@ -149,16 +151,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         tdMesAno.appendChild(selectMes);
 
-        // Título para ano
         const labelAno = document.createElement('label');
         labelAno.textContent = ' Ano: ';
         tdMesAno.appendChild(labelAno);
 
-        // Input para o ano
         const inputAno = document.createElement('input');
         inputAno.type = 'number';
         inputAno.id = 'ano';
         inputAno.placeholder = 'Ano';
+        inputAno.style.width = '80px'; 
+        inputAno.style.fontSize = '12px'; 
         tdMesAno.appendChild(inputAno);
 
         newRow.appendChild(tdMesAno); // Adiciona a célula à nova linha
@@ -174,11 +176,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Input para o valor
         const inputValor = document.createElement('input');
         inputValor.type = 'text';
+        inputValor.style.width = '100px'; // Defina o tamanho do input para o valor
+        inputValor.style.fontSize = '12px'; // Define o tamanho da fonte
         tdValor.appendChild(inputValor);
 
         // Botão de exclusão
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'X';
+        deleteButton.style.marginLeft = '5px';
         deleteButton.addEventListener('click', function() {
             tabela.deleteRow(newRow.rowIndex);
         });
@@ -189,11 +194,5 @@ document.addEventListener('DOMContentLoaded', function() {
         inputsAdded = true; // Define a flag como true para indicar que os inputs foram adicionados
     });
 });
-
-
-
-
-
-
 
 
