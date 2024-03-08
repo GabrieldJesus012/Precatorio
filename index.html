@@ -36,6 +36,7 @@
                 <td><label for="mes">Data do cálculo homologado:</label></td>
                 <td>
                     <select id="mes">
+                        <option value="" disabled selected>Selecione</option>
                         <option value="Janeiro">Janeiro</option>
                         <option value="Fevereiro">Fevereiro</option>
                         <option value="Março">Março</option>
@@ -49,7 +50,7 @@
                         <option value="Novembro">Novembro</option>
                         <option value="Dezembro">Dezembro</option>
                     </select>
-                    /
+                    <br>/ <br>
                     <input type="number" id="ano" placeholder="Ano">
                 </td>
             </tr>
@@ -67,6 +68,7 @@
                     </div>
                 </td>
             </tr>
+
             <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> MÓDULO SIMPLIFICADO</th></tr>
             <tr id="principalRow" class="ocultar">
                 <td><label for="valprin">Principal:</label></td>
@@ -81,12 +83,19 @@
                 <td><span id="total">R$ 0,00</span></td>
             </tr>
 
-            <tr><th colspan="2" id="completoROW" class="ocultarcompl"> MÓDULO COMPLETO</th></tr>
-            <tr>
-                <td><label for="valcomp">Digite os valores:</label></td>
-                <td><button class="button">Adicionar Valor</button></td>
+            <tr><th colspan="2" id="completoROW"> MÓDULO COMPLETO</th></tr>
+            <tr id="valcomp" class="ocultarcompl" >
+                <td>
+                    <label for="valcomp" class="ocultarcompl">Digite os valores:</label>
+                </td>
+                <td>
+                    <button class="button" class="ocultarcompl" id="addValorButton">Adicionar Valor</button>
+                </td>
             </tr>
         </table>
+        <div class="button-container">
+            <button id="calcular-button" class="button2">Calcular</button>
+        </div>
     </main>
 </body>
 </html>

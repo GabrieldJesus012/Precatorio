@@ -48,7 +48,7 @@ main{
 }
 
 .tabela input,.tabela textarea {
-    width: 98%;
+    width: 95%;
     border: 1px solid #ddd;
     font-size: 12px;
     padding: 5px;
@@ -57,7 +57,7 @@ main{
 }
 
 .tabela select {
-    width: 100%;
+    width: 97%;
     border: 1px solid #ddd;
     font-size: 12px;
     padding: 5px;
@@ -76,19 +76,51 @@ main{
     font-size: small;
     border: none;
     border-radius: 5px;
-    background-color: #012E40; /* Cor de fundo */
-    color: #F2E3D5; /* Cor do texto */
+    background-color: #012E40; 
+    color: #F2E3D5; 
 }
 
 .button:hover {
-    background-color: #3CA6A6; /* Cor de fundo ao passar o mouse */
-    color: #F2E3D5; /* Cor do texto ao passar o mouse */
+    background-color: #3CA6A6; 
+    color: #F2E3D5; 
     cursor: pointer;
 }
 
 .button:active {
     background-color: #024959; 
     color: #f8f9fa; 
+}
+
+.centered-cell {
+    text-align: center;
+}
+
+.button-container {
+    text-align: center; 
+}
+
+.button2 {
+    padding: 5px 10px;
+    font-size: small;
+    border: none;
+    border-radius: 5px;
+    background-color: #4AB36C; 
+    color: #F2E3D5; 
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button2:hover {
+    background-color: #29A2D4; 
+    color: #F2E3D5; 
+}
+
+.button2:active {
+    background-color: #EC2028; 
+}
+
+.button2:focus {
+    outline: none; 
 }
 
 
