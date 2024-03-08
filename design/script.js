@@ -165,20 +165,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
         newRow.appendChild(tdMesAno); // Adiciona a célula à nova linha
 
-        // Célula para o valor
-        const tdValor = document.createElement('td');
+        // Célula para o valor e juros
+        const tdValorJuros = document.createElement('td');
 
         // Rótulo para o valor
         const labelValor = document.createElement('label');
         labelValor.textContent = 'Valor:';
-        tdValor.appendChild(labelValor);
+        tdValorJuros.appendChild(labelValor);
 
         // Input para o valor
         const inputValor = document.createElement('input');
-        inputValor.type = 'text';
+        inputValor.type = 'number';
         inputValor.style.width = '100px'; // Defina o tamanho do input para o valor
         inputValor.style.fontSize = '12px'; // Define o tamanho da fonte
-        tdValor.appendChild(inputValor);
+        tdValorJuros.appendChild(inputValor);
+
+        // Espaçamento entre Valor e Juros
+        const spacer = document.createElement('span');
+        spacer.textContent = ' '; // Defina um espaço
+        tdValorJuros.appendChild(spacer);
+
+        // Rótulo para os juros
+        const labelJuros = document.createElement('label');
+        labelJuros.textContent = 'Juros:';
+        tdValorJuros.appendChild(labelJuros);
+
+        // Input para os juros
+        const inputJuros = document.createElement('input');
+        inputJuros.type = 'text';
+        inputJuros.style.width = '100px'; // Defina o tamanho do input para os juros
+        inputJuros.style.fontSize = '12px'; // Define o tamanho da fonte
+        inputJuros.placeholder = 'Valor em %'; // Define o placeholder
+        inputJuros.addEventListener('change', function() {
+            const juros = parseFloat(inputJuros.value.replace(',', '.'));
+            if (!isNaN(juros)) {
+                inputJuros.value = juros.toFixed(2) + '%';
+            }
+        });
+        tdValorJuros.appendChild(inputJuros);
 
         // Botão de exclusão
         const deleteButton = document.createElement('button');
@@ -187,12 +211,15 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteButton.addEventListener('click', function() {
             tabela.deleteRow(newRow.rowIndex);
         });
-        tdValor.appendChild(deleteButton);
+        tdValorJuros.appendChild(deleteButton);
 
-        newRow.appendChild(tdValor); // Adiciona a célula à nova linha
+        newRow.appendChild(tdValorJuros); // Adiciona a célula do valor e juros à nova linha
 
         inputsAdded = true; // Define a flag como true para indicar que os inputs foram adicionados
     });
 });
+
+
+
 
 
