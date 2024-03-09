@@ -252,3 +252,4 @@ function calcularIndice() {
         elementoIndice2.appendChild(inputIndice.cloneNode(true));
     }
 }
+
