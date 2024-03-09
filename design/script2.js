@@ -4,6 +4,8 @@ function atualizarValor() {
     var valorInserido = document.getElementById("valprin").value;
     // Atualiza o conteúdo do segundo td com o valor inserido
     document.getElementById("valorprincinformado").innerText = valorInserido;
+
+    calcularIndice();
 }
 
 function atualizarValor2() {
@@ -11,6 +13,8 @@ function atualizarValor2() {
     var valorInserido2 = document.getElementById("valjur").value;
     // Atualiza o conteúdo do segundo td com o valor inserido
     document.getElementById("valorjuroinformado").innerText = valorInserido2;
+
+    calcularIndice();
 }
 
 
@@ -326,22 +330,5 @@ function calcularIndice() {
     }
 }
 
-// Adicione a chamada para atualizar a multiplicação ao atualizar o valor do principal
-function atualizarValor() {
-    var valorInserido = parseFloat(document.getElementById("valprin").value);
-    document.getElementById("valorprincinformado").innerText = valorInserido;
-
-    // Chamada para recalcular a multiplicação
-    calcularIndice();
-}
-
-// Adicione a chamada para atualizar a multiplicação ao atualizar o valor dos juros
-function atualizarValor2() {
-    var valorInserido2 = parseFloat(document.getElementById("valjur").value);
-    document.getElementById("valorjuroinformado").innerText = valorInserido2;
-
-    // Chamada para recalcular a multiplicação
-    calcularIndice();
-}
 
 
