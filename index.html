@@ -72,15 +72,15 @@
             <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> MÓDULO SIMPLIFICADO</th></tr>
             <tr id="principalRow" class="ocultar">
                 <td><label for="valprin">Principal:</label></td>
-                <td><input type="text" id="valprin"></td>
+                <td><input type="text" id="valprin" onkeyup="atualizarValor()"></td>
             </tr>
             <tr id="jurosRow" class="ocultar">
                 <td><label for="valjur">Juros:</label></td>
-                <td><input type="text" id="valjur"></td>
+                <td><input type="text" id="valjur" onkeyup="atualizarValor2()"></td>
             </tr>
             <tr id="totalRow" class="ocultar">
                 <td><label for="total">Total:</label></td>
-                <td><span id="total">R$ 0,00</span></td>
+                <td><span id="total" >R$ 0,00</span></td>
             </tr>
 
             <tr><th colspan="2" id="completoROW"> MÓDULO COMPLETO</th></tr>
@@ -97,5 +97,53 @@
             <button id="calcular-button" class="button2">Calcular</button>
         </div>
     </main>
+    <section id="section">
+        <table class="tabela2">
+            <tr>
+                <th></th>
+                <th>Valor Devido</th>
+                <th>Índice de Correção</th>
+                <th>Valor atualizado em Dez/2021</th>
+                <th>Juros</th>
+                <th>Valor Juros</th>
+                <th>Valor atualizado com Juros Dez/2021</th>
+                <th>Índice de Atualização – Selic</th>
+                <th>Valor Atualizado</th>
+            </tr>
+            <tr>
+                <td>Principal:</td>
+                <td id="valorprincinformado">0</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Juros:</td>
+                <td id="valorjuroinformado"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>TOTAL:</th>
+                <td id="tot"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </section>
 </body>
 </html>

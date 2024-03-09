@@ -27,6 +27,21 @@ main{
     border-bottom-right-radius: 10px;
 }
 
+#section {
+    display: none; /* Oculta a seção inicialmente */
+}
+
+section{
+    background-color:#F2C6C2;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.418);
+    min-width: 360px;
+    max-width: 1690px;
+    margin: auto; 
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
 .tabela {
     width: 100%;
     border-collapse: collapse;
@@ -124,3 +139,32 @@ main{
 }
 
 
+.tabela2 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px
+}
+
+
+.tabela2 td {
+    border: 1px solid #000000;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.tabela2 th {
+    border: 1px solid #000000;
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.tabela2 input,.tabela textarea {
+    width: 95%;
+    border: 1px solid #000000;
+    font-size: 12px;
+    padding: 5px;
+    text-align: left;
+    border-radius: 5px;
+}
