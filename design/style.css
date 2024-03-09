@@ -161,15 +161,16 @@ section{
 }
 
 .tabela2 input,.tabela textarea {
-    width: 95%;
+    width: 66%;
     border: 1px solid #000000;
     font-size: 12px;
-    padding: 5px;
-    text-align: left;
+    padding: 3px;
     border-radius: 5px;
+    text-align: center;
 }
 
 .totnao{
     text-align: center;
     font-weight: bolder;
 }
+

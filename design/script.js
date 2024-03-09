@@ -238,18 +238,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//section calc
-function atualizarValor() {
-    // Obtém o valor inserido pelo usuário
-    var valorInserido = document.getElementById("valprin").value;
-    // Atualiza o conteúdo do segundo td com o valor inserido
-    document.getElementById("valorprincinformado").innerText = valorInserido;
-}
 
-function atualizarValor2() {
-    // Obtém o valor inserido pelo usuário
-    var valorInserido2 = document.getElementById("valjur").value;
-    // Atualiza o conteúdo do segundo td com o valor inserido
-    document.getElementById("valorjuroinformado").innerText = valorInserido2;
-}
 

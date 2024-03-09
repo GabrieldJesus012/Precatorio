@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="design/style.css">
     <link rel="shortcut icon" href="assets/ico.ico" type="image/x-icon">
     <script src="design/script.js"></script>
+    <script src="design/script2.js"></script>
     <title>Atualização de Cálculo</title>
 </head>
 <body>
@@ -35,23 +36,23 @@
             <tr>
                 <td><label for="mes">Data do cálculo homologado:</label></td>
                 <td>
-                    <select id="mes">
+                    <select id="mes" >
                         <option value="" disabled selected>Selecione</option>
-                        <option value="Janeiro">Janeiro</option>
-                        <option value="Fevereiro">Fevereiro</option>
-                        <option value="Março">Março</option>
-                        <option value="Abril">Abril</option>
-                        <option value="Maio">Maio</option>
-                        <option value="Junho">Junho</option>
-                        <option value="Julho">Julho</option>
-                        <option value="Agosto">Agosto</option>
-                        <option value="Setembro">Setembro</option>
-                        <option value="Outubro">Outubro</option>
-                        <option value="Novembro">Novembro</option>
-                        <option value="Dezembro">Dezembro</option>
+                        <option value="janeiro">janeiro</option>
+                        <option value="fevereiro">fevereiro</option>
+                        <option value="março">março</option>
+                        <option value="abril">abril</option>
+                        <option value="maio">maio</option>
+                        <option value="junho">junho</option>
+                        <option value="julho">julho</option>
+                        <option value="agosto">agosto</option>
+                        <option value="setembro">setembro</option>
+                        <option value="outubro">outubro</option>
+                        <option value="novembro">novembro</option>
+                        <option value="dezembro">dezembro</option>
                     </select>
                     <br>/ <br>
-                    <input type="number" id="ano" placeholder="Ano">
+                    <input type="number" id="ano" placeholder="Ano" onchange="calcularIndice()">
                 </td>
             </tr>
             <tr><th colspan="2"> DADOS DO CALCULO</th></tr>
@@ -124,7 +125,7 @@
             <tr>
                 <td>Juros:</td>
                 <td id="valorjuroinformado"></td>
-                <td id="indice"></td>
+                <td id="indice2"></td>
                 <td></td>
                 <td></td>
                 <td></td>
