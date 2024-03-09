@@ -231,6 +231,25 @@ function calcularIndice() {
         // Exibir o valor do índice na tabela
         document.getElementById("indice").textContent = valorIndice;
         document.getElementById("indice2").textContent = valorIndice;
+
+        // Obtendo o valor inserido pelo usuário (principal)
+        var valorPrincipal = parseFloat(document.getElementById("valprin").value);
+        
+        // Obtendo o valor inserido pelo usuário (juros)
+        var valorJuros = parseFloat(document.getElementById("valjur").value);
+
+        // Calculando a multiplicação correta para o principal
+        var multiplicacaoPrincipal = valorIndice * valorPrincipal;
+
+        // Atualizando o valor da multiplicação para o principal na tabela
+        document.getElementById("multindice").textContent = multiplicacaoPrincipal.toFixed(2);
+
+        // Calculando a multiplicação correta para os juros
+        var multiplicacaoJuros = valorIndice * valorJuros;
+
+        // Atualizando o valor da multiplicação para os juros na tabela
+        document.getElementById("multindice2").textContent = multiplicacaoJuros.toFixed(2);
+
     } else {
         // Remover o valor do índice da tabela
         document.getElementById("indice").textContent = "";
@@ -243,13 +262,43 @@ function calcularIndice() {
         inputIndice.placeholder = "Informe o índice";
         inputIndice.style.marginTop = "5px";
 
-        // Adicionar o input no lugar do valor do índice na tabela
+        // Adicionando um listener de evento para recalcular a multiplicação quando o valor do input mudar
+        inputIndice.addEventListener("input", function() {
+            var novoValorIndice = parseFloat(this.value);
+            var valorPrincipal = parseFloat(document.getElementById("valprin").value);
+            var valorJuros = parseFloat(document.getElementById("valjur").value);
+
+            // Calculando a nova multiplicação para o principal
+            var novaMultiplicacaoPrincipal = novoValorIndice * valorPrincipal;
+            document.getElementById("multindice").textContent = novaMultiplicacaoPrincipal.toFixed(2);
+
+            // Calculando a nova multiplicação para os juros
+            var novaMultiplicacaoJuros = novoValorIndice * valorJuros;
+            document.getElementById("multindice2").textContent = novaMultiplicacaoJuros.toFixed(2);
+        });
+
         var elementoIndice = document.getElementById("indice");
         elementoIndice.appendChild(inputIndice);
 
-        // Adicionar o input também ao elemento com id "indice2"
         var elementoIndice2 = document.getElementById("indice2");
         elementoIndice2.appendChild(inputIndice.cloneNode(true));
     }
 }
 
+// Adicione a chamada para atualizar a multiplicação ao atualizar o valor do principal
+function atualizarValor() {
+    var valorInserido = parseFloat(document.getElementById("valprin").value);
+    document.getElementById("valorprincinformado").innerText = valorInserido;
+
+    // Chamada para recalcular a multiplicação
+    calcularIndice();
+}
+
+// Adicione a chamada para atualizar a multiplicação ao atualizar o valor dos juros
+function atualizarValor2() {
+    var valorInserido2 = parseFloat(document.getElementById("valjur").value);
+    document.getElementById("valorjuroinformado").innerText = valorInserido2;
+
+    // Chamada para recalcular a multiplicação
+    calcularIndice();
+}
