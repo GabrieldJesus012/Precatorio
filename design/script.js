@@ -58,6 +58,9 @@ function updateTotal() {
     const totalValue = principalValue + jurosValue;
     const totalSpan = document.getElementById('total');
     totalSpan.textContent = formatCurrency(totalValue.toFixed(2));
+    
+    const totalTd = document.getElementById('tot');
+    totalTd.textContent = formatCurrency(totalValue.toFixed(2));
 }
 
 document.addEventListener('DOMContentLoaded', function() {

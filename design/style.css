@@ -149,7 +149,7 @@ section{
 .tabela2 td {
     border: 1px solid #000000;
     padding: 8px;
-    text-align: left;
+    text-align: center;
     font-size: 14px;
 }
 
@@ -167,4 +167,9 @@ section{
     padding: 5px;
     text-align: left;
     border-radius: 5px;
+}
+
+.totnao{
+    text-align: center;
+    font-weight: bolder;
 }
