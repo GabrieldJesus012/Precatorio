@@ -233,10 +233,10 @@ function calcularIndice() {
         document.getElementById("indice2").textContent = valorIndice;
 
         // Obtendo o valor inserido pelo usuário (principal)
-        var valorPrincipal = parseFloat(document.getElementById("valprin").value);
+        var valorPrincipal = parseFloat(document.getElementById("valprin").value).toFixed(2);
         
         // Obtendo o valor inserido pelo usuário (juros)
-        var valorJuros = parseFloat(document.getElementById("valjur").value);
+        var valorJuros = parseFloat(document.getElementById("valjur").value).toFixed(2);
 
         // Calculando a multiplicação correta para o principal
         var multiplicacaoPrincipal = valorIndice * valorPrincipal;
@@ -249,6 +249,12 @@ function calcularIndice() {
 
         // Atualizando o valor da multiplicação para os juros na tabela
         document.getElementById("multindice2").textContent = multiplicacaoJuros.toFixed(2);
+
+        // Calculando a soma dos valores multiplicados
+        var soma = multiplicacaoPrincipal + multiplicacaoJuros;
+
+        // Atualizando o elemento correspondente na tabela com a soma
+        document.getElementById("totatt").textContent = soma.toFixed(2);
 
     } else {
         // Se o índice não estiver disponível, remova o valor anterior e adicione campos de entrada para o índice do principal e dos juros
@@ -276,6 +282,9 @@ function calcularIndice() {
             var valorIndiceJuros = parseFloat(document.getElementById("indiceJurosInput").value);
             var novaMultiplicacaoJuros = valorIndiceJuros * valorJuros;
             document.getElementById("multindice2").textContent = novaMultiplicacaoJuros.toFixed(2);
+
+            var novaSoma = novaMultiplicacaoPrincipal + novaMultiplicacaoJuros;
+            document.getElementById("totatt").textContent = novaSoma.toFixed(2);
         });
     
         // Adicionar o input do índice para o principal na tabela
@@ -305,6 +314,10 @@ function calcularIndice() {
             // Calculando a nova multiplicação para os juros
             var novaMultiplicacaoJuros = novoValorIndiceJuros * valorJuros;
             document.getElementById("multindice2").textContent = novaMultiplicacaoJuros.toFixed(2);
+
+            // Calculando a nova soma dos valores multiplicados
+            var novaSoma = novaMultiplicacaoPrincipal + novaMultiplicacaoJuros;
+            document.getElementById("totatt").textContent = novaSoma.toFixed(2);
         });
     
         // Adicionar o input do índice para os juros na tabela
