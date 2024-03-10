@@ -346,10 +346,8 @@ function calcularIndice() {
 
 
 function calcularJuros() {
-    const planoOrcamentario = document.getElementById('planoO').value;
-    const mesSelecionado = document.getElementById('mes').value;
-    const anoSelecionado = document.getElementById('ano').value;
-    const jurosCalElement = document.getElementById('juroscal');
+    const mesSelecionado = parseInt(document.getElementById('mes').querySelector(':checked').dataset.numero);
+    const anoSelecionado = document.getElementById('ano').value.slice(-2); 
     
     var dadosJuros = {
         "10/64": 0.5000,
@@ -1037,22 +1035,30 @@ function calcularJuros() {
         "08/21": 0.2446,
         "09/21": 0.3012,
         "10/21": 0.3575,
-        "11/21": 0.4412,
+        "11/21": 0.4412
     };
-    
-    let jurosAcumulados = 1; 
-    let mesAnoEncontrado = false;
-    
-    
-    for (const [mesAno, taxa] of Object.entries(dadosJuros)) {
-        if (mesAnoEncontrado || (mesAno === `${mesSelecionado}/${anoSelecionado}`)) {
-            mesAnoEncontrado = true;
-            jurosAcumulados *= (1 + (taxa / 100)); 
+
+    var jurosTotal = 1;
+    var multiplicar = false;
+    for (const data in dadosJuros) {
+        const [m, a] = data.split('/');
+        const mes = parseInt(m);
+        const ano = parseInt(a);
+        
+        // Verificar se a data é posterior ao mês e ano selecionados
+        if ((ano > anoSelecionado || (ano === anoSelecionado && mes >= mesSelecionado))) {
+            multiplicar = true;
+        }
+        
+        if (multiplicar) {
+            jurosTotal *= (1 + dadosJuros[data]);
         }
     }
-    
-    // Exibe o resultado
-    const resultado = parseFloat((planoOrcamentario * jurosAcumulados).toFixed(2));
-    jurosCalElement.textContent = resultado;
-}
 
+    // Arredondar o resultado para 5 casas decimais
+    const resultado = jurosTotal - 1;
+    const resultadoArredondado = resultado.toFixed(5);
+
+    // Exibir o resultado na ID "juroscal"
+    document.getElementById('juroscal').textContent = resultadoArredondado;
+}

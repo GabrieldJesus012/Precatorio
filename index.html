@@ -36,23 +36,23 @@
             <tr>
                 <td><label for="mes">Data do cálculo homologado:</label></td>
                 <td>
-                    <select id="mes" onchange="calcularIndice()" >
+                    <select id="mes" onchange="calcularIndice()" onclick="calcularJuros()">
                         <option value="" disabled selected>Selecione</option>
-                        <option value="janeiro">janeiro</option>
-                        <option value="fevereiro">fevereiro</option>
-                        <option value="março">março</option>
-                        <option value="abril">abril</option>
-                        <option value="maio">maio</option>
-                        <option value="junho">junho</option>
-                        <option value="julho">julho</option>
-                        <option value="agosto">agosto</option>
-                        <option value="setembro">setembro</option>
-                        <option value="outubro">outubro</option>
-                        <option value="novembro">novembro</option>
-                        <option value="dezembro">dezembro</option>
+                        <option value="janeiro" data-numero="01">janeiro</option>
+                        <option value="fevereiro" data-numero="02">fevereiro</option>
+                        <option value="março" data-numero="03">março</option>
+                        <option value="abril" data-numero="04">abril</option>
+                        <option value="maio" data-numero="05">maio</option>
+                        <option value="junho" data-numero="06">junho</option>
+                        <option value="julho" data-numero="07">julho</option>
+                        <option value="agosto" data-numero="08">agosto</option>
+                        <option value="setembro" data-numero="09">setembro</option>
+                        <option value="outubro" data-numero="10">outubro</option>
+                        <option value="novembro" data-numero="11">novembro</option>
+                        <option value="dezembro" data-numero="12">dezembro</option>
                     </select>
                     <br>/ <br>
-                    <input type="number" id="ano" placeholder="Ano" onchange="calcularIndice()">
+                    <input type="number" id="ano" placeholder="Ano" onchange="calcularIndice()" onclick="calcularJuros()">
                 </td>
             </tr>
             <tr><th colspan="2"> DADOS DO CALCULO</th></tr>
@@ -73,7 +73,7 @@
             <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> MÓDULO SIMPLIFICADO</th></tr>
             <tr id="principalRow" class="ocultar">
                 <td><label for="valprin">Principal:</label></td>
-                <td><input type="text" id="valprin" onkeyup="atualizarValor()"></td>
+                <td><input type="text" id="valprin" onkeyup="atualizarValor()" onclick="calcularJuros()"></td>
             </tr>
             <tr id="jurosRow" class="ocultar">
                 <td><label for="valjur">Juros:</label></td>
