@@ -15,6 +15,7 @@ function atualizarValor2() {
     document.getElementById("valorjuroinformado").innerText = valorInserido2;
 
     calcularIndice();
+
 }
 
 
@@ -254,6 +255,10 @@ function calcularIndice() {
         // Atualizando o valor da multiplicação para os juros na tabela
         document.getElementById("multindice2").textContent = multiplicacaoJuros.toFixed(2).replace(".", ",");
 
+        var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", "."));
+
+        document.getElementById("jur").textContent = multiplicacaoJuros.toFixed(2).replace(".", ",");
+
         // Calculando a soma dos valores multiplicados
         var soma = parseFloat(multiplicacaoPrincipal) + parseFloat(multiplicacaoJuros);
 
@@ -322,6 +327,13 @@ function calcularIndice() {
             // Calculando a nova soma dos valores multiplicados
             var novaSoma = novaMultiplicacaoPrincipal + novaMultiplicacaoJuros;
             document.getElementById("totatt").textContent = "R$ " + novaSoma.toFixed(2).replace(".", ",");
+
+            // Obtendo o elemento "jur"
+        var elementoJur = document.getElementById("jur");
+
+        // Atualizando o texto do elemento com o valor multiplicado dos juros
+        elementoJur.textContent = novaMultiplicacaoJuros.toFixed(2).replace(".", ",");
+
         });
     
         // Adicionar o input do índice para os juros na tabela
@@ -330,6 +342,7 @@ function calcularIndice() {
     }
     
 }
+
 
 
 
