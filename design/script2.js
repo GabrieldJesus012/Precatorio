@@ -347,7 +347,8 @@ function calcularIndice() {
 function calcularJuros() {
     var mesSSelecionado = document.getElementById("mes").value;
     var anoSSelecionado = document.getElementById("ano").value;
-    
+    const dataSelecionada = `${mesSSelecionado}, ${anoSSelecionado}`;
+
     var dadosJuros = {
         "Outubro, 1964": 0.5000,
         "Novembro, 1964": 0.5000,
@@ -1037,21 +1038,22 @@ function calcularJuros() {
         "Novembro, 2021": 0.4412
     };
 
-    var juroscal = 1; 
-    var multiplicar = false;
-
-    for (var data in dadosJuros) {
-        var [mes, ano] = data.split(", ");
-
-        if (ano == anoSSelecionado && mes == mesSSelecionado) {
-            multiplicar = true; // Ativa a multiplicação a partir do mês e ano selecionados
-        }
-
+    let jurosAcumulados = 1; // Começa em 1 para multiplicação
+    let multiplicar = false; // Controla se devemos começar a multiplicação
+    
+    // Itera sobre os dados de juros
+    for (const [data, taxa] of Object.entries(dadosJuros)) {
         if (multiplicar) {
-            juroscal *= dadosJuros[data]; // Multiplica os juros
+            jurosAcumulados *= (1 + taxa / 100); // Multiplica a taxa convertida em decimal
+        }
+        
+        if (data === dataSelecionada) {
+            multiplicar = true; // Começa a multiplicação a partir dessa data
         }
     }
-
-    // Exibir o resultado com 5 casas decimais
-    document.getElementById("juroscal").textContent = juroscal.toFixed(5);
+    
+    // Exibe o resultado na célula especificada
+    const resultado = jurosAcumulados.toFixed(4); // Ajuste para 4 casas decimais
+    document.getElementById('juroscal').textContent = resultado;
 }
+
