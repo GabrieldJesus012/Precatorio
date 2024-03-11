@@ -345,9 +345,9 @@ function calcularIndice() {
 
 
 function calcularJuros() {
-    var mesSSelecionado = document.getElementById("mes").value;
-    var anoSSelecionado = document.getElementById("ano").value;
-    const dataSelecionada = `${mesSSelecionado}, ${anoSSelecionado}`;
+    var mes = document.getElementById("mes").value;
+    var ano = document.getElementById("ano").value;
+    const dataSelecionada = `${mes.charAt(0).toUpperCase() + mes.slice(1)}, ${ano}`;
 
     var dadosJuros = {
         "Outubro, 1964": 0.5000,
@@ -1041,21 +1041,13 @@ function calcularJuros() {
     let jurosAcumulados = 1; // Começa em 1 para multiplicação
     let multiplicar = false; // Controla se devemos começar a multiplicação
     
-    // Verifica se a data selecionada está presente nos dados de juros
-    if (dadosJuros.hasOwnProperty(dataSelecionada)) {
-        multiplicar = true; // Começa a multiplicação a partir dessa data
-    }
-    
-    // Se a multiplicação estiver ativada, faz a multiplicação das taxas de juros
-    if (multiplicar) {
-        for (const [data, taxa] of Object.entries(dadosJuros)) {
-            // Multiplica a taxa
-            jurosAcumulados *= (1 + taxa);
-            
-            // Se a data atual for igual à data selecionada, interrompe o loop
-            if (data === dataSelecionada) {
-                break;
-            }
+    // Itera sobre os dados de juros a partir do mês e ano selecionados
+    for (const [data, taxa] of Object.entries(dadosJuros)) {
+        if (data === dataSelecionada) {
+            multiplicar = true; // Começa a multiplicação a partir dessa data
+        }
+        if (multiplicar) {
+            jurosAcumulados *= (1 + parseFloat(taxa)); // Multiplica a taxa
         }
     }
     
