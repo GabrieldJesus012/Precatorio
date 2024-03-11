@@ -1041,14 +1041,21 @@ function calcularJuros() {
     let jurosAcumulados = 1; // Começa em 1 para multiplicação
     let multiplicar = false; // Controla se devemos começar a multiplicação
     
-    // Itera sobre os dados de juros
-    for (const [data, taxa] of Object.entries(dadosJuros)) {
-        if (multiplicar) {
-            jurosAcumulados *= (1 + taxa / 100); // Multiplica a taxa convertida em decimal
-        }
-        
-        if (data === dataSelecionada) {
-            multiplicar = true; // Começa a multiplicação a partir dessa data
+    // Verifica se a data selecionada está presente nos dados de juros
+    if (dadosJuros.hasOwnProperty(dataSelecionada)) {
+        multiplicar = true; // Começa a multiplicação a partir dessa data
+    }
+    
+    // Se a multiplicação estiver ativada, faz a multiplicação das taxas de juros
+    if (multiplicar) {
+        for (const [data, taxa] of Object.entries(dadosJuros)) {
+            // Multiplica a taxa
+            jurosAcumulados *= (1 + taxa);
+            
+            // Se a data atual for igual à data selecionada, interrompe o loop
+            if (data === dataSelecionada) {
+                break;
+            }
         }
     }
     
@@ -1056,4 +1063,3 @@ function calcularJuros() {
     const resultado = jurosAcumulados.toFixed(4); // Ajuste para 4 casas decimais
     document.getElementById('juroscal').textContent = resultado;
 }
-
