@@ -347,6 +347,7 @@ function calcularIndice() {
 function calcularJuros() {
     var mes = document.getElementById("mes").value;
     var ano = document.getElementById("ano").value;
+    var plano= document.getElementById("planoO").value;
     const dataSelecionada = `${mes.charAt(0).toUpperCase() + mes.slice(1)}, ${ano}`;
 
     var dadosJuros = {
@@ -1039,19 +1040,19 @@ function calcularJuros() {
     };
 
     let jurosAcumulados = 0; 
-    let somar = false; // Controla se devemos começar a multiplicação
+    let somar = false; // Controla se devemos começar a somar
     
     // Itera sobre os dados de juros a partir do mês e ano selecionados
     for (const [data, taxa] of Object.entries(dadosJuros)) {
         if (data === dataSelecionada) {
-            somar = true; // Começa a multiplicação a partir dessa data
+            somar = true; // Começa a somar a partir dessa data
         }
         if (somar) {
-            jurosAcumulados += (parseFloat(taxa)); // Multiplica a taxa
+            jurosAcumulados += (parseFloat(taxa)); // somar a taxa
         }
     }
     
     // Exibe o resultado na célula especificada
-    const resultado = jurosAcumulados.toFixed(4); // Ajuste para 4 casas decimais
+    const resultado = jurosAcumulados.toFixed(4).replace('.', ',') + '%'; // Ajuste para 4 casas decimais
     document.getElementById('juroscal').textContent = resultado;
 }
