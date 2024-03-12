@@ -1047,7 +1047,7 @@ function calcularJuros() {
             multiplicar = true; // Começa a multiplicação a partir dessa data
         }
         if (multiplicar) {
-            jurosAcumulados *= (1 + parseFloat(taxa)); // Multiplica a taxa
+            jurosAcumulados *= (parseFloat(taxa)); // Multiplica a taxa
         }
     }
     
