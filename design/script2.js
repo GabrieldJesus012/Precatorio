@@ -1074,3 +1074,4 @@ function calcularJuros() {
     const resultado = jurosAcumulados.toFixed(5).replace('.', ',') + '%'; // Ajuste para 4 casas decimais
     document.getElementById('juroscal').textContent = resultado;
 }
+
