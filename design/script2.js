@@ -1042,6 +1042,21 @@ function calcularJuros() {
     let jurosAcumulados = 0; 
     let somar = false; // Controla se devemos começar a somar
     
+        // Verifica se deve deduzir algum valor com base no plano selecionado
+        let deducao = 0;
+        if (plano === '2018') {
+            deducao = 7.351400; //soma julho de 2017 a dez/2018
+        } else if (plano === '2019') {
+            deducao = 6.405800; //soma julho de 2018 a dez/2019
+        } else if (plano === '2020') {
+            deducao = 4.039900; //soma julho de 2019 a dez/2020 
+        } else if (plano === '2021') {
+            deducao = 3.180900; //soma julho de 2020 a nov/2021 
+        } else if (plano === '2022') {
+            deducao = 1.589100; //soma julho de 2021 a nov 2021 
+        }
+    
+
     // Itera sobre os dados de juros a partir do mês e ano selecionados
     for (const [data, taxa] of Object.entries(dadosJuros)) {
         if (data === dataSelecionada) {
@@ -1051,8 +1066,11 @@ function calcularJuros() {
             jurosAcumulados += (parseFloat(taxa)); // somar a taxa
         }
     }
+
+        // Deduz o valor calculado
+        jurosAcumulados -= deducao;
     
     // Exibe o resultado na célula especificada
-    const resultado = jurosAcumulados.toFixed(4).replace('.', ',') + '%'; // Ajuste para 4 casas decimais
+    const resultado = jurosAcumulados.toFixed(5).replace('.', ',') + '%'; // Ajuste para 4 casas decimais
     document.getElementById('juroscal').textContent = resultado;
 }
