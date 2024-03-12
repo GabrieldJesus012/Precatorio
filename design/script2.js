@@ -1038,16 +1038,16 @@ function calcularJuros() {
         "Novembro, 2021": 0.4412
     };
 
-    let jurosAcumulados = 1; // Começa em 1 para multiplicação
-    let multiplicar = false; // Controla se devemos começar a multiplicação
+    let jurosAcumulados = 0; 
+    let somar = false; // Controla se devemos começar a multiplicação
     
     // Itera sobre os dados de juros a partir do mês e ano selecionados
     for (const [data, taxa] of Object.entries(dadosJuros)) {
         if (data === dataSelecionada) {
-            multiplicar = true; // Começa a multiplicação a partir dessa data
+            somar = true; // Começa a multiplicação a partir dessa data
         }
-        if (multiplicar) {
-            jurosAcumulados *= (parseFloat(taxa)); // Multiplica a taxa
+        if (somar) {
+            jurosAcumulados += (parseFloat(taxa)); // Multiplica a taxa
         }
     }
     
