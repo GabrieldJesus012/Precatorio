@@ -1132,8 +1132,28 @@ fetch(url)
     document.getElementById('selic').textContent = result.toFixed(5).replace(".", ",");
     document.getElementById('selic1').textContent = result.toFixed(5).replace(".", ",");
 })
+
 .catch(error => {
     console.error('Erro ao obter os dados:', error);
     document.getElementById('selic').textContent = 'Erro ao obter os dados';
     document.getElementById('selic1').textContent = 'Erro ao obter os dados';
+
+    document.getElementById("selic").textContent = "";
+    document.getElementById("selic1").textContent = "";
+
+// Criar um input para permitir que o usuário insira o valor da SELIC
+var inputSelic = document.createElement("input");
+inputSelic.type = "number";
+inputSelic.id = "selicInput";
+inputSelic.placeholder = "Informe a SELIC";
+inputSelic.style.marginTop = "5px";
+
+    // Cria uma cópia do input para o segundo local
+    var inputSelicCopy = inputSelic.cloneNode(true);
+
+    // Adiciona o input ao elemento com o ID "selic"
+    document.getElementById("selic").appendChild(inputSelic);
+
+    // Adiciona a cópia do input ao elemento com o ID "selic1"
+    document.getElementById("selic1").appendChild(inputSelicCopy);
 });
