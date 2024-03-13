@@ -294,6 +294,7 @@ function calcularIndice() {
     
             var novaSoma = novaMultiplicacaoPrincipal + novaMultiplicacaoJuros;
             document.getElementById("totatt").textContent = "R$ " + novaSoma.toFixed(2).replace(".", ",");
+
         });
     
         // Adicionar o input do índice para o principal na tabela
@@ -1075,3 +1076,23 @@ function calcularJuros() {
     document.getElementById('juroscal').textContent = resultado;
 }
 
+    // Função para calcular a multiplicação dos resultados das funções de índice e juros
+    function calcularMultiplicacao() {
+
+        calcularIndice();
+        calcularJuros();
+
+        // Obtém os valores calculados de índice e juros
+        var valorIndice = parseFloat(document.getElementById("multindice").textContent.replace(",", "."));
+        var valorJuros = parseFloat(document.getElementById("juroscal").textContent.replace("%", "").replace(",", "."));
+
+        // Calcula a multiplicação dos resultados
+        var multiplicacao = valorIndice * (valorJuros/100);
+
+        // Exibe o resultado na tabela com id "multjuros"
+        document.getElementById("multjuros").textContent = multiplicacao.toFixed(2).replace(".", ",");
+        document.getElementById("totjur").textContent = "R$ " + multiplicacao.toFixed(2).replace(".", ",");
+
+        var somaa = valorIndice + multiplicacao
+        document.getElementById("somjur").textContent = somaa.toFixed(2).replace(".", ",");
+    }
