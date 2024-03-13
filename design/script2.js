@@ -1077,7 +1077,7 @@ function calcularJuros() {
         jurosAcumulados -= deducao;
     
     // Exibe o resultado na célula especificada
-    const resultado = jurosAcumulados.toFixed(5).replace('.', ',') + '%'; // Ajuste para 4 casas decimais
+    const resultado = jurosAcumulados.toFixed(4).replace('.', ',') + '%'; // Ajuste para 4 casas decimais
     document.getElementById('juroscal').textContent = resultado;
 
     calcularMultiplicacao();
@@ -1107,8 +1107,8 @@ fetch(url)
     // Calcula a soma dos valores
     const sum = data.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
     const result = 1 + sum / 100;
-    document.getElementById('selic').textContent = result.toFixed(5).replace(".", ",");
-    document.getElementById('selic1').textContent = result.toFixed(5).replace(".", ",");
+    document.getElementById('selic').textContent = result.toFixed(4).replace(".", ",");
+    document.getElementById('selic1').textContent = result.toFixed(4).replace(".", ",");
 
     calcularMultiplicacao();
 })
