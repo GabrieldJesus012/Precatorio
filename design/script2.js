@@ -263,7 +263,7 @@ function calcularIndice() {
         var soma = parseFloat(multiplicacaoPrincipal) + parseFloat(multiplicacaoJuros);
 
         // Atualizando o elemento correspondente na tabela com a soma
-        document.getElementById("totatt").textContent = "R$ " + soma.toFixed(2).replace(".", ",");
+        document.getElementById("totatt").textContent = "R$ " + soma.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
         calcularMultiplicacao();
 
@@ -295,7 +295,7 @@ function calcularIndice() {
             document.getElementById("multindice2").textContent = novaMultiplicacaoJuros.toFixed(2).replace(".", ",");
     
             var novaSoma = novaMultiplicacaoPrincipal + novaMultiplicacaoJuros;
-            document.getElementById("totatt").textContent = "R$ " + novaSoma.toFixed(2).replace(".", ",");
+            document.getElementById("totatt").textContent = "R$ " + novaSoma.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
             calcularMultiplicacao();
         });
@@ -330,7 +330,7 @@ function calcularIndice() {
     
             // Calculando a nova soma dos valores multiplicados
             var novaSoma = novaMultiplicacaoPrincipal + novaMultiplicacaoJuros;
-            document.getElementById("totatt").textContent = "R$ " + novaSoma.toFixed(2).replace(".", ",");
+            document.getElementById("totatt").textContent = "R$ " + novaSoma.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
             // Obtendo o elemento "jur"
         var elementoJur = document.getElementById("jur");
@@ -1097,11 +1097,11 @@ function calcularJuros() {
 
         // Exibe o resultado na tabela com id "multjuros"
         document.getElementById("multjuros").textContent = multiplicacao.toFixed(2).replace(".", ",");
-        document.getElementById("totjur").textContent = "R$ " + multiplicacao.toFixed(2).replace(".", ",");
+        document.getElementById("totjur").textContent = "R$ " + multiplicacao.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
         var somaa = valorIndice + multiplicacao
         document.getElementById("somjur").textContent = somaa.toFixed(2).replace(".", ",");
 
         var atuali= somajuros + somaa
-        document.getElementById("atuali").textContent = "R$ " + atuali.toFixed(2).replace(".", ",");
+        document.getElementById("atuali").textContent = "R$ " + atuali.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
