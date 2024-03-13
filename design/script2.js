@@ -276,7 +276,7 @@ function calcularIndice() {
         var inputIndicePrincipal = document.createElement("input");
         inputIndicePrincipal.type = "number";
         inputIndicePrincipal.id = "indicePrincipalInput";
-        inputIndicePrincipal.placeholder = "Informe o índice para o principal";
+        inputIndicePrincipal.placeholder = "Informe o índice";
         inputIndicePrincipal.style.marginTop = "5px";
     
         // Adicionar um listener de evento para recalcular a multiplicação quando o valor do input mudar
@@ -308,7 +308,7 @@ function calcularIndice() {
         var inputIndiceJuros = document.createElement("input");
         inputIndiceJuros.type = "number";
         inputIndiceJuros.id = "indiceJurosInput";
-        inputIndiceJuros.placeholder = "Informe o índice para os juros";
+        inputIndiceJuros.placeholder = "Informe o índice";
         inputIndiceJuros.style.marginTop = "5px";
     
         // Adicionar um listener de evento para recalcular a multiplicação quando o valor do input mudar
@@ -1105,3 +1105,35 @@ function calcularJuros() {
         var atuali= somajuros + somaa
         document.getElementById("atuali").textContent = "R$ " + atuali.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
+
+
+function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+// Calcula a data do mês anterior
+function getLastMonthDate() {
+    const today = new Date();
+    const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+    return formatDate(lastMonth);
+}
+
+// Faz a requisição à API do Banco Central do Brasil
+const url = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json&dataInicial=01/12/2021&dataFinal=${getLastMonthDate()}`;
+fetch(url)
+.then(response => response.json())
+.then(data => {
+    // Calcula a soma dos valores
+    const sum = data.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
+    const result = 1 + sum / 100;
+    document.getElementById('selic').textContent = result.toFixed(5).replace(".", ",");
+    document.getElementById('selic1').textContent = result.toFixed(5).replace(".", ",");
+})
+.catch(error => {
+    console.error('Erro ao obter os dados:', error);
+    document.getElementById('selic').textContent = 'Erro ao obter os dados';
+    document.getElementById('selic1').textContent = 'Erro ao obter os dados';
+});
