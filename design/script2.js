@@ -1104,6 +1104,19 @@ function calcularJuros() {
 
         var atuali= somajuros + somaa
         document.getElementById("atuali").textContent = "R$ " + atuali.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        var valorSelic = parseFloat(document.getElementById("selic").textContent.replace(",", "."));
+
+        var atualizacao = somaa * valorSelic;
+
+        document.getElementById("atualizacao").textContent = "R$ " + atualizacao.toFixed(2).replace(".", ",");
+
+        var atualizacao1 = somajuros * valorSelic;
+
+        document.getElementById("atualizacao1").textContent = "R$ " + atualizacao1.toFixed(2).replace(".", ",");
+
+        var totalat = atualizacao + atualizacao1
+        document.getElementById("totatual").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
 
@@ -1131,6 +1144,8 @@ fetch(url)
     const result = 1 + sum / 100;
     document.getElementById('selic').textContent = result.toFixed(5).replace(".", ",");
     document.getElementById('selic1').textContent = result.toFixed(5).replace(".", ",");
+
+    calcularMultiplicacao();
 })
 
 .catch(error => {
