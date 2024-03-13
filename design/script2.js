@@ -265,6 +265,8 @@ function calcularIndice() {
         // Atualizando o elemento correspondente na tabela com a soma
         document.getElementById("totatt").textContent = "R$ " + soma.toFixed(2).replace(".", ",");
 
+        calcularMultiplicacao();
+
     } else {
         // Se o índice não estiver disponível, remova o valor anterior e adicione campos de entrada para o índice do principal e dos juros
         document.getElementById("indice").textContent = "";
@@ -295,6 +297,7 @@ function calcularIndice() {
             var novaSoma = novaMultiplicacaoPrincipal + novaMultiplicacaoJuros;
             document.getElementById("totatt").textContent = "R$ " + novaSoma.toFixed(2).replace(".", ",");
 
+            calcularMultiplicacao();
         });
     
         // Adicionar o input do índice para o principal na tabela
@@ -334,6 +337,8 @@ function calcularIndice() {
 
         // Atualizando o texto do elemento com o valor multiplicado dos juros
         elementoJur.textContent = novaMultiplicacaoJuros.toFixed(2).replace(".", ",");
+
+        calcularMultiplicacao();
 
         });
     
@@ -1074,14 +1079,13 @@ function calcularJuros() {
     // Exibe o resultado na célula especificada
     const resultado = jurosAcumulados.toFixed(5).replace('.', ',') + '%'; // Ajuste para 4 casas decimais
     document.getElementById('juroscal').textContent = resultado;
+
+    calcularMultiplicacao();
 }
 
     // Função para calcular a multiplicação dos resultados das funções de índice e juros
     function calcularMultiplicacao() {
-
-        calcularIndice();
-        calcularJuros();
-
+        
         // Obtém os valores calculados de índice e juros
         var valorIndice = parseFloat(document.getElementById("multindice").textContent.replace(",", "."));
         var valorJuros = parseFloat(document.getElementById("juroscal").textContent.replace("%", "").replace(",", "."));
