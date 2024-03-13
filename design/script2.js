@@ -1141,12 +1141,12 @@ fetch(url)
     document.getElementById("selic").textContent = "";
     document.getElementById("selic1").textContent = "";
 
-// Criar um input para permitir que o usuário insira o valor da SELIC
-var inputSelic = document.createElement("input");
-inputSelic.type = "number";
-inputSelic.id = "selicInput";
-inputSelic.placeholder = "Informe a SELIC";
-inputSelic.style.marginTop = "5px";
+    // Criar um input para permitir que o usuário insira o valor da SELIC
+    var inputSelic = document.createElement("input");
+    inputSelic.type = "number";
+    inputSelic.id = "selicInput";
+    inputSelic.placeholder = "Informe a SELIC";
+    inputSelic.style.marginTop = "5px";
 
     // Cria uma cópia do input para o segundo local
     var inputSelicCopy = inputSelic.cloneNode(true);
