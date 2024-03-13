@@ -1089,6 +1089,8 @@ function calcularJuros() {
         // Obtém os valores calculados de índice e juros
         var valorIndice = parseFloat(document.getElementById("multindice").textContent.replace(",", "."));
         var valorJuros = parseFloat(document.getElementById("juroscal").textContent.replace("%", "").replace(",", "."));
+        var somajuros= parseFloat(document.getElementById("jur").textContent.replace(",", "."));
+
 
         // Calcula a multiplicação dos resultados
         var multiplicacao = valorIndice * (valorJuros/100);
@@ -1099,4 +1101,7 @@ function calcularJuros() {
 
         var somaa = valorIndice + multiplicacao
         document.getElementById("somjur").textContent = somaa.toFixed(2).replace(".", ",");
+
+        var atuali= somajuros + somaa
+        document.getElementById("atuali").textContent = "R$ " + atuali.toFixed(2).replace(".", ",");
     }
