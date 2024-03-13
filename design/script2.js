@@ -1083,41 +1083,6 @@ function calcularJuros() {
     calcularMultiplicacao();
 }
 
-    // Função para calcular a multiplicação dos resultados das funções de índice e juros
-    function calcularMultiplicacao() {
-        
-        // Obtém os valores calculados de índice e juros
-        var valorIndice = parseFloat(document.getElementById("multindice").textContent.replace(",", "."));
-        var valorJuros = parseFloat(document.getElementById("juroscal").textContent.replace("%", "").replace(",", "."));
-        var somajuros= parseFloat(document.getElementById("jur").textContent.replace(",", "."));
-
-
-        // Calcula a multiplicação dos resultados
-        var multiplicacao = valorIndice * (valorJuros/100);
-
-        // Exibe o resultado na tabela com id "multjuros"
-        document.getElementById("multjuros").textContent = multiplicacao.toFixed(2).replace(".", ",");
-        document.getElementById("totjur").textContent = "R$ " + multiplicacao.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-        var somaa = valorIndice + multiplicacao
-        document.getElementById("somjur").textContent = somaa.toFixed(2).replace(".", ",");
-
-        var atuali= somajuros + somaa
-        document.getElementById("atuali").textContent = "R$ " + atuali.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-        var valorSelic = parseFloat(document.getElementById("selic").textContent.replace(",", "."));
-
-        var atualizacao = somaa * valorSelic;
-
-        document.getElementById("atualizacao").textContent = "R$ " + atualizacao.toFixed(2).replace(".", ",");
-
-        var atualizacao1 = somajuros * valorSelic;
-
-        document.getElementById("atualizacao1").textContent = "R$ " + atualizacao1.toFixed(2).replace(".", ",");
-
-        var totalat = atualizacao + atualizacao1
-        document.getElementById("totatual").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
 
 
 function formatDate(date) {
@@ -1172,3 +1137,38 @@ fetch(url)
     // Adiciona a cópia do input ao elemento com o ID "selic1"
     document.getElementById("selic1").appendChild(inputSelicCopy);
 });
+
+
+// Função para calcular a multiplicação dos resultados das funções de índice e juros
+function calcularMultiplicacao() {
+    // Obtém os valores calculados de índice e juros
+    var valorIndice = parseFloat(document.getElementById("multindice").textContent.replace(",", "."));
+    var valorJuros = parseFloat(document.getElementById("juroscal").textContent.replace("%", "").replace(",", "."));
+    var somajuros= parseFloat(document.getElementById("jur").textContent.replace(",", "."));
+
+    // Calcula a multiplicação dos resultados
+    var multiplicacao = valorIndice * (valorJuros/100);
+
+    // Exibe o resultado na tabela com id "multjuros"
+    document.getElementById("multjuros").textContent = multiplicacao.toFixed(2).replace(".", ",");
+    document.getElementById("totjur").textContent = "R$ " + multiplicacao.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    var somaa = valorIndice + multiplicacao
+    document.getElementById("somjur").textContent = somaa.toFixed(2).replace(".", ",");
+
+    var atuali= somajuros + somaa
+    document.getElementById("atuali").textContent = "R$ " + atuali.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    var valorSelic = parseFloat(document.getElementById("selic").textContent.replace(",", "."));
+
+    var atualizacao = somaa * valorSelic;
+
+    document.getElementById("atualizacao").textContent = "R$ " + atualizacao.toFixed(2).replace(".", ",");
+
+    var atualizacao1 = somajuros * valorSelic;
+
+    document.getElementById("atualizacao1").textContent = "R$ " + atualizacao1.toFixed(2).replace(".", ",");
+
+    var totalat = atualizacao + atualizacao1
+    document.getElementById("totatual").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}

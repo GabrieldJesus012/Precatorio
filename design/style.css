@@ -169,8 +169,10 @@ section{
     text-align: center;
 }
 
-.totnao{
+.totnao {
     text-align: center;
     font-weight: bolder;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    color: #333; 
+    font-size: 1.2em; 
 }
-
