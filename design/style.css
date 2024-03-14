@@ -188,6 +188,15 @@ h2{
     color: #13678A;
 }
 
+#section3 ul {
+    list-style-position: inside;
+    list-style-type: "\01F468\01F3FD\200D\01F4BB";
+    padding: 0;
+}
+
+#section3 li {
+    margin-bottom: 5px;
+}
 
 #section3 input[type="text"]{
     width: 150px;
