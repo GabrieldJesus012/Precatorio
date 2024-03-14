@@ -176,3 +176,8 @@ section{
     color: #333; 
     font-size: 1.2em; 
 }
+
+
+#totatual, #atuali, #totjur, #totatt , #tot{
+    font-weight: bolder;
+}
