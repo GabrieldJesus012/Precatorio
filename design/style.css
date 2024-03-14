@@ -181,3 +181,40 @@ section{
 #totatual, #atuali, #totjur, #totatt , #tot{
     font-weight: bolder;
 }
+
+section h2{
+    font-size: 1.0em;
+}
+
+section input[type="text"]{
+    width: 150px;
+    font-size: 12px;
+    margin: 3px;
+    border-radius: 5px;
+}
+
+#porcentagemadv{
+    width: 80px;
+}
+
+section button{
+    width: 15px; 
+    height: 15px; 
+    border: none;
+    border-radius: 50%; 
+    background-color: #29A2D4; 
+    color: white; 
+    cursor: pointer; 
+    text-align: center;
+    margin: 1px;
+}
+
+section button:hover {
+    background-color: #4AB36C; 
+    color: #F2E3D5; 
+}
+
+section button:active {
+    background-color: #EC2028; 
+}
+

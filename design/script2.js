@@ -1172,3 +1172,97 @@ function calcularMultiplicacao() {
     var totalat = atualizacao + atualizacao1
     document.getElementById("totatual").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
+//Função para alternar a visibilidade dos h.contratual
+
+document.addEventListener('DOMContentLoaded', function() {
+    const checkbox = document.getElementById('hcont');
+    const hcontInputs = document.getElementById('hcontInputs');
+
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            hcontInputs.style.display = 'block';
+        } else {
+            hcontInputs.style.display = 'none';
+        }
+    });
+
+    // Ocultar a div inicialmente quando a página é carregada ou atualizada
+    hcontInputs.style.display = 'none';
+});
+
+window.onload = function() {
+    document.getElementById("hcont").checked = false;
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+    const hcontInputs = document.getElementById("hcontInputs");
+
+    function criarNovoAdvogado() {
+        const div = document.createElement('div');
+        
+        const labelNome = document.createElement('label');
+        labelNome.setAttribute('for', 'nomeadv');
+        labelNome.textContent = 'Nome:';
+        div.appendChild(labelNome);
+        
+        const inputNome = document.createElement('input');
+        inputNome.setAttribute('type', 'text');
+        inputNome.setAttribute('id', 'nomeadv');
+        div.appendChild(inputNome);
+        
+        const selectTipoDocumento = document.createElement('select');
+        selectTipoDocumento.setAttribute('id', 'tipoDocumento');
+        const optionCNPJ = document.createElement('option');
+        optionCNPJ.setAttribute('value', 'CNPJ');
+        optionCNPJ.textContent = 'CNPJ';
+        selectTipoDocumento.appendChild(optionCNPJ);
+        const optionCPF = document.createElement('option');
+        optionCPF.setAttribute('value', 'CPF');
+        optionCPF.textContent = 'CPF';
+        selectTipoDocumento.appendChild(optionCPF);
+        div.appendChild(selectTipoDocumento);
+        
+        const labelPorcentagem = document.createElement('label');
+        labelPorcentagem.setAttribute('for', 'porcentagemadv');
+        labelPorcentagem.textContent = 'Porcentagem:';
+        div.appendChild(labelPorcentagem);
+        
+        const inputPorcentagem = document.createElement('input');
+        inputPorcentagem.setAttribute('type', 'text');
+        inputPorcentagem.setAttribute('id', 'porcentagemadv');
+        inputPorcentagem.setAttribute('placeholder', 'Valor em %');
+        
+        inputPorcentagem.addEventListener('blur', function() {
+            let valor = this.value.trim(); 
+            if (valor !== '') { 
+                valor = valor.replace(/[^\d,]/g, '');
+                valor = valor.replace(/,+/g, ',');
+                valor += '%';
+            }
+            this.value = valor; 
+        });
+        div.appendChild(inputPorcentagem);
+        
+        const addAdvogadoBtn = document.createElement('button');
+        addAdvogadoBtn.setAttribute('id', 'addAdvogado');
+        addAdvogadoBtn.textContent = '+';
+        addAdvogadoBtn.addEventListener('click', criarNovoAdvogado);
+        div.appendChild(addAdvogadoBtn);
+        
+        if (hcontInputs.children.length > 0) {
+            const remAdvogadoBtn = document.createElement('button');
+            remAdvogadoBtn.setAttribute('id', 'remAdvogado');
+            remAdvogadoBtn.textContent = '-';
+            remAdvogadoBtn.addEventListener('click', function() {
+                hcontInputs.removeChild(div);
+            });
+            div.appendChild(remAdvogadoBtn);
+        }
+    
+        hcontInputs.appendChild(div);
+    }
+    
+    
+    criarNovoAdvogado(); // Criar o primeiro advogado por padrão
+});
