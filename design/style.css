@@ -182,11 +182,14 @@ section{
     font-weight: bolder;
 }
 
-section h2{
-    font-size: 1.0em;
+h2{
+    font-size: 1.2em;
+    margin-bottom: 1.2rem;
+    color: #13678A;
 }
 
-section input[type="text"]{
+
+#section3 input[type="text"]{
     width: 150px;
     font-size: 12px;
     margin: 3px;
@@ -197,7 +200,7 @@ section input[type="text"]{
     width: 80px;
 }
 
-section button{
+#section3 button{
     width: 15px; 
     height: 15px; 
     border: none;
@@ -209,12 +212,12 @@ section button{
     margin: 1px;
 }
 
-section button:hover {
+#section3 button:hover {
     background-color: #4AB36C; 
     color: #F2E3D5; 
 }
 
-section button:active {
+#section3 button:active {
     background-color: #EC2028; 
 }
 

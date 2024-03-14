@@ -226,17 +226,25 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const button2 = document.getElementById('calcular-button'); 
     const section = document.getElementById('section'); 
+    const section2 = document.getElementById('section2'); 
+    const section3 = document.getElementById('section3'); 
+
+    section2.style.display = 'none'; // Esconde section2 quando a página é carregada
+    section3.style.display = 'none'; // Esconde section3 quando a página é carregada
 
     button2.addEventListener('click', function() {
         const sectionDisplayStyle = window.getComputedStyle(section).getPropertyValue('display');
         if (sectionDisplayStyle === 'none') {
             section.style.display = 'block';
+            section2.style.display = 'block'; // Mostra section2 também
+            section3.style.display = 'block'; // Mostra section3 também
         } else {
             section.style.display = 'none';
+            section2.style.display = 'none'; // Esconde section2 também
+            section3.style.display = 'none'; // Esconde section3 também
         }
     });
 });
-
 
 
 
