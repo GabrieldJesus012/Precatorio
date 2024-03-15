@@ -189,6 +189,17 @@ h2{
     color: #13678A;
 }
 
+.flex-container {
+    display: flex;
+    justify-content: center; 
+    width: 1690px;
+}
+
+.previdencia, .imposto-renda {
+    flex-basis: 15%; 
+}
+
+
 #section2 label {
     display: block;
     text-indent: 10px;

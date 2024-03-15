@@ -142,17 +142,27 @@
 
     <section id="section2">
         <h2>Deduções Legais</h2>
-        <p>Previdência Social</p>
-        <label for="baseprev">Base de Cálculo:</label>
-        <input type="text" name="" id="" class="form">
-        <label for="previdencia">Previdência Percentual (%)</label>
-        <input type="text" name="previdencia" id="previdencia" class="form" placeholder="Aliquota Previdência" autocomplete="off">
-
-        <p>Imposto de Renda</p>
-        <label for="baseir">Base de Cálculo:</label>
-        <input type="text" name="" id="" class="form">
-        <label for="ir">Imposto de Renda Percentual (%)</label>
-        <input type="text" name="ir" id="ir" class="form" placeholder="Aliquota IR" autocomplete="off">
+        <div class="flex-container">
+            <div class="previdencia">
+                <h2>Previdência Social</h2>
+                <label for="baseprev">Base de Cálculo:</label>
+                <input type="text" name="" id="baseprev" class="form" autocomplete="off">
+                <label for="previdencia">Previdência Percentual (%)</label>
+                <input type="text" name="previdencia" id="previdencia" class="form" placeholder="Aliquota Previdência" autocomplete="off">
+                <label for="prevdev">Valor Devido:</label>
+                <input type="text" name="prevdev" id="prevdev" class="form" autocomplete="off">
+            </div>
+    
+            <div class="imposto-renda">
+                <h2>Imposto de Renda</h2>
+                <label for="baseir">Base de Cálculo:</label>
+                <input type="text" name="" id="baseir" class="form" autocomplete="off">
+                <label for="rra"> RRA Total:</label>
+                <input type="number" name="" id="rra" class="form" autocomplete="off">
+                <label for="irdev">Valor Devido:</label>
+                <input type="text" name="irdev" id="irdev" class="form" autocomplete="off">
+            </div>
+        </div>
     </section>
 
     <section id="section3">
