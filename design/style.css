@@ -28,7 +28,12 @@ main{
 }
 
 #section {
-    display: none; /* Oculta a seção inicialmente */
+    display: none; 
+}
+
+#section h1{
+    text-align: center;
+    padding-bottom: 3px;
 }
 
 section{

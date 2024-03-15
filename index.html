@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <h1>Atualização Monetária</h1>
+        <h1>PreCalc</h1>
         <img div="icone" src="assets/tjpi.png" alt="">
     </header>
     <main>
@@ -60,10 +60,6 @@
                 <td><label for="tipoCalculo">Tipo de Cálculo:</label></td>
                 <td class="tipoCalculo">
                     <div>
-                        <input type="radio" id="calculoCompleto" name="tipoCalculo" value="completo">
-                        <label class="radioLabel" for="calculoCompleto">Cálculo Completo</label>
-                    </div>
-                    <div>
                         <input type="radio" id="calculoReduzido" name="tipoCalculo" value="reduzido" checked>
                         <label class="radioLabel" for="calculoReduzido">Cálculo Simplificado</label>
                     </div>
@@ -83,22 +79,13 @@
                 <td><label for="total">Total:</label></td>
                 <td><span id="total" >R$ 0,00</span></td>
             </tr>
-
-            <tr><th colspan="2" id="completoROW"> MÓDULO COMPLETO</th></tr>
-            <tr id="valcomp" class="ocultarcompl" >
-                <td>
-                    <label for="valcomp" class="ocultarcompl">Digite os valores:</label>
-                </td>
-                <td>
-                    <button class="button" class="ocultarcompl" id="addValorButton">Adicionar Valor</button>
-                </td>
-            </tr>
         </table>
         <div class="button-container">
             <button id="calcular-button" class="button2" onclick="calcularMultiplicacao()">Calcular</button>
         </div>
     </main>
     <section id="section">
+        <h1>Atualização Monetária</h1>
         <table class="tabela2">
             <tr>
                 <th></th>
