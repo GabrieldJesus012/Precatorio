@@ -1,3 +1,5 @@
+//DADOS DO CÁLCULO
+
 document.addEventListener('DOMContentLoaded', function() {
     const selectTipoCalculo = document.getElementById('tipoCalculo');
 
@@ -10,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     selectTipoCalculo.value = "";
 });
 
+//BASE DE CÁLCULO
 
 // Função para formatar o valor para moeda brasileira
 function formatCurrency(value) {
@@ -44,7 +47,6 @@ function updateTotal() {
     totalTd.textContent = formatCurrency(totalValue.toFixed(2));
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const inputPrincipal = document.getElementById('valprin');
     const inputJuros = document.getElementById('valjur');
@@ -69,51 +71,43 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleRowsVisibility(false);
 });
 
-//section config
+//section1 config Atualização Monetária
+
 document.addEventListener('DOMContentLoaded', function() {
     const button2 = document.getElementById('calcular-button'); 
     const section = document.getElementById('section'); 
     const section2 = document.getElementById('section2'); 
     const section3 = document.getElementById('section3'); 
 
-    section2.style.display = 'none'; // Esconde section2 quando a página é carregada
-    section3.style.display = 'none'; // Esconde section3 quando a página é carregada
+    section2.style.display = 'none'; 
+    section3.style.display = 'none'; 
 
     button2.addEventListener('click', function() {
         const sectionDisplayStyle = window.getComputedStyle(section).getPropertyValue('display');
         if (sectionDisplayStyle === 'none') {
             section.style.display = 'block';
-            section2.style.display = 'block'; // Mostra section2 também
-            section3.style.display = 'block'; // Mostra section3 também
+            section2.style.display = 'block'; 
+            section3.style.display = 'block'; 
         } else {
             section.style.display = 'none';
-            section2.style.display = 'none'; // Esconde section2 também
-            section3.style.display = 'none'; // Esconde section3 também
+            section2.style.display = 'none'; 
+            section3.style.display = 'none'; 
         }
     });
 });
 
 
-//section calc
 function atualizarValor() {
-    // Obtém o valor inserido pelo usuário
     var valorInserido = document.getElementById("valprin").value;
-    // Atualiza o conteúdo do segundo td com o valor inserido
     document.getElementById("valorprincinformado").innerText = valorInserido;
-
     calcularIndice();
 }
 
 function atualizarValor2() {
-    // Obtém o valor inserido pelo usuário
     var valorInserido2 = document.getElementById("valjur").value;
-    // Atualiza o conteúdo do segundo td com o valor inserido
     document.getElementById("valorjuroinformado").innerText = valorInserido2;
-
     calcularIndice();
-
 }
-
 
 function calcularIndice() {
     var mesSelecionado = document.getElementById("mes").value;
@@ -329,63 +323,43 @@ function calcularIndice() {
     var valorIndice = tabelaIndices[chave];
 
     if (valorIndice !== undefined) {
-        // Exibir o valor do índice na tabela
         document.getElementById("indice").textContent = valorIndice.toFixed(7).replace(".", ",");
         document.getElementById("indice2").textContent = valorIndice.toFixed(7).replace(".", ",");
 
-        // Obtendo o valor inserido pelo usuário (principal)
         var valorPrincipal = parseFloat(document.getElementById("valprin").value.replace(",", ".")).toFixed(2);
-
-        // Obtendo o valor inserido pelo usuário (juros)
         var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", ".")).toFixed(2);
 
-        // Calculando a multiplicação correta para o principal
         var multiplicacaoPrincipal = parseFloat(valorIndice.toFixed(7)) * parseFloat(valorPrincipal);
-
-        // Atualizando o valor da multiplicação para o principal na tabela
         document.getElementById("multindice").textContent = multiplicacaoPrincipal.toFixed(2).replace(".", ",");
 
-        // Calculando a multiplicação correta para os juros
         var multiplicacaoJuros = parseFloat(valorIndice.toFixed(7)) * parseFloat(valorJuros);
-
-        // Atualizando o valor da multiplicação para os juros na tabela
         document.getElementById("multindice2").textContent = multiplicacaoJuros.toFixed(2).replace(".", ",");
 
         var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", "."));
-
         document.getElementById("jur").textContent = multiplicacaoJuros.toFixed(2).replace(".", ",");
 
-        // Calculando a soma dos valores multiplicados
         var soma = parseFloat(multiplicacaoPrincipal) + parseFloat(multiplicacaoJuros);
-
-        // Atualizando o elemento correspondente na tabela com a soma
         document.getElementById("totatt").textContent = "R$ " + soma.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
         calcularMultiplicacao();
-
     } else {
-        // Se o índice não estiver disponível, remova o valor anterior e adicione campos de entrada para o índice do principal e dos juros
         document.getElementById("indice").textContent = "";
         document.getElementById("indice2").textContent = "";
-    
-        // Criar um input para permitir que o usuário insira o valor do índice para o principal
+
         var inputIndicePrincipal = document.createElement("input");
         inputIndicePrincipal.type = "number";
         inputIndicePrincipal.id = "indicePrincipalInput";
         inputIndicePrincipal.placeholder = "Informe o índice";
         inputIndicePrincipal.style.marginTop = "5px";
-    
-        // Adicionar um listener de evento para recalcular a multiplicação quando o valor do input mudar
+
         inputIndicePrincipal.addEventListener("input", function() {
             var novoValorIndice = parseFloat(this.value.replace(",", "."));
             var valorPrincipal = parseFloat(document.getElementById("valprin").value.replace(",", "."));
             var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", "."));
     
-            // Calculando a nova multiplicação para o principal
             var novaMultiplicacaoPrincipal = novoValorIndice * valorPrincipal;
             document.getElementById("multindice").textContent = novaMultiplicacaoPrincipal.toFixed(2).replace(".", ",");
-    
-            // Calculando a nova multiplicação para os juros
+
             var valorIndiceJuros = parseFloat(document.getElementById("indiceJurosInput").value.replace(",", "."));
             var novaMultiplicacaoJuros = valorIndiceJuros * valorJuros;
             document.getElementById("multindice2").textContent = novaMultiplicacaoJuros.toFixed(2).replace(".", ",");
@@ -396,55 +370,42 @@ function calcularIndice() {
             calcularMultiplicacao();
         });
     
-        // Adicionar o input do índice para o principal na tabela
         var elementoIndicePrincipal = document.getElementById("indice");
         elementoIndicePrincipal.appendChild(inputIndicePrincipal);
-    
-        // Criar um input para permitir que o usuário insira o valor do índice para os juros
+
         var inputIndiceJuros = document.createElement("input");
         inputIndiceJuros.type = "number";
         inputIndiceJuros.id = "indiceJurosInput";
         inputIndiceJuros.placeholder = "Informe o índice";
         inputIndiceJuros.style.marginTop = "5px";
     
-        // Adicionar um listener de evento para recalcular a multiplicação quando o valor do input mudar
         inputIndiceJuros.addEventListener("input", function() {
             var novoValorIndiceJuros = parseFloat(this.value.replace(",", "."));
             var valorPrincipal = parseFloat(document.getElementById("valprin").value.replace(",", "."));
             var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", "."));
     
-            // Obtendo o valor inserido pelo usuário (índice de correção para o principal)
             var valorIndicePrincipal = parseFloat(document.getElementById("indicePrincipalInput").value.replace(",", "."));
     
-            // Calculando a nova multiplicação para o principal
             var novaMultiplicacaoPrincipal = valorIndicePrincipal * valorPrincipal;
             document.getElementById("multindice").textContent = novaMultiplicacaoPrincipal.toFixed(2).replace(".", ",");
     
-            // Calculando a nova multiplicação para os juros
             var novaMultiplicacaoJuros = novoValorIndiceJuros * valorJuros;
             document.getElementById("multindice2").textContent = novaMultiplicacaoJuros.toFixed(2).replace(".", ",");
     
-            // Calculando a nova soma dos valores multiplicados
             var novaSoma = novaMultiplicacaoPrincipal + novaMultiplicacaoJuros;
             document.getElementById("totatt").textContent = "R$ " + novaSoma.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-            // Obtendo o elemento "jur"
         var elementoJur = document.getElementById("jur");
 
-        // Atualizando o texto do elemento com o valor multiplicado dos juros
         elementoJur.textContent = novaMultiplicacaoJuros.toFixed(2).replace(".", ",");
 
         calcularMultiplicacao();
-
         });
     
-        // Adicionar o input do índice para os juros na tabela
         var elementoIndiceJuros = document.getElementById("indice2");
         elementoIndiceJuros.appendChild(inputIndiceJuros);
     }
-    
 }
-
 
 function calcularJuros() {
     var mes = document.getElementById("mes").value;
@@ -1180,7 +1141,6 @@ function calcularJuros() {
 }
 
 
-
 function formatDate(date) {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -1188,24 +1148,20 @@ function formatDate(date) {
     return `${day}/${month}/${year}`;
 }
 
-// Calcula a data do mês anterior
 function getLastMonthDate() {
     const today = new Date();
     const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
     return formatDate(lastMonth);
 }
 
-// Faz a requisição à API do Banco Central do Brasil
 const url = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json&dataInicial=01/12/2021&dataFinal=${getLastMonthDate()}`;
 fetch(url)
 .then(response => response.json())
 .then(data => {
-    // Calcula a soma dos valores
     const sum = data.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
     const result = 1 + sum / 100;
     document.getElementById('selic').textContent = result.toFixed(4).replace(".", ",");
     document.getElementById('selic1').textContent = result.toFixed(4).replace(".", ",");
-
     calcularMultiplicacao();
 })
 
@@ -1213,39 +1169,30 @@ fetch(url)
     console.error('Erro ao obter os dados:', error);
     document.getElementById('selic').textContent = 'Erro ao obter os dados';
     document.getElementById('selic1').textContent = 'Erro ao obter os dados';
-
     document.getElementById("selic").textContent = "";
     document.getElementById("selic1").textContent = "";
 
-    // Criar um input para permitir que o usuário insira o valor da SELIC
     var inputSelic = document.createElement("input");
     inputSelic.type = "number";
     inputSelic.id = "selicInput";
     inputSelic.placeholder = "Informe a SELIC";
     inputSelic.style.marginTop = "5px";
 
-    // Cria uma cópia do input para o segundo local
     var inputSelicCopy = inputSelic.cloneNode(true);
 
-    // Adiciona o input ao elemento com o ID "selic"
     document.getElementById("selic").appendChild(inputSelic);
 
-    // Adiciona a cópia do input ao elemento com o ID "selic1"
     document.getElementById("selic1").appendChild(inputSelicCopy);
 });
 
 
-// Função para calcular a multiplicação dos resultados das funções de índice e juros
 function calcularMultiplicacao() {
-    // Obtém os valores calculados de índice e juros
     var valorIndice = parseFloat(document.getElementById("multindice").textContent.replace(",", "."));
     var valorJuros = parseFloat(document.getElementById("juroscal").textContent.replace("%", "").replace(",", "."));
     var somajuros= parseFloat(document.getElementById("jur").textContent.replace(",", "."));
 
-    // Calcula a multiplicação dos resultados
     var multiplicacao = valorIndice * (valorJuros/100);
-
-    // Exibe o resultado na tabela com id "multjuros"
+    
     document.getElementById("multjuros").textContent = multiplicacao.toFixed(2).replace(".", ",");
     document.getElementById("totjur").textContent = "R$ " + multiplicacao.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -1269,7 +1216,31 @@ function calcularMultiplicacao() {
     document.getElementById("totatual").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-//Função para alternar a visibilidade dos h.contratual
+//Deduções Legais
+
+document.addEventListener("DOMContentLoaded", function() {
+    const previdenciaInput = document.getElementById("previdencia");
+    previdenciaInput.addEventListener('input', function() {
+        let valor = this.value.trim(); 
+        if (valor !== '') { 
+            valor = valor.replace(/[^\d,]/g, '');
+            valor = valor.replace(/,+/g, ',');
+        }
+        this.value = valor;
+    });
+
+    previdenciaInput.addEventListener('blur', function() {
+        let valor = this.value.trim();
+        if (valor !== '') { 
+            valor += '%'; 
+        }
+        this.value = valor; 
+    });
+});
+
+
+
+//Deduções Acessórias
 
 document.addEventListener('DOMContentLoaded', function() {
     const checkbox = document.getElementById('hcont');
@@ -1293,7 +1264,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Ocultar a div inicialmente quando a página é carregada ou atualizada
     hcontInputs.style.display = 'none';
     hsucumInputs.style.display = 'none';
 });
@@ -1378,7 +1348,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
         hcontInputs.appendChild(div);
     }
-    criarNovoAdvogado(); // Criar o primeiro advogado por padrão
+    criarNovoAdvogado(); 
 });
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -1459,6 +1429,6 @@ document.addEventListener("DOMContentLoaded", function() {
         container.appendChild(div);
     }
 
-    criarNovoAdvogado(hsucumInputs); // Criar o primeiro advogado por padrão em hsucumInputs
+    criarNovoAdvogado(hsucumInputs); 
 });
 

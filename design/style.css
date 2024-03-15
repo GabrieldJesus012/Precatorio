@@ -189,6 +189,22 @@ h2{
     color: #13678A;
 }
 
+#section2 label {
+    display: block;
+    text-indent: 10px;
+    padding: 3px;
+}
+
+.form{
+    width: 150px;
+    border: 1px solid #00000073;
+    font-size: 12px;
+    padding: 3px;
+    border-radius: 5px;
+    margin-left: 10px;
+    text-align: center;
+}
+
 #section3 ul {
     list-style-position: inside;
     list-style-type: "\01F468\01F3FD\200D\01F4BB";
@@ -202,8 +218,32 @@ h2{
 #section3 input[type="text"]{
     width: 150px;
     font-size: 12px;
+    padding: 3px;
     margin: 3px;
     border-radius: 5px;
+    text-align: center;
+    border: 1px solid #00000073;
+}
+
+#section3 select {
+    padding: 3px;
+    font-size: 12px;
+    border: 1px solid #00000073;
+    border-radius: 5px;
+    text-align: center;
+    appearance: none; 
+    width: 60px; 
+} 
+
+#section3 option {
+    padding: 12px;
+    font-size: 12px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+#section3 option:focus {
+    background-color: #f0f0f0;
 }
 
 #porcentagemadv{

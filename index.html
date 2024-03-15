@@ -19,7 +19,7 @@
             <tr><th colspan="2"> DADOS GERAIS</th></tr>
             <tr>
                 <td><label for="npre">Número do Precatório:</label></td>
-                <td><input type="number" id="npre" placeholder="0000000-00.0000.0.00.0000"></td>
+                <td><input type="number" id="npre" placeholder="0000000-00.0000.0.00.0000" autocomplete="off">></td>
             </tr>
             <tr>
                 <td><label for="planoO">Plano Orçamentario:</label></td>
@@ -27,11 +27,11 @@
             </tr>
             <tr>
                 <td><label for="inome">Exequente:</label></td>
-                <td><input type="text" id="inome"></td>
+                <td><input type="text" id="inome" autocomplete="off"></td>
             </tr>
             <tr>
                 <td><label for="inomee">Executado:</label></td>
-                <td><input type="text" id="inomee"></td>
+                <td><input type="text" id="inomee" autocomplete="off"></td>
             </tr>
             <tr>
                 <td><label for="mes">Data do cálculo homologado:</label></td>
@@ -68,15 +68,18 @@
                     </select>
                 </td>
             </tr>
+            <tr>
+                <td></td>
+            </tr>
 
             <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> BASE DE CÁLCULO</th></tr>
             <tr id="principalRow" class="ocultar">
                 <td><label for="valprin">Principal:</label></td>
-                <td><input type="text" id="valprin" onkeyup="atualizarValor()" onclick="calcularJuros()"></td>
+                <td><input type="text" id="valprin" onkeyup="atualizarValor()" onclick="calcularJuros()" autocomplete="off"></td>
             </tr>
             <tr id="jurosRow" class="ocultar">
                 <td><label for="valjur">Juros:</label></td>
-                <td><input type="text" id="valjur" onkeyup="atualizarValor2()" onclick="calcularMultiplicacao()"></td>
+                <td><input type="text" id="valjur" onkeyup="atualizarValor2()" onclick="calcularMultiplicacao()" autocomplete="off"></td>
             </tr>
             <tr id="totalRow" class="ocultar">
                 <td><label for="total">Total:</label></td>
@@ -139,6 +142,17 @@
 
     <section id="section2">
         <h2>Deduções Legais</h2>
+        <p>Previdência Social</p>
+        <label for="baseprev">Base de Cálculo:</label>
+        <input type="text" name="" id="" class="form">
+        <label for="previdencia">Previdência Percentual (%)</label>
+        <input type="text" name="previdencia" id="previdencia" class="form" placeholder="Aliquota Previdência" autocomplete="off">
+
+        <p>Imposto de Renda</p>
+        <label for="baseir">Base de Cálculo:</label>
+        <input type="text" name="" id="" class="form">
+        <label for="ir">Imposto de Renda Percentual (%)</label>
+        <input type="text" name="ir" id="ir" class="form" placeholder="Aliquota IR" autocomplete="off">
     </section>
 
     <section id="section3">
