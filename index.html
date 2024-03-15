@@ -55,18 +55,21 @@
                     <input type="number" id="ano" placeholder="Ano" onchange="calcularIndice()" onclick="calcularJuros()">
                 </td>
             </tr>
-            <tr><th colspan="2"> DADOS DO CALCULO</th></tr>
+
+            <tr><th colspan="2"> DADOS DO CÁLCULO</th></tr>
             <tr>
                 <td><label for="tipoCalculo">Tipo de Cálculo:</label></td>
                 <td class="tipoCalculo">
-                    <div>
-                        <input type="radio" id="calculoReduzido" name="tipoCalculo" value="reduzido" checked>
-                        <label class="radioLabel" for="calculoReduzido">Cálculo Simplificado</label>
-                    </div>
+                    <select id="tipoCalculo">
+                        <option value="" disabled selected>Selecione</option>
+                        <option>Normal</option>
+                        <option>Preferencial</option>
+                        <option>Acordo</option>
+                    </select>
                 </td>
             </tr>
 
-            <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> MÓDULO SIMPLIFICADO</th></tr>
+            <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> BASE DE CÁLCULO</th></tr>
             <tr id="principalRow" class="ocultar">
                 <td><label for="valprin">Principal:</label></td>
                 <td><input type="text" id="valprin" onkeyup="atualizarValor()" onclick="calcularJuros()"></td>

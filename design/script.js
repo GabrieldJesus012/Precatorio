@@ -1,3 +1,16 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const selectTipoCalculo = document.getElementById('tipoCalculo');
+
+    selectTipoCalculo.addEventListener('change', function() {
+        if (selectTipoCalculo.value === "") {
+            return;
+        }
+    });
+
+    selectTipoCalculo.value = "";
+});
+
+
 // Função para formatar o valor para moeda brasileira
 function formatCurrency(value) {
     return parseFloat(value).toLocaleString('pt-BR', {
@@ -51,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     inputJuros.addEventListener('blur', updateTotal);
 
-    // Atualiza o total ao carregar a página
+    
     updateTotal();
     toggleRowsVisibility(false);
 });

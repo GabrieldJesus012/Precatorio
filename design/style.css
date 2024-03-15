@@ -86,10 +86,6 @@ section{
     background-color: #fff;
 }
 
-.tabela .tipoCalculo {
-    display: flex;
-    justify-content: space-evenly;
-}
 
 .button {
     padding: 5px 10px;
