@@ -31,20 +31,24 @@ main{
     display: none; 
 }
 
+#ocultnorm , #ocultnorm1{
+    display: none; 
+}
+
 #section h1{
     text-align: center;
     padding-bottom: 3px;
 }
 
 section{
-    background-color:#F2C6C2;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.418);
+    background-color:#4597607a;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.274);
     min-width: 360px;
     max-width: 1690px;
     margin: auto; 
     margin-bottom: 30px;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .tabela {
@@ -189,32 +193,39 @@ h2{
     color: #13678A;
 }
 
-.flex-container {
-    display: flex;
-    justify-content: center; 
-    width: 1690px;
+
+#section2 h2.tit {
+    color: #13678A;
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 1.2em;
 }
 
-.previdencia, .imposto-renda {
-    flex-basis: 15%; 
+.tabela3 {
+    width: 45%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
-#section2 label {
-    display: block;
-    text-indent: 10px;
-    padding: 3px;
+.tabela3 td, .tabela3 th {
+    border: 1px solid #000000;
+    padding: 10px; /* Aumenta o espaçamento interno */
+    text-align: center;
+    font-size: 14px;
 }
 
-.form{
-    width: 150px;
-    border: 1px solid #00000073;
+.tabela3 input,.tabela textarea {
+    width: 50%;
+    border: 1px solid #000000;
     font-size: 12px;
     padding: 3px;
     border-radius: 5px;
-    margin-left: 10px;
     text-align: center;
 }
+
 
 #section3 ul {
     list-style-position: inside;

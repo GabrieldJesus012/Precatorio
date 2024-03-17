@@ -19,7 +19,7 @@
             <tr><th colspan="2"> DADOS GERAIS</th></tr>
             <tr>
                 <td><label for="npre">Número do Precatório:</label></td>
-                <td><input type="number" id="npre" placeholder="0000000-00.0000.0.00.0000" autocomplete="off">></td>
+                <td><input type="number" id="npre" placeholder="0000000-00.0000.0.00.0000" autocomplete="off"></td>
             </tr>
             <tr>
                 <td><label for="planoO">Plano Orçamentario:</label></td>
@@ -60,7 +60,7 @@
             <tr>
                 <td><label for="tipoCalculo">Tipo de Cálculo:</label></td>
                 <td class="tipoCalculo">
-                    <select id="tipoCalculo">
+                    <select id="tipoCalculo" onchange="mostrarOcultar(); mostrarOcultar1();">
                         <option value="" disabled selected>Selecione</option>
                         <option>Normal</option>
                         <option>Preferencial</option>
@@ -68,8 +68,38 @@
                     </select>
                 </td>
             </tr>
+            <!-- COLOCAR DEPOIS
+                <tr id="ocultnorm">
+                <td><label for="pag">Há Pagamento:(Informe R$)</label></td>
+                <td><input type="text" name="pag" id="pag" onblur="formatarCampoInput()" autocomplete="off"></td>
+            </tr>
+            <tr id="ocultnorm1">
+                <td> Data do Pagamento:</td>
+                <td>
+                    <select>
+                        <option value="" disabled selected>Selecione</option>
+                        <option>janeiro</option>
+                        <option>fevereiro</option>
+                        <option>março</option>
+                        <option>abril</option>
+                        <option>maio</option>
+                        <option>junho</option>
+                        <option>julho</option>
+                        <option>agosto</option>
+                        <option>setembro</option>
+                        <option>outubro</option>
+                        <option>novembro</option>
+                        <option>dezembro</option>
+                    </select>
+                    <br>/ <br>
+                    <input type="number" id="anopag" placeholder="Ano do Pagamento">
+                </td>
+            </tr>
+            APAGAR DEPOIS -->
+
             <tr>
-                <td></td>
+                <td><label for="rrainf">RRA Total:</label></td>
+                <td><input type="number" name="rrainf" id="rrainf" placeholder="Quantidade de Meses" autocomplete="off"></td>
             </tr>
 
             <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> BASE DE CÁLCULO</th></tr>
@@ -90,6 +120,7 @@
             <button id="calcular-button" class="button2" onclick="calcularMultiplicacao()">Calcular</button>
         </div>
     </main>
+
     <section id="section">
         <h1>Atualização Monetária</h1>
         <table class="tabela2">
@@ -142,27 +173,43 @@
 
     <section id="section2">
         <h2>Deduções Legais</h2>
-        <div class="flex-container">
-            <div class="previdencia">
-                <h2>Previdência Social</h2>
-                <label for="baseprev">Base de Cálculo:</label>
-                <input type="text" name="" id="baseprev" class="form" autocomplete="off">
-                <label for="previdencia">Previdência Percentual (%)</label>
-                <input type="text" name="previdencia" id="previdencia" class="form" placeholder="Aliquota Previdência" autocomplete="off">
-                <label for="prevdev">Valor Devido:</label>
-                <input type="text" name="prevdev" id="prevdev" class="form" autocomplete="off">
-            </div>
-    
-            <div class="imposto-renda">
-                <h2>Imposto de Renda</h2>
-                <label for="baseir">Base de Cálculo:</label>
-                <input type="text" name="" id="baseir" class="form" autocomplete="off">
-                <label for="rra"> RRA Total:</label>
-                <input type="number" name="" id="rra" class="form" autocomplete="off">
-                <label for="irdev">Valor Devido:</label>
-                <input type="text" name="irdev" id="irdev" class="form" autocomplete="off">
-            </div>
-        </div>
+            <table class="tabela3">
+                <div class="previdencia">
+                    <th colspan="2"><h2 class="tit">Previdência Social</h2></th>
+                    <tr>
+                        <td><label for="baseprev">Base de Cálculo:</label></td>
+                        <td><input type="text" name="" id="baseprev" placeholder="Informe o Valor" autocomplete="off"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="previdencia">Previdência Percentual (%)</label></td>
+                        <td><input type="text" name="previdencia" id="previdencia" placeholder="Aliquota Previdência" autocomplete="off"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="prevdev">Valor Devido:</label></td>
+                        <td><input type="text" name="prevdev" id="prevdev" autocomplete="off" readonly></td>
+                    </tr>
+                </div>
+
+                <div class="imposto-renda">
+                    <th colspan="2"><h2 class="tit">Imposto de Renda</h2></th>
+                    <tr>
+                        <td><label for="baseir">Base de Cálculo:</label></td>
+                        <td><input type="text" name="" id="baseir" placeholder="Informe o Valor" autocomplete="off"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="rra"> RRA Total:</label></td>
+                        <td><input type="number" name="" id="rra" autocomplete="off"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="aliqir">Aliquota IR:</label></td>
+                        <td><input type="text" name="aliqir" id="aliqir" autocomplete="off" placeholder="Aliquota IR" readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="irdev">Valor Devido:</label></td>
+                        <td><input type="text" name="irdev" id="irdev" autocomplete="off" readonly></td>
+                    </tr>
+                </div>
+            </table>
     </section>
 
     <section id="section3">

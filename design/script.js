@@ -12,6 +12,55 @@ document.addEventListener('DOMContentLoaded', function() {
     selectTipoCalculo.value = "";
 });
 
+function mostrarOcultar() {
+    var select = document.getElementById("tipoCalculo");
+    var option = select.options[select.selectedIndex].text;
+    var tr = document.getElementById("ocultnorm");
+
+    if (option === "Normal" || option === "Acordo") {
+        tr.style.display = "table-row";
+    } else {
+        tr.style.display = "none";
+    }
+}
+
+function mostrarOcultar1() {
+    var select = document.getElementById("tipoCalculo");
+    var option = select.options[select.selectedIndex].text;
+    var tr = document.getElementById("ocultnorm1");
+
+    if (option === "Normal" || option === "Acordo") {
+        tr.style.display = "table-row";
+    } else {
+        tr.style.display = "none";
+    }
+}
+
+function formatarParaReal(valor) {
+    valor = valor.replace(/[^\d.,]/g, '');
+
+    if (valor.trim() === "") return "R$ 0,00"; 
+
+    valor = valor.replace(",", ".");
+
+    valor = parseFloat(valor).toFixed(2);
+
+    var partes = valor.split('.');
+    var inteiro = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    var decimal = partes[1];
+
+    valor = inteiro + "," + decimal;
+
+    return "R$ " + valor;
+}
+
+
+function formatarCampoInput() {
+    var campoInput = document.getElementById("pag");
+    campoInput.value = formatarParaReal(campoInput.value);
+}
+
+
 //BASE DE CÁLCULO
 
 // Função para formatar o valor para moeda brasileira
@@ -1162,7 +1211,9 @@ fetch(url)
     const result = 1 + sum / 100;
     document.getElementById('selic').textContent = result.toFixed(4).replace(".", ",");
     document.getElementById('selic1').textContent = result.toFixed(4).replace(".", ",");
+    
     calcularMultiplicacao();
+
 })
 
 .catch(error => {
@@ -1219,6 +1270,30 @@ function calcularMultiplicacao() {
 //Deduções Legais
 
 document.addEventListener("DOMContentLoaded", function() {
+    var baseprevInputElement = document.getElementById('baseprev');
+    var baseirInputElement = document.getElementById('baseir');
+
+    baseprevInputElement.addEventListener('input', function(event) {
+        var value = event.target.value;
+
+        value = value.replace(/[^\d.,]/g, '');
+        value = value.replace(/\./g, ',');
+
+        event.target.value = value;
+    });
+
+    baseirInputElement.addEventListener('input', function(event) {
+        var value = event.target.value;
+
+        value = value.replace(/[^\d.,]/g, '');
+        value = value.replace(/\./g, ',');
+
+        event.target.value = value;
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
     const previdenciaInput = document.getElementById("previdencia");
     previdenciaInput.addEventListener('input', function() {
         let valor = this.value.trim(); 
@@ -1232,10 +1307,84 @@ document.addEventListener("DOMContentLoaded", function() {
     previdenciaInput.addEventListener('blur', function() {
         let valor = this.value.trim();
         if (valor !== '') { 
-            valor += '%'; 
+            if (!valor.endsWith('%')) { 
+                valor += '%'; 
+            }
         }
         this.value = valor; 
     });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    var basePrevInput = document.getElementById('baseprev');
+    var previdenciaInput = document.getElementById('previdencia');
+    var prevdevInput = document.getElementById('prevdev');
+
+    function calcularResultado() {
+        var basePrev = parseFloat(basePrevInput.value.replace(',', '.'));
+        var previdencia = parseFloat(previdenciaInput.value.replace(',', '.'));
+
+        var resultado = basePrev * (previdencia / 100);
+        prevdevInput.value = 'R$ ' + resultado.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    basePrevInput.addEventListener('input', function() {
+        calcularResultado();
+    });
+
+    previdenciaInput.addEventListener('input', function() {
+        calcularResultado();
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    var baseirInputElement = document.getElementById('baseir');
+    var rraInputElement = document.getElementById('rra');
+    var irdevElement = document.getElementById('irdev');
+    var aliqirElement = document.getElementById('aliqir');
+
+    baseirInputElement.addEventListener('input', calcularImposto);
+    rraInputElement.addEventListener('input', calcularImposto);
+
+    function formatarNumero(numero) {
+        return 'R$ ' + numero.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function calcularImposto() {
+        var baseirValue = parseFloat(baseirInputElement.value.replace(',', '.'));
+        var rraValue = parseInt(rraInputElement.value, 10);
+
+        if (isNaN(baseirValue) || isNaN(rraValue) || rraValue === 0) {
+            irdevElement.value = formatarNumero(0);
+            aliqirElement.value = '';
+            return;
+        }
+
+        var valorCalculado = baseirValue / rraValue;
+        var imposto = 0;
+        var alquota = '';
+
+        if (valorCalculado >= 4664.69) {
+            imposto = 0.275 * (valorCalculado - 896);
+            alquota = '27,5%';
+        } else if (valorCalculado >= 3751.06) {
+            imposto = 0.225 * (valorCalculado - 662.77);
+            alquota = '22,5%';
+        } else if (valorCalculado >= 2826.66) {
+            imposto = 0.15 * (valorCalculado - 381.44);
+            alquota = '15%';
+        } else if (valorCalculado >= 2259.21) {
+            imposto = 0.075 * (valorCalculado - 169.44);
+            alquota = '7,5%';
+        }else {
+            alquota = 'FAIXA ISENTA';
+        }
+
+        imposto = Math.max(0, imposto); 
+
+        irdevElement.value = formatarNumero(imposto);
+        aliqirElement.value = alquota;
+    }
 });
 
 
