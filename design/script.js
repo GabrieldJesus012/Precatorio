@@ -1270,6 +1270,8 @@ function calcularMultiplicacao() {
 
     var totalat = atualizacao + atualizacao1
     document.getElementById("totatual").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    document.getElementById("valordev").textContent ="R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 //Deduções Legais
@@ -1324,6 +1326,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var basePrevInput = document.getElementById('baseprev');
     var previdenciaInput = document.getElementById('previdencia');
     var prevdevInput = document.getElementById('prevdev');
+    var prevpagTd = document.getElementById('prevpag');
 
     function calcularResultado() {
         var basePrev = parseFloat(basePrevInput.value.replace(',', '.'));
@@ -1331,6 +1334,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         var resultado = basePrev * (previdencia / 100);
         prevdevInput.value = 'R$ ' + resultado.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        prevpagTd.textContent = 'R$ ' + resultado.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     basePrevInput.addEventListener('input', function() {
@@ -1346,6 +1350,8 @@ document.addEventListener("DOMContentLoaded", function() {
     var baseirInputElement = document.getElementById('baseir');
     var rraInputElement = document.getElementById('rra');
     var irdevElement = document.getElementById('irdev');
+    var irpagTd = document.getElementById('irpag');
+
     var aliqirElement = document.getElementById('aliqir');
 
     baseirInputElement.addEventListener('input', calcularImposto);
@@ -1388,7 +1394,10 @@ document.addEventListener("DOMContentLoaded", function() {
         imposto = Math.max(0, imposto); 
 
         irdevElement.value = formatarNumero(imposto);
+
         aliqirElement.value = alquota;
+
+        irpagTd.textContent = irdevElement.value;
     }
 });
 
@@ -1585,4 +1594,51 @@ document.addEventListener("DOMContentLoaded", function() {
 
     criarNovoAdvogado(hsucumInputs); 
 });
+
+//resumo
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    var inputNome = document.getElementById("inome");
+    
+    var tdNome = document.getElementById("nameex");
+    
+    inputNome.addEventListener("blur", function() {
+        tdNome.textContent = inputNome.value;
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    var valordevElement = document.getElementById('valordev');
+    var prevpagElement = document.getElementById('prevpag');
+    var irpagElement = document.getElementById('irpag');
+    var totexeqElement = document.getElementById('totexeq');
+
+    function extrairValor(element) {
+        if (element) {
+            var textoValor = element.textContent.trim().replace(/[^\d,-]/g, ''); 
+            var valor = parseFloat(textoValor.replace(',', '.')); 
+            return isNaN(valor) ? 0 : valor; 
+        }
+        return 0;
+    }
+
+    function calcularDiferenca() {
+        var valordev = extrairValor(valordevElement);
+        var prevpag = extrairValor(prevpagElement);
+        var irpag = extrairValor(irpagElement);
+
+        var diferenca = valordev - prevpag - irpag;
+
+        totexeqElement.textContent = 'R$ ' + diferenca.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    calcularDiferenca(); 
+
+    if (valordevElement) valordevElement.addEventListener('DOMSubtreeModified', calcularDiferenca);
+    if (prevpagElement) prevpagElement.addEventListener('DOMSubtreeModified', calcularDiferenca);
+    if (irpagElement) irpagElement.addEventListener('DOMSubtreeModified', calcularDiferenca);
+});
+
 
