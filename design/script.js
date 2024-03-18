@@ -127,9 +127,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const section = document.getElementById('section'); 
     const section2 = document.getElementById('section2'); 
     const section3 = document.getElementById('section3'); 
+    const section4 = document.getElementById('section4'); 
 
     section2.style.display = 'none'; 
     section3.style.display = 'none'; 
+    section4.style.display = 'none'; 
 
     button2.addEventListener('click', function() {
         const sectionDisplayStyle = window.getComputedStyle(section).getPropertyValue('display');
@@ -137,13 +139,16 @@ document.addEventListener('DOMContentLoaded', function() {
             section.style.display = 'block';
             section2.style.display = 'block'; 
             section3.style.display = 'block'; 
+            section4.style.display = 'block'; 
         } else {
             section.style.display = 'none';
             section2.style.display = 'none'; 
             section3.style.display = 'none'; 
+            section4.style.display = 'none'; 
         }
     });
 });
+
 
 
 function atualizarValor() {
