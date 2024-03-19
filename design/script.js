@@ -1412,6 +1412,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const hcontInputs = document.getElementById('hcontInputs');
     const checkbox2 = document.getElementById('hsucum');
     const hsucumInputs = document.getElementById('hsucumInputs');
+    const tabela = document.getElementById('tabela2');
     const advogados = []; 
 
     checkbox.addEventListener('change', function() {
@@ -1419,6 +1420,9 @@ document.addEventListener('DOMContentLoaded', function() {
             hcontInputs.style.display = 'block';
         } else {
             hcontInputs.style.display = 'none';
+            while (tabela.rows.length > 2) {
+                tabela.deleteRow(1); 
+            }
         }
     });
 
