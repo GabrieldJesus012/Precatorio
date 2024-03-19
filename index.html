@@ -216,14 +216,33 @@
                 <input type="checkbox" id="hcont" name="hcont">
             </li>
         </ul>
-        <div id="hcontInputs"></div>
+        <div id="hcontInputs">
+            <label for="nomeadv">Nome:</label>
+            <input type="text" name="" id="nomeadv" placeholder="Nome do Advogado">
+            <select name="" id="tipoDocumento">
+                <option value="CNPJ">CNPJ</option>
+                <option value="CPF">CPF</option>
+            </select>
+            <label for="porcentagemadv"> Porcentagem:</label>
+            <input type="text" name="" id="porcentagemadv" placeholder="Valor em %" onblur="formatPorcentagem(this)">
+        </div>
+
         <ul>
             <li>
                 <label for="hsucum">Honorários Sucumbencial:</label>
                 <input type="checkbox" id="hsucum" name="hsucum">
             </li>
         </ul>
-        <div id="hsucumInputs"></div>
+        <div id="hsucumInputs">
+            <label for="nomeadvsuc">Nome:</label>
+            <input type="text" name="" id="nomeadvsuc" placeholder="Nome do Advogado">
+            <select name="" id="tipoDocumentosuc">
+                <option value="CNPJ">CNPJ</option>
+                <option value="CPF">CPF</option>
+            </select>
+            <label for="porcentagemadvsuc"> Porcentagem:</label>
+            <input type="text" name="" id="porcentagemadvsuc" placeholder="Valor em %" onblur="formatPorcentagem(this)">
+        </div>
     </section>
 
     <section id="section4">

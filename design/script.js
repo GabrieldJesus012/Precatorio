@@ -1405,210 +1405,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //Deduções Acessórias
 
-//H.contratual
-
-document.addEventListener('DOMContentLoaded', function() {
-    const checkbox = document.getElementById('hcont');
-    const hcontInputs = document.getElementById('hcontInputs');
-    const checkbox2 = document.getElementById('hsucum');
-    const hsucumInputs = document.getElementById('hsucumInputs');
-    const tabela = document.getElementById('tabela2');
-    const advogados = []; 
-
-    checkbox.addEventListener('change', function() {
-        if (this.checked) {
-            hcontInputs.style.display = 'block';
-        } else {
-            hcontInputs.style.display = 'none';
-        }
-    });
-
-    checkbox2.addEventListener('change', function() {
-        if (this.checked) {
-            hsucumInputs.style.display = 'block';
-        } else {
-            hsucumInputs.style.display = 'none';
-        }
-    });
-
-    hcontInputs.style.display = 'none';
-    hsucumInputs.style.display = 'none';
-
-    document.getElementById("hcont").checked = false;
-    document.getElementById("hsucum").checked = false;
-
-    function criarNovoAdvogado() {
-        const div = document.createElement('div');
-        const advogado = {}; 
-
-        const labelNome = document.createElement('label');
-        labelNome.setAttribute('for', 'nomeadv');
-        labelNome.textContent = 'Nome:';
-        div.appendChild(labelNome);
-
-        const inputNome = document.createElement('input');
-        inputNome.setAttribute('type', 'text');
-        inputNome.setAttribute('id', 'nomeadv');
-        inputNome.setAttribute('placeholder', 'Nome do Advogado');
-        inputNome.addEventListener('input', function() {
-            this.style.width = ((this.value.length + 1) * 7) + 'px';
-        });
-        div.appendChild(inputNome);
-        labelNome.style.marginLeft = '5px';
-
-        const selectTipoDocumento = document.createElement('select');
-        selectTipoDocumento.setAttribute('id', 'tipoDocumento');
-        const optionCNPJ = document.createElement('option');
-        optionCNPJ.setAttribute('value', 'CNPJ');
-        optionCNPJ.textContent = 'CNPJ';
-        selectTipoDocumento.appendChild(optionCNPJ);
-        const optionCPF = document.createElement('option');
-        optionCPF.setAttribute('value', 'CPF');
-        optionCPF.textContent = 'CPF';
-        selectTipoDocumento.appendChild(optionCPF);
-        div.appendChild(selectTipoDocumento);
-
-        const labelPorcentagem = document.createElement('label');
-        labelPorcentagem.setAttribute('for', 'porcentagemadv');
-        labelPorcentagem.textContent = 'Porcentagem:';
-        div.appendChild(labelPorcentagem);
-
-        const inputPorcentagem = document.createElement('input');
-        inputPorcentagem.setAttribute('type', 'text');
-        inputPorcentagem.setAttribute('id', 'porcentagemadv');
-        inputPorcentagem.setAttribute('placeholder', 'Valor em %');
-
-        inputPorcentagem.addEventListener('blur', function() {
-            let valor = this.value.trim();
-            if (valor !== '') {
-                valor = valor.replace(/[^\d,]/g, '');
-                valor = valor.replace(/,+/g, ',');
-                valor += '%';
-            }
-            this.value = valor;
-        });
-        div.appendChild(inputPorcentagem);
-
-        selectTipoDocumento.style.marginRight = '5px';
-        labelPorcentagem.style.marginLeft = '5px';
-
-        const addAdvogadoBtn = document.createElement('button');
-        addAdvogadoBtn.setAttribute('id', 'addAdvogado');
-        addAdvogadoBtn.textContent = '+';
-        addAdvogadoBtn.addEventListener('click', criarNovoAdvogado);
-        div.appendChild(addAdvogadoBtn);
-
-        if (hcontInputs.children.length > 0) {
-            const remAdvogadoBtn = document.createElement('button');
-            remAdvogadoBtn.setAttribute('id', 'remAdvogado');
-            remAdvogadoBtn.textContent = '-';
-            remAdvogadoBtn.addEventListener('click', function() {
-                hcontInputs.removeChild(div);
-                
-                const index = advogados.indexOf(advogado);
-                if (index !== -1) {
-                    advogados.splice(index, 1);
-                }
-            });
-            div.appendChild(remAdvogadoBtn);
-        }
-
-        hcontInputs.appendChild(div);
-
-        advogado.nome = inputNome.value;
-        advogado.tipoDocumento = selectTipoDocumento.value;
-        advogado.porcentagem = inputPorcentagem.value;
-        advogados.push(advogado);
+function formatPorcentagem(input) {
+    let valor = input.value.trim(); 
+    if (valor !== '') { 
+        valor = valor.replace(/[^\d,]/g, '');
+        valor = valor.replace(/,+/g, ',');
+        valor += '%';
     }
+    input.value = valor; 
+    input.classList.add('formatted');
+}
 
-    criarNovoAdvogado();
-});
-
+//H.contratual
 
 
 
 //H.sucumencial
 
-document.addEventListener("DOMContentLoaded", function() {
-    const hsucumInputs = document.getElementById("hsucumInputs");
 
-    function criarNovoAdvogado(container) {
-        const div = document.createElement('div');
-        
-        const labelNome = document.createElement('label');
-        labelNome.setAttribute('for', 'nomeadv');
-        labelNome.textContent = 'Nome:';
-        div.appendChild(labelNome);
-        
-        const inputNome = document.createElement('input');
-        inputNome.setAttribute('type', 'text');
-        inputNome.setAttribute('id', 'nomeadv');
-        inputNome.setAttribute('placeholder', 'Nome do Advogado');
-        inputNome.addEventListener('input', function() {
-            this.style.width = ((this.value.length + 1) * 7) + 'px';
-        });
-        div.appendChild(inputNome);
-        labelNome.style.marginLeft = '5px';
-        
-        const selectTipoDocumento = document.createElement('select');
-        selectTipoDocumento.setAttribute('id', 'tipoDocumento');
-        const optionCNPJ = document.createElement('option');
-        optionCNPJ.setAttribute('value', 'CNPJ');
-        optionCNPJ.textContent = 'CNPJ';
-        selectTipoDocumento.appendChild(optionCNPJ);
-        const optionCPF = document.createElement('option');
-        optionCPF.setAttribute('value', 'CPF');
-        optionCPF.textContent = 'CPF';
-        selectTipoDocumento.appendChild(optionCPF);
-        div.appendChild(selectTipoDocumento);
-        
-        const labelPorcentagem = document.createElement('label');
-        labelPorcentagem.setAttribute('for', 'porcentagemadv');
-        labelPorcentagem.textContent = 'Porcentagem:';
-        div.appendChild(labelPorcentagem);
-        
-        const inputPorcentagem = document.createElement('input');
-        inputPorcentagem.setAttribute('type', 'text');
-        inputPorcentagem.setAttribute('id', 'porcentagemadv');
-        inputPorcentagem.setAttribute('placeholder', 'Valor em %');
-        
-        inputPorcentagem.addEventListener('blur', function() {
-            let valor = this.value.trim(); 
-            if (valor !== '') { 
-                valor = valor.replace(/[^\d,]/g, '');
-                valor = valor.replace(/,+/g, ',');
-                valor += '%';
-            }
-            this.value = valor; 
-        });
-        div.appendChild(inputPorcentagem);
-
-        selectTipoDocumento.style.marginRight = '5px';
-        labelPorcentagem.style.marginLeft = '5px';
-        
-        const addAdvogadoBtn = document.createElement('button');
-        addAdvogadoBtn.setAttribute('id', 'addAdvogado');
-        addAdvogadoBtn.textContent = '+';
-        addAdvogadoBtn.addEventListener('click', function() {
-            criarNovoAdvogado(container);
-        });
-        div.appendChild(addAdvogadoBtn);
-        
-        if (container.children.length > 0) {
-            const remAdvogadoBtn = document.createElement('button');
-            remAdvogadoBtn.setAttribute('id', 'remAdvogado');
-            remAdvogadoBtn.textContent = '-';
-            remAdvogadoBtn.addEventListener('click', function() {
-                container.removeChild(div);
-            });
-            div.appendChild(remAdvogadoBtn);
-        }
-    
-        container.appendChild(div);
-    }
-
-    criarNovoAdvogado(hsucumInputs); 
-});
 
 //resumo
 
