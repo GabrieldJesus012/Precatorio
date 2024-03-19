@@ -1417,11 +1417,85 @@ function formatPorcentagem(input) {
 }
 
 //H.contratual
+function toggleAdvogadoInputs() {
+    var numAdvogados = document.getElementById("numAdvogados").value;
+    var hcontInputs = document.getElementById("hcontInputs");
+    hcontInputs.innerHTML = '';
 
+    var advogadoscontratuais = [];
+
+    for (var i = 1; i <= numAdvogados; i++) {
+        var advogadoInputs = `
+            <div>
+                <label for="nomeadv${i}">Nome do Advogado ${i}:</label>
+                <input type="text" name="nomeadv${i}" id="nomeadv${i}" placeholder="Nome do Advogado ${i}">
+                <select name="tipoDocumento${i}" id="tipoDocumento${i}">
+                    <option value="CNPJ">CNPJ</option>
+                    <option value="CPF">CPF</option>
+                </select>
+                <label for="porcentagemadv${i}"> Porcentagem do Advogado ${i}:</label>
+                <input type="text" name="porcentagemadv${i}" id="porcentagemadv${i}" placeholder="Valor em %" onblur="formatPorcentagem(this)">
+            </div>`;
+        hcontInputs.innerHTML += advogadoInputs;
+
+        // Coletar os dados do advogado atual
+        var nome = document.getElementById(`nomeadv${i}`).value;
+        var tipoDocumento = document.getElementById(`tipoDocumento${i}`).value;
+        var porcentagem = document.getElementById(`porcentagemadv${i}`).value;
+
+        // Armazenar os dados em um objeto
+        var advogado = {
+            nome: nome,
+            tipoDocumento: tipoDocumento,
+            porcentagem: porcentagem
+        };
+        advogadoscontratuais.push(advogado);
+    }
+}
 
 
 //H.sucumencial
 
+function toggleSuccessLawyerInputs() {
+    var numAdvogados = document.getElementById("numAdvogadosSuccess").value;
+    toggleInputs("hsucumInputs", numAdvogados);
+}
+
+function toggleInputs(inputId, numAdvogados) {
+    var inputsContainer = document.getElementById(inputId);
+    inputsContainer.innerHTML = ''; 
+
+    var advogadossucumb = [];
+
+    for (var i = 1; i <= numAdvogados; i++) {
+        var advogadoInputs = `
+            <div>
+                <label for="nomeadvsuc${i}">Nome do Advogado ${i}:</label>
+                <input type="text" name="nomeadvsuc${i}" id="nomeadvsuc${i}" placeholder="Nome do Advogado ${i}">
+                <select name="tipoDocumentosuc${i}" id="tipoDocumentosuc${i}">
+                    <option value="CNPJ">CNPJ</option>
+                    <option value="CPF">CPF</option>
+                </select>
+                <label for="porcentagemadvsuc${i}"> Porcentagem do Advogado de Sucesso ${i}:</label>
+                <input type="text" name="porcentagemadvsuc${i}" id="porcentagemadvsuc${i}" placeholder="Valor em %" onblur="formatPorcentagem(this)">
+            </div>`;
+        inputsContainer.innerHTML += advogadoInputs;
+
+        // Coletar os dados do advogado atual
+        var nomesuc = document.getElementById(`nomeadvsuc${i}`).value;
+        var tipoDocumentosuc = document.getElementById(`tipoDocumentosuc${i}`).value;
+        var porcentagemsuc = document.getElementById(`porcentagemadvsuc${i}`).value;
+
+        // Armazenar os dados em um objeto
+        var advogadosuc = {
+            nome: nomesuc,
+            tipoDocumento: tipoDocumentosuc,
+            porcentagem: porcentagemsuc
+        };
+
+        advogadossucumb.push(advogadosuc);
+    }
+}
 
 
 //resumo

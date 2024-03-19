@@ -213,36 +213,38 @@
         <ul>
             <li>
                 <label for="hcont">Honorários Contratuais:</label>
-                <input type="checkbox" id="hcont" name="hcont">
+                <select id="numAdvogados" name="numAdvogados" onchange="toggleAdvogadoInputs()">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
             </li>
         </ul>
         <div id="hcontInputs">
-            <label for="nomeadv">Nome:</label>
-            <input type="text" name="" id="nomeadv" placeholder="Nome do Advogado">
-            <select name="" id="tipoDocumento">
-                <option value="CNPJ">CNPJ</option>
-                <option value="CPF">CPF</option>
-            </select>
-            <label for="porcentagemadv"> Porcentagem:</label>
-            <input type="text" name="" id="porcentagemadv" placeholder="Valor em %" onblur="formatPorcentagem(this)">
+            
         </div>
 
         <ul>
             <li>
-                <label for="hsucum">Honorários Sucumbencial:</label>
-                <input type="checkbox" id="hsucum" name="hsucum">
+                <label for="numAdvogados">Honorários Sucumbenciais:</label>
+                <select id="numAdvogadosSuccess" name="numAdvogadosSuccess" onchange="toggleSuccessLawyerInputs()">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
             </li>
         </ul>
         <div id="hsucumInputs">
-            <label for="nomeadvsuc">Nome:</label>
-            <input type="text" name="" id="nomeadvsuc" placeholder="Nome do Advogado">
-            <select name="" id="tipoDocumentosuc">
-                <option value="CNPJ">CNPJ</option>
-                <option value="CPF">CPF</option>
-            </select>
-            <label for="porcentagemadvsuc"> Porcentagem:</label>
-            <input type="text" name="" id="porcentagemadvsuc" placeholder="Valor em %" onblur="formatPorcentagem(this)">
-        </div>
+            
+        </div>        
     </section>
 
     <section id="section4">
