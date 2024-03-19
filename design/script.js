@@ -1420,9 +1420,6 @@ document.addEventListener('DOMContentLoaded', function() {
             hcontInputs.style.display = 'block';
         } else {
             hcontInputs.style.display = 'none';
-            while (tabela.rows.length > 2) {
-                tabela.deleteRow(1); 
-            }
         }
     });
 
