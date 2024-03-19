@@ -1405,6 +1405,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //Deduções Acessórias
 
+//H.contratual
+
 document.addEventListener('DOMContentLoaded', function() {
     const checkbox = document.getElementById('hcont');
     const hcontInputs = document.getElementById('hcontInputs');
@@ -1513,6 +1515,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     criarNovoAdvogado(); 
 });
+
+
+//H.sucumencial
 
 document.addEventListener("DOMContentLoaded", function() {
     const hsucumInputs = document.getElementById("hsucumInputs");
