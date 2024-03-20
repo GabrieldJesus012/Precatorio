@@ -1439,7 +1439,6 @@ function toggleAdvogadoInputs() {
         hcontInputs.innerHTML += advogadoInputs;
     }
 
-    // Agora que os elementos foram adicionados ao HTML, coletamos os valores e os armazenamos no objeto
     for (var i = 1; i <= numAdvogados; i++) {
         var nome = document.getElementById(`nomeadv${i}`).value;
         var tipoDocumento = document.getElementById(`tipoDocumento${i}`).value;
