@@ -1437,13 +1437,14 @@ function toggleAdvogadoInputs() {
                 <input type="text" name="porcentagemadv${i}" id="porcentagemadv${i}" placeholder="Valor em %" onblur="formatPorcentagem(this)">
             </div>`;
         hcontInputs.innerHTML += advogadoInputs;
+    }
 
-        // Coletar os dados do advogado atual
+    // Agora que os elementos foram adicionados ao HTML, coletamos os valores e os armazenamos no objeto
+    for (var i = 1; i <= numAdvogados; i++) {
         var nome = document.getElementById(`nomeadv${i}`).value;
         var tipoDocumento = document.getElementById(`tipoDocumento${i}`).value;
         var porcentagem = document.getElementById(`porcentagemadv${i}`).value;
 
-        // Armazenar os dados em um objeto
         var advogado = {
             nome: nome,
             tipoDocumento: tipoDocumento,
@@ -1451,7 +1452,10 @@ function toggleAdvogadoInputs() {
         };
         advogadoscontratuais.push(advogado);
     }
+
+    // Aqui fazer o que quiser com o array
 }
+
 
 
 //H.sucumencial
