@@ -1457,7 +1457,6 @@ function toggleAdvogadoInputs() {
 }
 
 
-
 //H.sucumencial
 
 function toggleSuccessLawyerInputs() {
@@ -1484,22 +1483,25 @@ function toggleInputs(inputId, numAdvogados) {
                 <input type="text" name="porcentagemadvsuc${i}" id="porcentagemadvsuc${i}" placeholder="Valor em %" onblur="formatPorcentagem(this)">
             </div>`;
         inputsContainer.innerHTML += advogadoInputs;
+    }
 
-        // Coletar os dados do advogado atual
+    // Agora que os elementos foram adicionados ao HTML, coletamos os valores e os armazenamos no objeto
+    for (var i = 1; i <= numAdvogados; i++) {
         var nomesuc = document.getElementById(`nomeadvsuc${i}`).value;
         var tipoDocumentosuc = document.getElementById(`tipoDocumentosuc${i}`).value;
         var porcentagemsuc = document.getElementById(`porcentagemadvsuc${i}`).value;
 
-        // Armazenar os dados em um objeto
         var advogadosuc = {
             nome: nomesuc,
             tipoDocumento: tipoDocumentosuc,
             porcentagem: porcentagemsuc
         };
-
         advogadossucumb.push(advogadosuc);
     }
+
+    // Aqui fazer o que quiser com o array advogadossucumb
 }
+
 
 
 //resumo
