@@ -1417,33 +1417,49 @@ function formatPorcentagem(input) {
 }
 
 //H.contratual
+
 function toggleAdvogadoInputs() {
     var numAdvogados = document.getElementById("numAdvogados").value;
     var hcontInputs = document.getElementById("hcontInputs");
-    hcontInputs.innerHTML = '';
-
     var advogadoscontratuais = [];
 
+    // Armazenar valores anteriores
+    var valoresAnteriores = [];
+    for (var i = 1; i <= numAdvogados; i++) {
+        var nomeInput = document.getElementById(`nomeadv${i}`);
+        var tipoDocumentoInput = document.getElementById(`tipoDocumento${i}`);
+        var porcentagemInput = document.getElementById(`porcentagemadv${i}`);
+
+        valoresAnteriores.push({
+            nome: nomeInput ? nomeInput.value : '',
+            tipoDocumento: tipoDocumentoInput ? tipoDocumentoInput.value : '',
+            porcentagem: porcentagemInput ? porcentagemInput.value : ''
+        });
+    }
+
+    // Limpar conteúdo
+    hcontInputs.innerHTML = '';
+
+    // Reconstruir elementos
     for (var i = 1; i <= numAdvogados; i++) {
         var advogadoInputs = `
             <div>
                 <label for="nomeadv${i}">Nome do Advogado ${i}:</label>
-                <input type="text" name="nomeadv${i}" id="nomeadv${i}" placeholder="Nome do Advogado ${i}">
+                <input type="text" name="nomeadv${i}" id="nomeadv${i}" placeholder="Nome do Advogado ${i}" value="${valoresAnteriores[i-1].nome}">
                 <select name="tipoDocumento${i}" id="tipoDocumento${i}">
-                    <option value="CNPJ">CNPJ</option>
-                    <option value="CPF">CPF</option>
+                    <option value="CNPJ" ${valoresAnteriores[i-1].tipoDocumento === 'CNPJ' ? 'selected' : ''}>CNPJ</option>
+                    <option value="CPF" ${valoresAnteriores[i-1].tipoDocumento === 'CPF' ? 'selected' : ''}>CPF</option>
                 </select>
                 <label for="porcentagemadv${i}"> Porcentagem do Advogado ${i}:</label>
-                <input type="text" name="porcentagemadv${i}" id="porcentagemadv${i}" placeholder="Valor em %" onblur="formatPorcentagem(this)">
+                <input type="text" name="porcentagemadv${i}" id="porcentagemadv${i}" placeholder="Valor em %" onblur="formatPorcentagem(this)" value="${valoresAnteriores[i-1].porcentagem}">
+                <button type="button" class="check-button" onclick="preencherTabela(${i})">✔</button>
             </div>`;
         hcontInputs.innerHTML += advogadoInputs;
-    }
 
-    for (var i = 1; i <= numAdvogados; i++) {
+        // Atualizar valores do array advogadoscontratuais
         var nome = document.getElementById(`nomeadv${i}`).value;
         var tipoDocumento = document.getElementById(`tipoDocumento${i}`).value;
         var porcentagem = document.getElementById(`porcentagemadv${i}`).value;
-
         var advogado = {
             nome: nome,
             tipoDocumento: tipoDocumento,
@@ -1454,6 +1470,8 @@ function toggleAdvogadoInputs() {
 
     // Aqui fazer o que quiser com o array
 }
+
+
 
 
 //H.sucumencial
