@@ -1422,6 +1422,7 @@ function toggleAdvogadoInputs() {
     var numAdvogados = document.getElementById("numAdvogados").value;
     var hcontInputs = document.getElementById("hcontInputs");
     var advogadoscontratuais = [];
+    var tabela = document.getElementById("tabela2");
 
     // Armazenar valores anteriores
     var valoresAnteriores = [];
@@ -1440,7 +1441,7 @@ function toggleAdvogadoInputs() {
     // Limpar conteúdo
     hcontInputs.innerHTML = '';
 
-    // Reconstruir elementos
+    // Reconstruir elementos e preencher a tabela
     for (var i = 1; i <= numAdvogados; i++) {
         var advogadoInputs = `
             <div>
@@ -1468,10 +1469,79 @@ function toggleAdvogadoInputs() {
         advogadoscontratuais.push(advogado);
     }
 
-    // Aqui fazer o que quiser com o array
+    // Remover linhas extras da tabela se necessário
+    var numRows = tabela.rows.length;
+    for (var j = numRows - 1; j > parseInt(numAdvogados) + 1; j--) {
+        tabela.deleteRow(j);
+    }
 }
 
+function calcularMultiplicacaoPorcentagem(porcentagem) {
+    var valorTotAtual = parseFloat(document.getElementById("totatual").textContent.replace("R$ ", "").replace(".", "").replace(",", "."));
+    var multiplicacao = (valorTotAtual * porcentagem) / 100;
+    return 'R$ ' + multiplicacao.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
+function calcularImpostoRenda(tipoDocumento, multiplicacaoPorcentagemStr) {
+    // Converter o valor de string para número
+    var multiplicacaoPorcentagem = parseFloat(multiplicacaoPorcentagemStr.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
+    
+    if (!isNaN(multiplicacaoPorcentagem)) {
+        if (tipoDocumento === 'CNPJ') {
+            var imposto = multiplicacaoPorcentagem * 0.015;
+            return 'R$ ' + imposto.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        } else if (tipoDocumento === 'CPF') {
+            if (multiplicacaoPorcentagem >= 4664.69) {
+                return 'R$ ' + (0.275 * (multiplicacaoPorcentagem - 896)).toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            } else if (multiplicacaoPorcentagem >= 3751.06) {
+                return 'R$ ' + (0.225 * (multiplicacaoPorcentagem - 662.77)).toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            } else if (multiplicacaoPorcentagem >= 2826.66) {
+                return 'R$ ' + (0.15 * (multiplicacaoPorcentagem - 381.44)).toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            } else if (multiplicacaoPorcentagem >= 2259.21) {
+                return 'R$ ' + (0.075 * (multiplicacaoPorcentagem - 169.44)).toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            } else {
+                return 'R$ 0,00';
+            }
+        }
+    }
+
+    return 'R$ 0,00';
+}
+
+function preencherTabela(index) {
+    var tabela = document.getElementById("tabela2");
+    var row = tabela.insertRow(-1); 
+    var cellNome = row.insertCell(0); 
+    var cellPorcentagem = row.insertCell(1); 
+    var cellPrevPag = row.insertCell(2); 
+    var cellIrPag = row.insertCell(3); 
+    var cellTotExeq = row.insertCell(4); 
+
+    // Define o conteúdo das células
+    var nomeAdvogado = document.getElementById(`nomeadv${index}`).value;
+    var porcentagemAdvogado = parseFloat(document.getElementById(`porcentagemadv${index}`).value);
+    var tipoDocumentoAdvogado = document.getElementById(`tipoDocumento${index}`).value;
+    var multiplicacaoPorcentagem = calcularMultiplicacaoPorcentagem(porcentagemAdvogado);
+    var impostoRenda = calcularImpostoRenda(tipoDocumentoAdvogado, multiplicacaoPorcentagem);
+    
+     // Função para converter valores monetários em números
+    function valorMonetarioParaNumero(valorMonetario) {
+        return parseFloat(valorMonetario.replace('R$ ', '').replace(/\./g, '').replace(',', '.'));
+    }
+
+    // Convertendo valores para números
+    var valorPorcentagem = valorMonetarioParaNumero(multiplicacaoPorcentagem);
+    var valorIrPag = valorMonetarioParaNumero(impostoRenda);
+
+    // Calculando o total exequente
+    var totalExequente = valorPorcentagem - valorIrPag;
+    
+    cellNome.innerHTML = nomeAdvogado;
+    cellPorcentagem.innerHTML = multiplicacaoPorcentagem;
+    cellPrevPag.innerHTML = '-'; 
+    cellIrPag.innerHTML = impostoRenda; 
+    cellTotExeq.innerHTML = 'R$ ' + totalExequente.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 
 //H.sucumencial
