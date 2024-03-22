@@ -1462,7 +1462,14 @@ function toggleAdvogadoInputs() {
     for (var j = numRows - 1; j > parseInt(numAdvogados) + 1; j--) {
         tabela.deleteRow(j);
     }
+    
+    if (numAdvogados === "0") {
+        var valorOriginal = parseFloat(document.getElementById("totatual").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
+        document.getElementById("valordev").textContent = "R$ " + valorOriginal.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
 }
+
+
 
 function calcularMultiplicacaoPorcentagem(porcentagem) {
     // Obter o valor total atual removendo o símbolo de moeda e qualquer separador de milhar
@@ -1471,11 +1478,12 @@ function calcularMultiplicacaoPorcentagem(porcentagem) {
     // Calcular a multiplicação
     var multiplicacao = (valorTotAtual * porcentagem) / 100;
 
-    // Formatar o resultado
-    var multiplicacaoFormatada = 'R$ ' + multiplicacao.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    // Formatar o resultado com exatamente duas casas decimais
+    var multiplicacaoFormatada = 'R$ ' + multiplicacao.toFixed(2).replace(".", ",");
 
     return multiplicacaoFormatada;
 }
+
 
 
 function calcularImpostoRenda(tipoDocumento, multiplicacaoPorcentagemStr) {
@@ -1538,6 +1546,13 @@ function preencherTabela(index) {
     cellIrPag.innerHTML = impostoRenda; 
     cellTotExeq.innerHTML = 'R$ ' + totalExequente.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     cellTotExeq.classList.add("total-adv");
+
+    // Atualizar o valordev subtraindo a multiplicação da porcentagem do advogado
+    var valorDevAtual = parseFloat(document.getElementById("valordev").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
+    var novaMultiplicacaoPorcentagem = valorMonetarioParaNumero(multiplicacaoPorcentagem);
+    var novoValorDev = valorDevAtual - novaMultiplicacaoPorcentagem;
+
+    document.getElementById("valordev").textContent = "R$ " + novoValorDev.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 
