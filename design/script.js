@@ -396,6 +396,7 @@ function calcularIndice() {
         document.getElementById("totatt").textContent = "R$ " + soma.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
         calcularMultiplicacao();
+        calcularPrev();
     } else {
         document.getElementById("indice").textContent = "";
         document.getElementById("indice2").textContent = "";
@@ -422,6 +423,7 @@ function calcularIndice() {
             document.getElementById("totatt").textContent = "R$ " + novaSoma.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
             calcularMultiplicacao();
+            calcularPrev();
         });
     
         var elementoIndicePrincipal = document.getElementById("indice");
@@ -454,6 +456,7 @@ function calcularIndice() {
         elementoJur.textContent = novaMultiplicacaoJuros.toFixed(2).replace(".", ",");
 
         calcularMultiplicacao();
+        calcularPrev();
         });
     
         var elementoIndiceJuros = document.getElementById("indice2");
@@ -1218,6 +1221,7 @@ fetch(url)
     document.getElementById('selic1').textContent = result.toFixed(4).replace(".", ",");
     
     calcularMultiplicacao();
+    calcularPrev();
 
 })
 
@@ -1345,6 +1349,25 @@ document.addEventListener("DOMContentLoaded", function() {
         calcularResultado();
     });
 });
+
+function calcularPrev() {
+    var multindiceText = document.getElementById("multindice").textContent.trim();
+    var selicText = document.getElementById("selic").textContent.trim();
+
+    // Verifica se os valores de multindice e selic são válidos
+    if (multindiceText !== "" && selicText !== "") {
+        var multindice = parseFloat(multindiceText.replace(",", "."));
+        var selic = parseFloat(selicText.replace(",", "."));
+
+        var valorBasePrev = multindice * selic;
+        document.getElementById("baseprev").value = valorBasePrev.toFixed(2).replace(".", ",");
+    } else {
+        // Caso não haja valor calculado, exibe o placeholder
+        document.getElementById("baseprev").placeholder = "Informe o Valor";
+        document.getElementById("baseprev").value = ""; 
+    }
+}
+
 
 document.addEventListener("DOMContentLoaded", function() {
     var baseirInputElement = document.getElementById('baseir');
