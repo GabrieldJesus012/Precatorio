@@ -1537,6 +1537,7 @@ function preencherTabela(index) {
     cellPrevPag.innerHTML = '-'; 
     cellIrPag.innerHTML = impostoRenda; 
     cellTotExeq.innerHTML = 'R$ ' + totalExequente.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    cellTotExeq.classList.add("total-adv");
 }
 
 
