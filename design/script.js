@@ -1421,7 +1421,6 @@ function formatPorcentagem(input) {
 function toggleAdvogadoInputs() {
     var numAdvogados = document.getElementById("numAdvogados").value;
     var hcontInputs = document.getElementById("hcontInputs");
-    var advogadoscontratuais = [];
     var tabela = document.getElementById("tabela2");
 
     // Armazenar valores anteriores
@@ -1446,27 +1445,16 @@ function toggleAdvogadoInputs() {
         var advogadoInputs = `
             <div>
                 <label for="nomeadv${i}">Nome do Advogado ${i}:</label>
-                <input type="text" name="nomeadv${i}" id="nomeadv${i}" placeholder="Nome do Advogado ${i}" value="${valoresAnteriores[i-1].nome}">
+                <input type="text" name="nomeadv${i}" id="nomeadv${i}" placeholder="Nome do Advogado ${i}" value="${valoresAnteriores[i-1].nome}" autocomplete="off">
                 <select name="tipoDocumento${i}" id="tipoDocumento${i}">
                     <option value="CNPJ" ${valoresAnteriores[i-1].tipoDocumento === 'CNPJ' ? 'selected' : ''}>CNPJ</option>
                     <option value="CPF" ${valoresAnteriores[i-1].tipoDocumento === 'CPF' ? 'selected' : ''}>CPF</option>
                 </select>
                 <label for="porcentagemadv${i}"> Porcentagem do Advogado ${i}:</label>
-                <input type="text" name="porcentagemadv${i}" id="porcentagemadv${i}" placeholder="Valor em %" onblur="formatPorcentagem(this)" value="${valoresAnteriores[i-1].porcentagem}">
+                <input type="text" name="porcentagemadv${i}" id="porcentagemadv${i}" placeholder="Valor em %" onblur="formatPorcentagem(this)" value="${valoresAnteriores[i-1].porcentagem}" autocomplete="off">
                 <button type="button" class="check-button" onclick="preencherTabela(${i})">✔</button>
             </div>`;
         hcontInputs.innerHTML += advogadoInputs;
-
-        // Atualizar valores do array advogadoscontratuais
-        var nome = document.getElementById(`nomeadv${i}`).value;
-        var tipoDocumento = document.getElementById(`tipoDocumento${i}`).value;
-        var porcentagem = document.getElementById(`porcentagemadv${i}`).value;
-        var advogado = {
-            nome: nome,
-            tipoDocumento: tipoDocumento,
-            porcentagem: porcentagem
-        };
-        advogadoscontratuais.push(advogado);
     }
 
     // Remover linhas extras da tabela se necessário
@@ -1477,10 +1465,18 @@ function toggleAdvogadoInputs() {
 }
 
 function calcularMultiplicacaoPorcentagem(porcentagem) {
-    var valorTotAtual = parseFloat(document.getElementById("totatual").textContent.replace("R$ ", "").replace(".", "").replace(",", "."));
+    // Obter o valor total atual removendo o símbolo de moeda e qualquer separador de milhar
+    var valorTotAtual = parseFloat(document.getElementById("totatual").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
+
+    // Calcular a multiplicação
     var multiplicacao = (valorTotAtual * porcentagem) / 100;
-    return 'R$ ' + multiplicacao.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Formatar o resultado
+    var multiplicacaoFormatada = 'R$ ' + multiplicacao.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+    return multiplicacaoFormatada;
 }
+
 
 function calcularImpostoRenda(tipoDocumento, multiplicacaoPorcentagemStr) {
     // Converter o valor de string para número
@@ -1544,8 +1540,9 @@ function preencherTabela(index) {
 }
 
 
-
 //H.sucumencial
+
+/*
 
 function toggleSuccessLawyerInputs() {
     var numAdvogados = document.getElementById("numAdvogadosSuccess").value;
@@ -1590,7 +1587,7 @@ function toggleInputs(inputId, numAdvogados) {
     // Aqui fazer o que quiser com o array advogadossucumb
 }
 
-
+*/
 
 //resumo
 
