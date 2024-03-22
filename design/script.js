@@ -1564,7 +1564,7 @@ function preencherTabela(index) {
     var totalExequente = valorPorcentagem - valorIrPag;
     
     cellNome.innerHTML = nomeAdvogado;
-    cellPorcentagem.innerHTML = multiplicacaoPorcentagem;
+    cellPorcentagem.innerHTML = multiplicacaoPorcentagem.replace(/\B(?=(\d{3})+(?!\d))/g, ".");;
     cellPrevPag.innerHTML = '-'; 
     cellIrPag.innerHTML = impostoRenda; 
     cellTotExeq.innerHTML = 'R$ ' + totalExequente.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
