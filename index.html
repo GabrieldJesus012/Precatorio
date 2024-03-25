@@ -99,19 +99,19 @@
 
             <tr id="ocultpref">
                 <td><label for="pref">Valor Limite:</label></td>
-                <td><input type="text" name="pref" id="pref" onblur="formatarCampoInput()" autocomplete="off"></td>
+                <td><input type="text" name="pref" id="pref" onblur="formatarCampoInput(); atualizarValorDevComPref()" autocomplete="off"></td>
             </tr>
 
-            <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> BASE DE CÁLCULO</th></tr>
-            <tr id="principalRow" class="ocultar">
+            <tr><th colspan="2" id="simplifacadoROW"> BASE DE CÁLCULO</th></tr>
+            <tr id="principalRow">
                 <td><label for="valprin">Principal:</label></td>
                 <td><input type="text" id="valprin" onkeyup="atualizarValor()" onclick="calcularJuros()" autocomplete="off"></td>
             </tr>
-            <tr id="jurosRow" class="ocultar">
+            <tr id="jurosRow">
                 <td><label for="valjur">Juros:</label></td>
                 <td><input type="text" id="valjur" onkeyup="atualizarValor2()" onclick="calcularMultiplicacao()" autocomplete="off"></td>
             </tr>
-            <tr id="totalRow" class="ocultar">
+            <tr id="totalRow">
                 <td><label for="total">Total:</label></td>
                 <td><span id="total" >R$ 0,00</span></td>
             </tr>

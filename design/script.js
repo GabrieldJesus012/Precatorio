@@ -16,11 +16,13 @@ function mostrarOcultar() {
     var select = document.getElementById("tipoCalculo");
     var option = select.options[select.selectedIndex].text;
     var tr = document.getElementById("ocultnorm");
+    var inpag= document.getElementById("pag");
 
     if (option === "Normal" || option === "Acordo") {
         tr.style.display = "table-row";
     } else {
         tr.style.display = "none";
+        inpag.value = "";
     }
 }
 
@@ -28,11 +30,13 @@ function mostrarOcultar1() {
     var select = document.getElementById("tipoCalculo");
     var option = select.options[select.selectedIndex].text;
     var tr = document.getElementById("ocultnorm1");
+    var inpag= document.getElementById("pag");
 
     if (option === "Normal" || option === "Acordo") {
         tr.style.display = "table-row";
     } else {
         tr.style.display = "none";
+        inpag.value = "";
     }
 }
 
@@ -40,11 +44,13 @@ function mostrarOcultar2() {
     var select = document.getElementById("tipoCalculo");
     var option = select.options[select.selectedIndex].text;
     var tr = document.getElementById("ocultpref");
+    var input = document.getElementById("pref");
 
     if (option === "Preferencial") {
         tr.style.display = "table-row";
     } else {
         tr.style.display = "none";
+        input.value = "";
     }
 }
 
@@ -1687,5 +1693,4 @@ document.addEventListener("DOMContentLoaded", function() {
     if (prevpagElement) prevpagElement.addEventListener('DOMSubtreeModified', calcularDiferenca);
     if (irpagElement) irpagElement.addEventListener('DOMSubtreeModified', calcularDiferenca);
 });
-
 
