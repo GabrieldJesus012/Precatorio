@@ -36,6 +36,18 @@ function mostrarOcultar1() {
     }
 }
 
+function mostrarOcultar2() {
+    var select = document.getElementById("tipoCalculo");
+    var option = select.options[select.selectedIndex].text;
+    var tr = document.getElementById("ocultpref");
+
+    if (option === "Preferencial") {
+        tr.style.display = "table-row";
+    } else {
+        tr.style.display = "none";
+    }
+}
+
 function formatarParaReal(valor) {
     valor = valor.replace(/[^\d.,]/g, '');
 
@@ -57,7 +69,9 @@ function formatarParaReal(valor) {
 
 function formatarCampoInput() {
     var campoInput = document.getElementById("pag");
+    var prefInput = document.getElementById("pref");
     campoInput.value = formatarParaReal(campoInput.value);
+    prefInput.value = formatarParaReal(prefInput.value);
 }
 
 

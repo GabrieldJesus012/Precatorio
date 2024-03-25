@@ -34,7 +34,7 @@
                 <td><input type="text" id="inomee" autocomplete="off"></td>
             </tr>
             <tr>
-                <td><label for="mes">Data do cálculo homologado:</label></td>
+                <td><label for="mes">Data do Cálculo Homologado:</label></td>
                 <td>
                     <select id="mes" onchange="calcularIndice()" onclick="calcularJuros()">
                         <option value="" disabled selected>Selecione</option>
@@ -60,7 +60,7 @@
             <tr>
                 <td><label for="tipoCalculo">Tipo de Cálculo:</label></td>
                 <td class="tipoCalculo">
-                    <select id="tipoCalculo" onchange="mostrarOcultar(); mostrarOcultar1();">
+                    <select id="tipoCalculo" onchange="mostrarOcultar(); mostrarOcultar1(); mostrarOcultar2()">
                         <option value="" disabled selected>Selecione</option>
                         <option>Normal</option>
                         <option>Preferencial</option>
@@ -68,8 +68,9 @@
                     </select>
                 </td>
             </tr>
-            <!-- COLOCAR DEPOIS
-                <tr id="ocultnorm">
+
+
+            <tr id="ocultnorm">
                 <td><label for="pag">Há Pagamento:(Informe R$)</label></td>
                 <td><input type="text" name="pag" id="pag" onblur="formatarCampoInput()" autocomplete="off"></td>
             </tr>
@@ -95,8 +96,11 @@
                     <input type="number" id="anopag" placeholder="Ano do Pagamento">
                 </td>
             </tr>
-            APAGAR DEPOIS -->
 
+            <tr id="ocultpref">
+                <td><label for="pref">Valor Limite:</label></td>
+                <td><input type="text" name="pref" id="pref" onblur="formatarCampoInput()" autocomplete="off"></td>
+            </tr>
 
             <tr><th colspan="2" id="simplifacadoROW" class="ocultar"> BASE DE CÁLCULO</th></tr>
             <tr id="principalRow" class="ocultar">
