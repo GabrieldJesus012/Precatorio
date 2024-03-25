@@ -1302,12 +1302,14 @@ function calcularMultiplicacao() {
         valorPref = valorPref.replace(",", ".");
         if (parseFloat(valorPref) < totalat) {
             totalat = parseFloat(valorPref);
+            document.getElementById("valordev").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
     }
-    
-    document.getElementById("totatual").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    else {
+        document.getElementById("valordev").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
 
-    document.getElementById("valordev").textContent ="R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    document.getElementById("totatual").textContent = "R$ " + (atualizacao + atualizacao1).toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 //Deduções Legais
@@ -1519,8 +1521,12 @@ function toggleAdvogadoInputs() {
     }
     
     if (numAdvogados === "0") {
-        var valorOriginal = parseFloat(document.getElementById("totatual").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
-        document.getElementById("valordev").textContent = "R$ " + valorOriginal.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        calcularMultiplicacao();
+
+    // Obtém o valor calculado de valordev após chamar calcularMultiplicacao()
+    var outroValor = parseFloat(document.getElementById("valordev").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
+
+    document.getElementById("valordev").textContent = "R$ " + outroValor.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 }
 
@@ -1528,7 +1534,7 @@ function toggleAdvogadoInputs() {
 
 function calcularMultiplicacaoPorcentagem(porcentagem) {
     // Obter o valor total atual removendo o símbolo de moeda e qualquer separador de milhar
-    var valorTotAtual = parseFloat(document.getElementById("totatual").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
+    var valorTotAtual = parseFloat(document.getElementById("valordev").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
 
     // Calcular a multiplicação
     var multiplicacao = (valorTotAtual * porcentagem) / 100;
