@@ -52,7 +52,7 @@
                         <option value="dezembro">dezembro</option>
                     </select>
                     <br>/ <br>
-                    <input type="number" id="ano" placeholder="Ano" onchange="calcularIndice()" onclick="calcularJuros()">
+                    <input type="number" id="ano" placeholder="Ano" onchange="calcularIndice()">
                 </td>
             </tr>
 
@@ -60,7 +60,7 @@
             <tr>
                 <td><label for="tipoCalculo">Tipo de Cálculo:</label></td>
                 <td class="tipoCalculo">
-                    <select id="tipoCalculo" onchange="mostrarOcultar(); mostrarOcultar1(); mostrarOcultar2()">
+                    <select id="tipoCalculo" onchange="mostrarOcultar(); mostrarOcultar1(); mostrarOcultar2(); atualizarValorDev()">
                         <option value="" disabled selected>Selecione</option>
                         <option>Normal</option>
                         <option>Preferencial</option>
