@@ -1712,3 +1712,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if (irpagElement) irpagElement.addEventListener('DOMSubtreeModified', calcularDiferenca);
 });
 
+function adjustTextareaHeight(textarea) {
+    if (textarea.value.trim() === '') {
+        textarea.style.width = '15%'; 
+        textarea.style.height = ''; 
+    } else {
+        textarea.style.width = "auto";
+        textarea.style.width = (textarea.scrollWidth) + "px";
+        textarea.style.height = (textarea.scrollHeight) + "px";
+    }
+}
+

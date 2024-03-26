@@ -300,3 +300,26 @@ h2{
 .total-adv{
     font-weight: bolder;
 }
+
+
+h3 {
+    font-size: 20px;
+    padding: 4px;
+    color: #333; /* Cor do texto */
+}
+
+textarea {
+    width: 15%; 
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4597607a; 
+    color: #333; 
+    resize: none; 
+    overflow-y: hidden; 
+    transition: height 0.3s; 
+}
+
+textarea:focus {
+    outline: none; 
+}
