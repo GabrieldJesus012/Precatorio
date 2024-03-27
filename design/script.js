@@ -82,6 +82,30 @@ function formatarCampoInput() {
 
 //Tabela pagamento ou acordo
 
+// Função para remover a formatação e converter para número
+function removerFormatacao(valor) {
+    return parseFloat(valor.replace(/[^\d.,]/g, '').replace(",", "."));
+}
+
+function mostrarOcultarTabela() {
+    var tipoCalculoSelect = document.getElementById("tipoCalculo");
+    var selectedOption = tipoCalculoSelect.options[tipoCalculoSelect.selectedIndex];
+    var valorPagamento = removerFormatacao(document.getElementById("pag").value);
+    var tabela = document.getElementById("pagm");
+
+    // Verifica se a opção selecionada é "Preferencial"
+    if (selectedOption.value === "Preferencial") {
+        tabela.style.display = "none"; // Oculta a tabela
+        return;
+    }
+
+    // Verifica se o valor do pagamento é diferente de zero e se é um número válido
+    if (valorPagamento !== 0 && !isNaN(valorPagamento)) {
+        tabela.style.display = "table"; // Mostra a tabela
+    } else {
+        tabela.style.display = "none"; // Oculta a tabela
+    }
+}
 
 
 

@@ -60,11 +60,11 @@
             <tr>
                 <td><label for="tipoCalculo">Tipo de Cálculo:</label></td>
                 <td class="tipoCalculo">
-                    <select id="tipoCalculo" onchange="mostrarOcultar(); mostrarOcultar1(); mostrarOcultar2(); atualizarValorDevComPref()">
+                    <select id="tipoCalculo" onchange="mostrarOcultar(); mostrarOcultar1(); mostrarOcultar2(); atualizarValorDevComPref(); mostrarOcultarTabela()">
                         <option value="" disabled selected>Selecione</option>
-                        <option>Normal</option>
-                        <option>Preferencial</option>
-                        <option>Acordo</option>
+                        <option value="Normal" data-show-table="true">Normal</option>
+                        <option value="Preferencial" data-show-table="false">Preferencial</option>
+                        <option value="Acordo" data-show-table="true">Acordo</option>
                     </select>
                 </td>
             </tr>
@@ -72,7 +72,7 @@
 
             <tr id="ocultnorm">
                 <td><label for="pag">Há Pagamento:(Informe R$)</label></td>
-                <td><input type="text" name="pag" id="pag" onblur="formatarCampoInput()" autocomplete="off"></td>
+                <td><input type="text" name="pag" id="pag" onblur="formatarCampoInput();mostrarOcultarTabela()" autocomplete="off"></td>
             </tr>
             <tr id="ocultnorm1">
                 <td> Data do Pagamento:</td>
