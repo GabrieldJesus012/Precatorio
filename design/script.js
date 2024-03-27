@@ -80,6 +80,10 @@ function formatarCampoInput() {
     prefInput.value = formatarParaReal(prefInput.value);
 }
 
+//Tabela pagamento ou acordo
+
+
+
 
 //BASE DE CÁLCULO
 
