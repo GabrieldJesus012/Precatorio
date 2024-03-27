@@ -1791,3 +1791,6 @@ function adjustTextareaHeight(textarea) {
     }
 }
 
+function cancelar() {
+    location.reload(); // Atualiza a página
+}
