@@ -57,7 +57,7 @@ function mostrarOcultar2() {
 function formatarParaReal(valor) {
     valor = valor.replace(/[^\d.,]/g, '');
 
-    if (valor.trim() === "") return "R$ 0,00"; 
+    if (valor.trim() === "") return " "; 
 
     valor = valor.replace(",", ".");
 
@@ -148,10 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const section2 = document.getElementById('section2'); 
     const section3 = document.getElementById('section3'); 
     const section4 = document.getElementById('section4'); 
+    const section5 = document.getElementById('section5'); 
 
     section2.style.display = 'none'; 
     section3.style.display = 'none'; 
     section4.style.display = 'none'; 
+    section5.style.display = 'none'; 
 
     button2.addEventListener('click', function() {
         const sectionDisplayStyle = window.getComputedStyle(section).getPropertyValue('display');
@@ -160,11 +162,13 @@ document.addEventListener('DOMContentLoaded', function() {
             section2.style.display = 'block'; 
             section3.style.display = 'block'; 
             section4.style.display = 'block'; 
+            section5.style.display = 'block'; 
         } else {
             section.style.display = 'none';
             section2.style.display = 'none'; 
             section3.style.display = 'none'; 
             section4.style.display = 'none'; 
+            section5.style.display = 'none'; 
         }
     });
 });

@@ -4,6 +4,24 @@
     padding:0px;
 }
 
+@media print {
+    @page {
+        size: landscape;
+        margin: 0;
+    }
+
+    header, main, #section4, #section5 {
+        page-break-inside: avoid;
+    }
+    
+    body {
+        zoom: 79%;
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact;
+    }
+}
+
+
 header{
     text-align: center;
 }
