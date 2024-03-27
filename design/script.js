@@ -1372,29 +1372,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    var basePrevInput = document.getElementById('baseprev');
-    var previdenciaInput = document.getElementById('previdencia');
-    var prevdevInput = document.getElementById('prevdev');
-    var prevpagTd = document.getElementById('prevpag');
 
-    function calcularResultado() {
-        var basePrev = parseFloat(basePrevInput.value.replace(',', '.'));
-        var previdencia = parseFloat(previdenciaInput.value.replace(',', '.'));
-
-        var resultado = basePrev * (previdencia / 100);
-        prevdevInput.value = 'R$ ' + resultado.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-        prevpagTd.textContent = 'R$ ' + resultado.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
-
-    basePrevInput.addEventListener('input', function() {
-        calcularResultado();
-    });
-
-    previdenciaInput.addEventListener('input', function() {
-        calcularResultado();
-    });
-});
 
 /* function calcularPrev() {
     var multindiceText = document.getElementById("multindice").textContent.trim();
@@ -1438,7 +1416,7 @@ function calcularPrev() {
 
             if (!isNaN(pref)) {
                 if (pref < totalatual) {
-                    var porcentagem = (multindice * selic / totalatual) * 100;
+                    var porcentagem = ((multindice * selic) / totalatual) * 100;
                     valorBasePrev = (porcentagem * pref) / 100;
                 } else {
                     valorBasePrev = multindice * selic;
@@ -1455,6 +1433,38 @@ function calcularPrev() {
         document.getElementById("baseprev").value = ""; 
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    var basePrevInput = document.getElementById('baseprev');
+    var previdenciaInput = document.getElementById('previdencia');
+    var prevdevInput = document.getElementById('prevdev');
+    var prevpagTd = document.getElementById('prevpag');
+
+    function calcularResultado() {
+        var basePrevText = basePrevInput.value.replace(/[^\d,.]/g, ''); 
+        var previdenciaText = previdenciaInput.value.replace(/[^\d,.]/g, '');
+
+        if (basePrevText !== '' && previdenciaText !== '') {
+            var basePrev = parseFloat(basePrevText.replace(',', '.'));
+            var previdencia = parseFloat(previdenciaText.replace(',', '.'));
+
+            if (!isNaN(basePrev) && !isNaN(previdencia)) {
+                var resultado = basePrev * (previdencia / 100);
+                prevdevInput.value = 'R$ ' + resultado.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                prevpagTd.textContent = 'R$ ' + resultado.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                return; 
+            }
+        }
+
+        prevdevInput.value = 'R$ ERRO';
+        prevpagTd.textContent = 'R$ ERRO';
+    }
+
+    basePrevInput.addEventListener('input', calcularResultado);
+    previdenciaInput.addEventListener('input', calcularResultado);
+
+    calcularResultado();
+});
 
 
 document.addEventListener("DOMContentLoaded", function() {
