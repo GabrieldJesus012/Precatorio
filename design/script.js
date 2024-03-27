@@ -1300,14 +1300,26 @@ function calcularMultiplicacao() {
         // Remover formatação do valorPref
         valorPref = valorPref.replace(/[^\d,]/g, '');
         valorPref = valorPref.replace(",", ".");
-        if (parseFloat(valorPref) < totalat) {
-            totalat = parseFloat(valorPref);
+        var novoTotal = parseFloat(valorPref); // Converta o valorPref para um número
+    
+        // Verifique se o novoTotal é menor que o totalat
+        if (novoTotal < totalat) {
+            totalat = novoTotal;
+            // Atualize o elemento HTML com o novo valor de totalat
+            document.getElementById("valordev").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        } else {
+            // Caso contrário, redefina o totalat para seu valor original
+            totalat = atualizacao + atualizacao1;
+            // Atualize o elemento HTML com o valor original de totalat
             document.getElementById("valordev").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
-    }
-    else {
+    } else {
+        // Se não for "Preferencial" ou valorPref estiver vazio, redefina totalat para seu valor original
+        totalat = atualizacao + atualizacao1;
+        // Atualize o elemento HTML com o valor original de totalat
         document.getElementById("valordev").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
+    
 
     document.getElementById("totatual").textContent = "R$ " + (atualizacao + atualizacao1).toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
@@ -1384,7 +1396,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-function calcularPrev() {
+/* function calcularPrev() {
     var multindiceText = document.getElementById("multindice").textContent.trim();
     var selicText = document.getElementById("selic").textContent.trim();
 
@@ -1397,6 +1409,48 @@ function calcularPrev() {
         document.getElementById("baseprev").value = valorBasePrev.toFixed(2).replace(".", ",");
     } else {
         // Caso não haja valor calculado, exibe o placeholder
+        document.getElementById("baseprev").placeholder = "Informe o Valor";
+        document.getElementById("baseprev").value = ""; 
+    }
+}
+---- caso erro
+*/ 
+
+function calcularPrev() {
+    var multindiceText = document.getElementById("multindice").textContent.trim().replace(",", ".");
+    var selicText = document.getElementById("selic").textContent.trim().replace(",", ".");
+    var tipoCalculo = document.getElementById("tipoCalculo").value;
+
+    // Obter o valor formatado do campo pref
+    var prefText = document.getElementById("pref").value.trim();
+
+    if (multindiceText !== "" && selicText !== "") {
+        var multindice = parseFloat(multindiceText);
+        var selic = parseFloat(selicText);
+        var totalatual = parseFloat(document.getElementById("totatual").textContent.trim().replace("R$", "").trim().replace(",", "."));
+
+        var valorBasePrev;
+
+        if (tipoCalculo === "Preferencial" && prefText !== "" && totalatual !== 0) {
+            // Remover o prefixo "R$" e substituir a vírgula por ponto para conversão para número
+            prefText = prefText.replace("R$", "").replace(",", ".");
+            var pref = parseFloat(prefText);
+
+            if (!isNaN(pref)) {
+                if (pref < totalatual) {
+                    var porcentagem = (multindice * selic / totalatual) * 100;
+                    valorBasePrev = (porcentagem * pref) / 100;
+                } else {
+                    valorBasePrev = multindice * selic;
+                }
+            }
+        } else {
+            valorBasePrev = multindice * selic;
+        }
+
+        // Exibir o resultado formatado na interface do usuário
+        document.getElementById("baseprev").value = "R$ " + (valorBasePrev || 0).toFixed(2).replace(".", ",");
+    } else {
         document.getElementById("baseprev").placeholder = "Informe o Valor";
         document.getElementById("baseprev").value = ""; 
     }
