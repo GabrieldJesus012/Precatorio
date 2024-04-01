@@ -72,28 +72,28 @@
 
             <tr id="ocultnorm">
                 <td><label for="pag">Há Pagamento:(Informe R$)</label></td>
-                <td><input type="text" name="pag" id="pag" onblur="formatarCampoInput();mostrarOcultarTabela();mostrarValorPagamento()" autocomplete="off"></td>
+                <td><input type="text" name="pag" id="pag" onblur="formatarCampoInput();mostrarOcultarTabela();mostrarValorPagamento()" onchange="calcularIndice()" autocomplete="off"></td>
             </tr>
             <tr id="ocultnorm1">
                 <td> Data do Pagamento:</td>
                 <td>
-                    <select onchange="atualizarData()">
+                    <select id="mespag" onchange="atualizarData(); calcularIndice()">
                         <option value="" disabled selected>Selecione</option>
-                        <option>janeiro</option>
-                        <option>fevereiro</option>
-                        <option>março</option>
-                        <option>abril</option>
-                        <option>maio</option>
-                        <option>junho</option>
-                        <option>julho</option>
-                        <option>agosto</option>
-                        <option>setembro</option>
-                        <option>outubro</option>
-                        <option>novembro</option>
-                        <option>dezembro</option>
+                        <option value="janeiro pag">janeiro</option>
+                        <option value="fevereiro pag">fevereiro</option>
+                        <option value="março pag">março</option>
+                        <option value="abril pag">abril</option>
+                        <option value="maio pag">maio</option>
+                        <option value="junho pag">junho</option>
+                        <option value="julho pag">julho</option>
+                        <option value="agosto pag">agosto</option>
+                        <option value="setembro pag">setembro</option>
+                        <option value="outubro pag">outubro</option>
+                        <option value="novembro pag">novembro</option>
+                        <option value="dezembro pag">dezembro</option>
                     </select>
                     <br>/ <br>
-                    <input type="number" id="anopag" placeholder="Ano do Pagamento" oninput="atualizarData()" >
+                    <input type="number" id="anopag" placeholder="Ano do Pagamento" oninput="atualizarData()" onchange="calcularIndice()">
                 </td>
             </tr>
 
@@ -186,7 +186,7 @@
                 <td id="datapag"></td>
                 <td id="valorPagamento"></td>
                 <td id="indicepag"></td>
-                <td></td>
+                <td id="multindicepag"></td>
                 <td></td>
                 <td></td>
                 <td></td>

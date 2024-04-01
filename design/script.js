@@ -72,7 +72,6 @@ function formatarParaReal(valor) {
     return "R$ " + valor;
 }
 
-
 function formatarCampoInput() {
     var campoInput = document.getElementById("pag");
     var prefInput = document.getElementById("pref");
@@ -110,6 +109,8 @@ function mostrarOcultarTabela() {
 //funcion para data
 function atualizarData() {
     var mesSelecionado = document.querySelector("#ocultnorm1 select").value;
+    mesSelecionado = mesSelecionado.replace(" pag", ""); 
+    mesSelecionado = mesSelecionado.charAt(0).toUpperCase() + mesSelecionado.slice(1);
     
     var anoDigitado = document.querySelector("#anopag").value;
     
@@ -231,6 +232,9 @@ function atualizarValor2() {
 function calcularIndice() {
     var mesSelecionado = document.getElementById("mes").value;
     var anoSelecionado = document.getElementById("ano").value;
+    var mesPagamento = document.getElementById("mespag").value.split(" ")[0]; 
+    var anoPagamento = document.getElementById("anopag").value;
+
     var tabelaIndices = {
         "janeiro, 2005":	2.5296912,
         "fevereiro, 2005":	2.5126055,
@@ -441,18 +445,28 @@ function calcularIndice() {
     var chave = mesSelecionado + ", " + anoSelecionado;
     var valorIndice = tabelaIndices[chave];
 
-    if (valorIndice !== undefined) {
+    var chavePagamento = mesPagamento + ", " + anoPagamento;
+    var valorIndicePagamento = tabelaIndices[chavePagamento];
+
+    if (valorIndice !== undefined || valorIndicePagamento !== undefined) {
         document.getElementById("indice").textContent = valorIndice.toFixed(7).replace(".", ",");
         document.getElementById("indice2").textContent = valorIndice.toFixed(7).replace(".", ",");
+        document.getElementById("indicepag").textContent = valorIndicePagamento.toFixed(7).replace(".", ",");
 
         var valorPrincipal = parseFloat(document.getElementById("valprin").value.replace(",", ".")).toFixed(2);
         var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", ".")).toFixed(2);
+
+        var valorPagamento = parseFloat(document.getElementById("pag").value.replace(/[^\d.,]/g, '').replace(",", "."));
 
         var multiplicacaoPrincipal = parseFloat(valorIndice.toFixed(7)) * parseFloat(valorPrincipal);
         document.getElementById("multindice").textContent = multiplicacaoPrincipal.toFixed(2).replace(".", ",");
 
         var multiplicacaoJuros = parseFloat(valorIndice.toFixed(7)) * parseFloat(valorJuros);
         document.getElementById("multindice2").textContent = multiplicacaoJuros.toFixed(2).replace(".", ",");
+
+        var multiplicacaoPagamento = parseFloat(valorIndicePagamento.toFixed(7)) * valorPagamento;
+
+        document.getElementById("multindicepag").textContent = multiplicacaoPagamento.toFixed(2).replace(".", ",");
 
         var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", "."));
         document.getElementById("jur").textContent = multiplicacaoJuros.toFixed(2).replace(".", ",");
