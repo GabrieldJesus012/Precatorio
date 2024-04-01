@@ -107,6 +107,19 @@ function mostrarOcultarTabela() {
     }
 }
 
+//funcion para data
+function atualizarData() {
+    var mesSelecionado = document.querySelector("#ocultnorm1 select").value;
+    
+    var anoDigitado = document.querySelector("#anopag").value;
+    
+    document.querySelector("#datapag").textContent = mesSelecionado + "/" + anoDigitado;
+}
+
+function mostrarValorPagamento() {
+    var valorPagamento = document.getElementById("pag").value;
+    document.getElementById("valorPagamento").textContent = valorPagamento;
+}
 
 
 //BASE DE CÁLCULO

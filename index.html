@@ -72,12 +72,12 @@
 
             <tr id="ocultnorm">
                 <td><label for="pag">Há Pagamento:(Informe R$)</label></td>
-                <td><input type="text" name="pag" id="pag" onblur="formatarCampoInput();mostrarOcultarTabela()" autocomplete="off"></td>
+                <td><input type="text" name="pag" id="pag" onblur="formatarCampoInput();mostrarOcultarTabela();mostrarValorPagamento()" autocomplete="off"></td>
             </tr>
             <tr id="ocultnorm1">
                 <td> Data do Pagamento:</td>
                 <td>
-                    <select>
+                    <select onchange="atualizarData()">
                         <option value="" disabled selected>Selecione</option>
                         <option>janeiro</option>
                         <option>fevereiro</option>
@@ -93,7 +93,7 @@
                         <option>dezembro</option>
                     </select>
                     <br>/ <br>
-                    <input type="number" id="anopag" placeholder="Ano do Pagamento">
+                    <input type="number" id="anopag" placeholder="Ano do Pagamento" oninput="atualizarData()" >
                 </td>
             </tr>
 
@@ -183,9 +183,9 @@
                 <th>Valor Pago Atualizado</th>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td id="datapag"></td>
+                <td id="valorPagamento"></td>
+                <td id="indicepag"></td>
                 <td></td>
                 <td></td>
                 <td></td>
