@@ -1470,6 +1470,12 @@ function calcularMultiplicacaoPag(){
 
     var somapag = valorIndicePag + multiplicacaoPag
     document.getElementById("somajurpag").textContent = somapag.toFixed(2).replace(".", ",");
+
+    var valorSelicpag = parseFloat(document.getElementById("selicpag").textContent.replace(",", "."));
+
+    var atualizacaopag = somapag * valorSelicpag;
+
+    document.getElementById("atualizacaopag").textContent = atualizacaopag.toFixed(2).replace(".", ",");
 }
 
 function calcularMultiplicacao() {
