@@ -448,13 +448,13 @@ function calcularIndice() {
     var chavePagamento = mesPagamento + ", " + anoPagamento;
     var valorIndicePagamento = tabelaIndices[chavePagamento];
 
-    if (valorIndice !== undefined || valorIndicePagamento !== undefined) {
-        document.getElementById("indice").textContent = valorIndice.toFixed(7).replace(".", ",");
-        document.getElementById("indice2").textContent = valorIndice.toFixed(7).replace(".", ",");
-        document.getElementById("indicepag").textContent = valorIndicePagamento.toFixed(7).replace(".", ",");
+    if(valorIndicePagamento !== undefined){
+        document.getElementById("indicepag").style.display = ""; 
+        document.getElementById("multindicepag").style.display = "";
+        document.getElementById("indpag").style.display = ""; 
+        document.getElementById("multpag").style.display = "";
 
-        var valorPrincipal = parseFloat(document.getElementById("valprin").value.replace(",", ".")).toFixed(2);
-        var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", ".")).toFixed(2);
+        document.getElementById("indicepag").textContent = valorIndicePagamento.toFixed(7).replace(".", ",");
 
         var valorPagamento = document.getElementById("pag").value.trim();
 
@@ -462,15 +462,28 @@ function calcularIndice() {
         valorPagamento = valorPagamento.replace(",", ".");
         var novoPagamento = parseFloat(valorPagamento);
 
+        var multiplicacaoPagamento = parseFloat(valorIndicePagamento.toFixed(7)) * novoPagamento;
+
+        document.getElementById("multindicepag").textContent = multiplicacaoPagamento.toFixed(2).replace(".", ",");
+    }else{
+        document.getElementById("indicepag").style.display = "none";
+        document.getElementById("multindicepag").style.display = "none";
+        document.getElementById("indpag").style.display = "none";
+        document.getElementById("multpag").style.display = "none";
+    }
+
+    if (valorIndice !== undefined) {
+        document.getElementById("indice").textContent = valorIndice.toFixed(7).replace(".", ",");
+        document.getElementById("indice2").textContent = valorIndice.toFixed(7).replace(".", ",");
+
+        var valorPrincipal = parseFloat(document.getElementById("valprin").value.replace(",", ".")).toFixed(2);
+        var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", ".")).toFixed(2);
+
         var multiplicacaoPrincipal = parseFloat(valorIndice.toFixed(7)) * parseFloat(valorPrincipal);
         document.getElementById("multindice").textContent = multiplicacaoPrincipal.toFixed(2).replace(".", ",");
 
         var multiplicacaoJuros = parseFloat(valorIndice.toFixed(7)) * parseFloat(valorJuros);
         document.getElementById("multindice2").textContent = multiplicacaoJuros.toFixed(2).replace(".", ",");
-
-        var multiplicacaoPagamento = parseFloat(valorIndicePagamento.toFixed(7)) * novoPagamento;
-
-        document.getElementById("multindicepag").textContent = multiplicacaoPagamento.toFixed(2).replace(".", ",");
 
         var valorJuros = parseFloat(document.getElementById("valjur").value.replace(",", "."));
         document.getElementById("jur").textContent = multiplicacaoJuros.toFixed(2).replace(".", ",");
