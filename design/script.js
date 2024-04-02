@@ -1340,29 +1340,83 @@ function formatDate(date) {
     return `${day}/${month}/${year}`;
 }
 
+function formatDatePag(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
 function getLastMonthDate() {
     const today = new Date();
     const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
     return formatDate(lastMonth);
 }
 
-/* VERIFICAR
-function getSelectedMonthDate() {
-    const selectedMonth = document.getElementById("mespag").value.split(" ")[0];
-    const selectedYear = document.getElementById("anopag").value;
-    return `01/${selectedMonth}/${selectedYear}`;
+function getLastMonthDatePag() {
+    const today = new Date();
+    const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+    return formatDatePag(lastMonth);
 }
 
-const urlpag = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json&dataInicial=01/12/2021&dataFinal=${getLastMonthDate()}`;
-fetch(urlpag)
-.then(response => response.json())
-.then(data => {
-    const sumpag = data.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
-    const resultpag = 1 + sumpag / 100;
-    document.getElementById('selicpag').textContent = resultpag.toFixed(4).replace(".", ",");
+function getSelectedMonthDatePag() {
+    const selectedMonthYear = document.getElementById("mespag").value;
+    const selectedYear = document.getElementById("anopag").value;
     
-})
-*/
+    const monthMap = {
+        'janeiro pag': '01',
+        'fevereiro pag': '02',
+        'março pag': '03',
+        'abril pag': '04',
+        'maio pag': '05',
+        'junho pag': '06',
+        'julho pag': '07',
+        'agosto pag': '08',
+        'setembro pag': '09',
+        'outubro pag': '10',
+        'novembro pag': '11',
+        'dezembro pag': '12'
+    };
+    
+    const selectedMonth = monthMap[selectedMonthYear.toLowerCase()];
+    
+    return `${selectedMonth.padStart(2, '0')}/01/${selectedYear}`;
+}
+
+
+function getStartDatePag() {
+    const selectedDate = new Date(getSelectedMonthDatePag());
+    const december2021 = new Date('2021-12-01');
+    const selectedDateTimestamp = selectedDate.getTime();
+    const december2021Timestamp = december2021.getTime();
+    
+    if (selectedDateTimestamp > december2021Timestamp) {
+        return formatDatePag(selectedDate);
+    } else {
+        return formatDatePag(december2021);
+    }
+}
+
+
+function fetchDataForSelicPag() {
+    const startDatePag = getStartDatePag();
+    const endDatePag = getLastMonthDatePag();
+
+    const urlpag = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json&dataInicial=${startDatePag}&dataFinal=${endDatePag}`;
+    
+    fetch(urlpag)
+    .then(response => response.json())
+    .then(data => {
+        const sumpag = data.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
+        const resultpag = 1 + sumpag / 100;
+        document.getElementById('selicpag').textContent = resultpag.toFixed(4).replace(".", ",");
+    })
+    .catch(error => {
+        console.error('Erro ao obter os dados:', error);
+        document.getElementById('selicpag').textContent = 'Erro ao obter os dados';
+    });
+}
+
 
 const url = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json&dataInicial=01/12/2021&dataFinal=${getLastMonthDate()}`;
 fetch(url)

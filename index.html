@@ -77,7 +77,7 @@
             <tr id="ocultnorm1">
                 <td> Data do Pagamento:</td>
                 <td>
-                    <select id="mespag" onchange="atualizarData(); calcularIndice()" onclick="calcularJuros()">
+                    <select id="mespag" onchange="atualizarData(); calcularIndice()" onclick="calcularJuros();fetchDataForSelicPag()">
                         <option value="" disabled selected>Selecione</option>
                         <option value="janeiro pag">janeiro</option>
                         <option value="fevereiro pag">fevereiro</option>
@@ -93,7 +93,7 @@
                         <option value="dezembro pag">dezembro</option>
                     </select>
                     <br>/ <br>
-                    <input type="number" id="anopag" placeholder="Ano do Pagamento" oninput="atualizarData()" onchange="calcularIndice();calcularJuros()">
+                    <input type="number" id="anopag" placeholder="Ano do Pagamento" oninput="atualizarData();fetchDataForSelicPag()" onchange="calcularIndice();calcularJuros()">
                 </td>
             </tr>
 
