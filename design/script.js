@@ -566,6 +566,10 @@ function calcularJuros() {
     var plano= document.getElementById("planoO").value;
     const dataSelecionada = `${mes.charAt(0).toUpperCase() + mes.slice(1)}, ${ano}`;
 
+    var mesPagamento = document.getElementById("mespag").value.split(" ")[0]; 
+    var anoPagamento = document.getElementById("anopag").value;
+    const dataPagamento = `${mesPagamento.charAt(0).toUpperCase() + mesPagamento.slice(1)}, ${anoPagamento}`;
+
     var dadosJuros = {
         "Outubro, 1964": 0.5000,
         "Novembro, 1964": 0.5000,
@@ -1256,7 +1260,9 @@ function calcularJuros() {
     };
 
     let jurosAcumulados = 0; 
-    let somar = false; // Controla se devemos começar a somar
+    let jurosAcumuladospag = 0;
+    let somar = false; 
+    let somarp= false;
     
         // Verifica se deve deduzir algum valor com base no plano selecionado
         let deducao = 0;
@@ -1283,12 +1289,42 @@ function calcularJuros() {
         }
     }
 
+    for (const [data, taxa] of Object.entries(dadosJuros)) {
+        if (data === dataPagamento) {
+            somarp = true; 
+        }
+        if (somarp) {
+            jurosAcumuladospag += parseFloat(taxa); 
+        }
+    }
+
+    if (jurosAcumuladospag === 0) {
+        document.getElementById('jurospag').style.display = 'none';
+        document.getElementById('multijurospag').style.display = 'none';
+        document.getElementById('jurpag').style.display = 'none';
+        document.getElementById('multjupag').style.display = 'none';
+        document.getElementById('somjupag').style.display = 'none';
+        document.getElementById('somajurpag').style.display = 'none';
+    } else {
+        document.getElementById('jurospag').style.display = "";
+        document.getElementById('multijurospag').style.display = "";
+        document.getElementById('jurpag').style.display = "";
+        document.getElementById('multjupag').style.display = "";
+        document.getElementById('somjupag').style.display = "";
+        document.getElementById('somajurpag').style.display = "";
+    }
+    
         // Deduz o valor calculado
         jurosAcumulados -= deducao;
+
+        jurosAcumuladospag -=deducao;
     
     // Exibe o resultado na célula especificada
     const resultado = jurosAcumulados.toFixed(4).replace('.', ',') + '%'; // Ajuste para 4 casas decimais
     document.getElementById('juroscal').textContent = resultado;
+
+    const resultadopag = jurosAcumuladospag.toFixed(4).replace('.', ',') + '%';
+    document.getElementById('jurospag').textContent = resultadopag;
 
     calcularMultiplicacao();
 }

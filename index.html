@@ -77,7 +77,7 @@
             <tr id="ocultnorm1">
                 <td> Data do Pagamento:</td>
                 <td>
-                    <select id="mespag" onchange="atualizarData(); calcularIndice()">
+                    <select id="mespag" onchange="atualizarData(); calcularIndice()" onclick="calcularJuros()">
                         <option value="" disabled selected>Selecione</option>
                         <option value="janeiro pag">janeiro</option>
                         <option value="fevereiro pag">fevereiro</option>
@@ -93,7 +93,7 @@
                         <option value="dezembro pag">dezembro</option>
                     </select>
                     <br>/ <br>
-                    <input type="number" id="anopag" placeholder="Ano do Pagamento" oninput="atualizarData()" onchange="calcularIndice()">
+                    <input type="number" id="anopag" placeholder="Ano do Pagamento" oninput="atualizarData()" onchange="calcularIndice();calcularJuros()">
                 </td>
             </tr>
 
@@ -178,7 +178,7 @@
                 <th id="multpag"> Valor Pago I.C</th>
                 <th id="jurpag"> Juros (%) </th>
                 <th id="multjupag"> Valor Juros</th>
-                <th> Valor atualizado com Juros</th>
+                <th id="somjupag"> Valor atualizado com Juros</th>
                 <th>Índice de Atualização – Selic</th>
                 <th>Valor Pago Atualizado</th>
             </tr>
@@ -189,7 +189,7 @@
                 <td id="multindicepag"></td>
                 <td id="jurospag"></td>
                 <td id="multijurospag"></td>
-                <td></td>
+                <td id="somajurpag"></td>
                 <td></td>
                 <td></td>
             </tr>
