@@ -465,6 +465,8 @@ function calcularIndice() {
         var multiplicacaoPagamento = parseFloat(valorIndicePagamento.toFixed(7)) * novoPagamento;
 
         document.getElementById("multindicepag").textContent = multiplicacaoPagamento.toFixed(2).replace(".", ",");
+
+        calcularMultiplicacaoPag();
     }else{
         document.getElementById("indicepag").style.display = "none";
         document.getElementById("multindicepag").style.display = "none";
@@ -1313,7 +1315,7 @@ function calcularJuros() {
         document.getElementById('somjupag').style.display = "";
         document.getElementById('somajurpag').style.display = "";
     }
-    
+
         // Deduz o valor calculado
         jurosAcumulados -= deducao;
 
@@ -1327,6 +1329,7 @@ function calcularJuros() {
     document.getElementById('jurospag').textContent = resultadopag;
 
     calcularMultiplicacao();
+    calcularMultiplicacaoPag();
 }
 
 
@@ -1377,6 +1380,18 @@ fetch(url)
     document.getElementById("selic1").appendChild(inputSelicCopy);
 });
 
+
+function calcularMultiplicacaoPag(){
+    var valorIndicePag = parseFloat(document.getElementById("multindicepag").textContent.replace(",", "."));
+    var valorJurosPag = parseFloat(document.getElementById("jurospag").textContent.replace("%", "").replace(",", "."));
+
+    var multiplicacaoPag = valorIndicePag * (valorJurosPag/100);
+    
+    document.getElementById("multijurospag").textContent = multiplicacaoPag.toFixed(2).replace(".", ",");
+
+    var somapag = valorIndicePag + multiplicacaoPag
+    document.getElementById("somajurpag").textContent = somapag.toFixed(2).replace(".", ",");
+}
 
 function calcularMultiplicacao() {
     var valorIndice = parseFloat(document.getElementById("multindice").textContent.replace(",", "."));
