@@ -1346,6 +1346,24 @@ function getLastMonthDate() {
     return formatDate(lastMonth);
 }
 
+/* VERIFICAR
+function getSelectedMonthDate() {
+    const selectedMonth = document.getElementById("mespag").value.split(" ")[0];
+    const selectedYear = document.getElementById("anopag").value;
+    return `01/${selectedMonth}/${selectedYear}`;
+}
+
+const urlpag = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json&dataInicial=01/12/2021&dataFinal=${getLastMonthDate()}`;
+fetch(urlpag)
+.then(response => response.json())
+.then(data => {
+    const sumpag = data.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
+    const resultpag = 1 + sumpag / 100;
+    document.getElementById('selicpag').textContent = resultpag.toFixed(4).replace(".", ",");
+    
+})
+*/
+
 const url = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json&dataInicial=01/12/2021&dataFinal=${getLastMonthDate()}`;
 fetch(url)
 .then(response => response.json())
@@ -1357,7 +1375,6 @@ fetch(url)
     
     calcularMultiplicacao();
     calcularPrev();
-
 })
 
 .catch(error => {
