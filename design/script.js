@@ -1390,10 +1390,10 @@ function getStartDatePag() {
     const selectedDateTimestamp = selectedDate.getTime();
     const december2021Timestamp = december2021.getTime();
     
-    if (selectedDateTimestamp > december2021Timestamp) {
+    if (selectedDateTimestamp >= december2021Timestamp) {
         return formatDatePag(selectedDate);
     } else {
-        return formatDatePag(december2021);
+        return '01/12/2021'; 
     }
 }
 
@@ -1414,6 +1414,14 @@ function fetchDataForSelicPag() {
     .catch(error => {
         console.error('Erro ao obter os dados:', error);
         document.getElementById('selicpag').textContent = 'Erro ao obter os dados';
+        document.getElementById("selicpag").textContent = "";
+        var inputSelic = document.createElement("input");
+        inputSelic.type = "number";
+        inputSelic.id = "selicInput";
+        inputSelic.placeholder = "Informe a SELIC";
+        inputSelic.style.marginTop = "5px";
+
+        document.getElementById("selicpag").appendChild(inputSelic);
     });
 }
 
