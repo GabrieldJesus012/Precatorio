@@ -1460,23 +1460,38 @@ fetch(url)
 });
 
 
-function calcularMultiplicacaoPag(){
+function calcularMultiplicacaoPag() {
+    var valorPagamento = document.getElementById("pag").value.trim();
+    valorPagamento = valorPagamento.replace(/[^\d,]/g, '');
+    valorPagamento = valorPagamento.replace(",", ".");
+    var novoPagamento = parseFloat(valorPagamento);
+
     var valorIndicePag = parseFloat(document.getElementById("multindicepag").textContent.replace(",", "."));
     var valorJurosPag = parseFloat(document.getElementById("jurospag").textContent.replace("%", "").replace(",", "."));
 
-    var multiplicacaoPag = valorIndicePag * (valorJurosPag/100);
-    
+    var multiplicacaoPag = valorIndicePag * (valorJurosPag / 100);
+
     document.getElementById("multijurospag").textContent = multiplicacaoPag.toFixed(2).replace(".", ",");
 
-    var somapag = valorIndicePag + multiplicacaoPag
+    var somapag = valorIndicePag + multiplicacaoPag;
     document.getElementById("somajurpag").textContent = somapag.toFixed(2).replace(".", ",");
 
     var valorSelicpag = parseFloat(document.getElementById("selicpag").textContent.replace(",", "."));
 
-    var atualizacaopag = somapag * valorSelicpag;
+    var atualizacaopag;
+
+    var mesSelecionado = document.getElementById("mespag").value.trim();
+    var anoSelecionado = parseInt(document.getElementById("anopag").value.trim());
+
+    if (anoSelecionado < 2021 || (anoSelecionado === 2021 && mesSelecionado !== "dezembro pag")) {
+        atualizacaopag = somapag * valorSelicpag;
+    } else {
+        atualizacaopag = novoPagamento * valorSelicpag;
+    }
 
     document.getElementById("atualizacaopag").textContent = atualizacaopag.toFixed(2).replace(".", ",");
 }
+
 
 function calcularMultiplicacao() {
     var valorIndice = parseFloat(document.getElementById("multindice").textContent.replace(",", "."));

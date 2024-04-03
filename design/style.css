@@ -214,6 +214,16 @@ h2{
     color: #13678A;
 }
 
+caption{
+    font-size: 1.2em;
+    color: #13678A;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+
+#atualizacaopag{
+    font-weight: bolder;
+}
 
 #section2 h2.tit {
     color: #13678A;
