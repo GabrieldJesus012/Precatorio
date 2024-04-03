@@ -38,6 +38,10 @@ function mostrarOcultar1() {
         tr.style.display = "none";
         inpag.value = "";
     }
+
+    if (inpag.value === "R$ 0,00" || inpag.value.trim() === "") {
+        tr.style.display = "none";
+    }
 }
 
 function mostrarOcultar2() {
@@ -77,6 +81,12 @@ function formatarCampoInput() {
     var prefInput = document.getElementById("pref");
     campoInput.value = formatarParaReal(campoInput.value);
     prefInput.value = formatarParaReal(prefInput.value);
+
+    if (campoInput.value === "R$ 0,00" || campoInput.value.trim() === "") {
+        document.getElementById("ocultnorm1").style.display = "none";
+    } else {
+        document.getElementById("ocultnorm1").style.display = "table-row";
+    }
 }
 
 //Tabela pagamento ou acordo
