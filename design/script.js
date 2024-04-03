@@ -1412,6 +1412,10 @@ function fetchDataForSelicPag() {
         inputSelic.style.marginTop = "5px";
 
         document.getElementById("selicpag").appendChild(inputSelic);
+
+        inputSelic.addEventListener("input", function() {
+            calcularMultiplicacaoPag();
+        });
     });
 }
 
@@ -1471,11 +1475,15 @@ function calcularMultiplicacaoPag() {
     var mesSelecionado = document.getElementById("mespag").value.trim();
     var anoSelecionado = parseInt(document.getElementById("anopag").value.trim());
 
+    if (isNaN(valorSelicpag)) {
+        valorSelicpag = parseFloat(document.getElementById("selicInput").value.trim());
+    }
+
     if (anoSelecionado < 2021 || (anoSelecionado === 2021 && mesSelecionado !== "dezembro pag")) {
         atualizacaopag = somapag * valorSelicpag;
     } else {
         atualizacaopag = novoPagamento * valorSelicpag;
-    }
+    }    
 
     document.getElementById("atualizacaopag").textContent = atualizacaopag.toFixed(2).replace(".", ",");
 }
