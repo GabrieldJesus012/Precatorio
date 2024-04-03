@@ -464,7 +464,6 @@ function calcularIndice() {
 
         document.getElementById("multindicepag").textContent = multiplicacaoPagamento.toFixed(2).replace(".", ",");
 
-        calcularMultiplicacaoPag();
     }else{
         document.getElementById("indicepag").style.display = "none";
         document.getElementById("multindicepag").style.display = "none";
