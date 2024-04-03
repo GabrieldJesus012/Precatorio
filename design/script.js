@@ -1683,8 +1683,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        prevdevInput.value = 'R$ ERRO';
-        prevpagTd.textContent = 'R$ ERRO';
+        prevdevInput.value = 'R$ 0,00';
+        prevpagTd.textContent = 'R$ 0,00';
     }
 
     basePrevInput.addEventListener('input', calcularResultado);
