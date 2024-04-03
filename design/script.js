@@ -91,7 +91,6 @@ function formatarCampoInput() {
 
 //Tabela pagamento ou acordo
 
-// Função para remover a formatação e converter para número
 function removerFormatacao(valor) {
     return parseFloat(valor.replace(/[^\d.,]/g, '').replace(",", "."));
 }
@@ -102,21 +101,18 @@ function mostrarOcultarTabela() {
     var valorPagamento = removerFormatacao(document.getElementById("pag").value);
     var tabela = document.getElementById("pagm");
 
-    // Verifica se a opção selecionada é "Preferencial"
     if (selectedOption.value === "Preferencial") {
-        tabela.style.display = "none"; // Oculta a tabela
+        tabela.style.display = "none"; 
         return;
     }
 
-    // Verifica se o valor do pagamento é diferente de zero e se é um número válido
     if (valorPagamento !== 0 && !isNaN(valorPagamento)) {
-        tabela.style.display = "table"; // Mostra a tabela
+        tabela.style.display = "table"; 
     } else {
-        tabela.style.display = "none"; // Oculta a tabela
+        tabela.style.display = "none"; 
     }
 }
 
-//funcion para data
 function atualizarData() {
     var mesSelecionado = document.querySelector("#ocultnorm1 select").value;
     mesSelecionado = mesSelecionado.replace(" pag", ""); 
@@ -135,7 +131,6 @@ function mostrarValorPagamento() {
 
 //BASE DE CÁLCULO
 
-// Função para formatar o valor para moeda brasileira
 function formatCurrency(value) {
     return parseFloat(value).toLocaleString('pt-BR', {
         style: 'currency',
@@ -146,13 +141,10 @@ function formatCurrency(value) {
 function handleInput(event) {
     const input = event.target;
     let value = input.value;
-    // Substitui ponto por vírgula apenas se não houver outra vírgula presente
     if (value.indexOf(',') === -1 && value.indexOf('.') !== -1) {
         value = value.replace('.', ',');
     }
-    // Remove caracteres não numéricos
     value = value.replace(/[^\d,]/g, '');
-    // Atualiza o valor no input
     input.value = value;
 }
 
@@ -172,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputPrincipal = document.getElementById('valprin');
     const inputJuros = document.getElementById('valjur');
 
-    // Event listeners para input de principal e juros
     inputPrincipal.addEventListener('input', function(event) {
         handleInput(event);
         updateTotal();
@@ -186,7 +177,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     inputJuros.addEventListener('blur', updateTotal);
-
     
     updateTotal();
     toggleRowsVisibility(false);
@@ -224,8 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-
 
 function atualizarValor() {
     var valorInserido = document.getElementById("valprin").value;
@@ -1276,7 +1264,6 @@ function calcularJuros() {
     let somar = false; 
     let somarp= false;
     
-        // Verifica se deve deduzir algum valor com base no plano selecionado
         let deducao = 0;
         if (plano === '2018') {
             deducao = 7.351400; //soma julho de 2017 a dez/2018
@@ -1290,14 +1277,12 @@ function calcularJuros() {
             deducao = 1.589100; //soma julho de 2021 a nov 2021 
         }
     
-
-    // Itera sobre os dados de juros a partir do mês e ano selecionados
     for (const [data, taxa] of Object.entries(dadosJuros)) {
         if (data === dataSelecionada) {
-            somar = true; // Começa a somar a partir dessa data
+            somar = true; 
         }
         if (somar) {
-            jurosAcumulados += (parseFloat(taxa)); // somar a taxa
+            jurosAcumulados += (parseFloat(taxa)); 
         }
     }
 
@@ -1326,13 +1311,11 @@ function calcularJuros() {
         document.getElementById('somajurpag').style.display = "";
     }
 
-        // Deduz o valor calculado
         jurosAcumulados -= deducao;
 
         jurosAcumuladospag -=deducao;
     
-    // Exibe o resultado na célula especificada
-    const resultado = jurosAcumulados.toFixed(4).replace('.', ',') + '%'; // Ajuste para 4 casas decimais
+    const resultado = jurosAcumulados.toFixed(4).replace('.', ',') + '%'; 
     document.getElementById('juroscal').textContent = resultado;
 
     const resultadopag = jurosAcumuladospag.toFixed(4).replace('.', ',') + '%';
@@ -1341,7 +1324,6 @@ function calcularJuros() {
     calcularMultiplicacao();
     calcularMultiplicacaoPag();
 }
-
 
 function formatDate(date) {
     const day = String(date.getDate()).padStart(2, '0');
@@ -1393,7 +1375,6 @@ function getSelectedMonthDatePag() {
     return `${selectedMonth.padStart(2, '0')}/01/${selectedYear}`;
 }
 
-
 function getStartDatePag() {
     const selectedDate = new Date(getSelectedMonthDatePag());
     const december2021 = new Date('2021-12-01');
@@ -1406,7 +1387,6 @@ function getStartDatePag() {
         return '01/12/2021'; 
     }
 }
-
 
 function fetchDataForSelicPag() {
     const startDatePag = getStartDatePag();
@@ -1434,7 +1414,6 @@ function fetchDataForSelicPag() {
         document.getElementById("selicpag").appendChild(inputSelic);
     });
 }
-
 
 const url = `https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados?formato=json&dataInicial=01/12/2021&dataFinal=${getLastMonthDate()}`;
 fetch(url)
@@ -1469,7 +1448,6 @@ fetch(url)
     document.getElementById("selic1").appendChild(inputSelicCopy);
 });
 
-
 function calcularMultiplicacaoPag() {
     var valorPagamento = document.getElementById("pag").value.trim();
     valorPagamento = valorPagamento.replace(/[^\d,]/g, '');
@@ -1502,7 +1480,6 @@ function calcularMultiplicacaoPag() {
     document.getElementById("atualizacaopag").textContent = atualizacaopag.toFixed(2).replace(".", ",");
 }
 
-
 function calcularMultiplicacao() {
     var valorIndice = parseFloat(document.getElementById("multindice").textContent.replace(",", "."));
     var valorJuros = parseFloat(document.getElementById("juroscal").textContent.replace("%", "").replace(",", "."));
@@ -1534,30 +1511,22 @@ function calcularMultiplicacao() {
     var tipoCalculo = document.getElementById("tipoCalculo").value;
     var valorPref = document.getElementById("pref").value.trim();
     if (tipoCalculo === "Preferencial" && valorPref !== "") {
-        // Remover formatação do valorPref
         valorPref = valorPref.replace(/[^\d,]/g, '');
         valorPref = valorPref.replace(",", ".");
-        var novoTotal = parseFloat(valorPref); // Converta o valorPref para um número
+        var novoTotal = parseFloat(valorPref); 
     
-        // Verifique se o novoTotal é menor que o totalat
         if (novoTotal < totalat) {
             totalat = novoTotal;
-            // Atualize o elemento HTML com o novo valor de totalat
             document.getElementById("valordev").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         } else {
-            // Caso contrário, redefina o totalat para seu valor original
             totalat = atualizacao + atualizacao1;
-            // Atualize o elemento HTML com o valor original de totalat
             document.getElementById("valordev").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
     } else {
-        // Se não for "Preferencial" ou valorPref estiver vazio, redefina totalat para seu valor original
         totalat = atualizacao + atualizacao1;
-        // Atualize o elemento HTML com o valor original de totalat
         document.getElementById("valordev").textContent = "R$ " + totalat.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
     
-
     document.getElementById("totatual").textContent = "R$ " + (atualizacao + atualizacao1).toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
@@ -1586,7 +1555,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
 document.addEventListener("DOMContentLoaded", function() {
     const previdenciaInput = document.getElementById("previdencia");
     previdenciaInput.addEventListener('input', function() {
@@ -1608,7 +1576,6 @@ document.addEventListener("DOMContentLoaded", function() {
         this.value = valor; 
     });
 });
-
 
 
 /* function calcularPrev() {
@@ -1635,8 +1602,6 @@ function calcularPrev() {
     var multindiceText = document.getElementById("multindice").textContent.trim().replace(",", ".");
     var selicText = document.getElementById("selic").textContent.trim().replace(",", ".");
     var tipoCalculo = document.getElementById("tipoCalculo").value;
-
-    // Obter o valor formatado do campo pref
     var prefText = document.getElementById("pref").value.trim();
 
     if (multindiceText !== "" && selicText !== "") {
@@ -1647,7 +1612,6 @@ function calcularPrev() {
         var valorBasePrev;
 
         if (tipoCalculo === "Preferencial" && prefText !== "" && totalatual !== 0) {
-            // Remover o prefixo "R$" e substituir a vírgula por ponto para conversão para número
             prefText = prefText.replace("R$", "").replace(",", ".");
             var pref = parseFloat(prefText);
 
@@ -1662,8 +1626,6 @@ function calcularPrev() {
         } else {
             valorBasePrev = multindice * selic;
         }
-
-        // Exibir o resultado formatado na interface do usuário
         document.getElementById("baseprev").value = "R$ " + (valorBasePrev || 0).toFixed(2).replace(".", ",");
     } else {
         document.getElementById("baseprev").placeholder = "Informe o Valor";
@@ -1684,7 +1646,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (basePrevText !== '' && previdenciaText !== '') {
             var basePrev = parseFloat(basePrevText.replace(',', '.'));
             var previdencia = parseFloat(previdenciaText.replace(',', '.'));
-
             if (!isNaN(basePrev) && !isNaN(previdencia)) {
                 var resultado = basePrev * (previdencia / 100);
                 prevdevInput.value = 'R$ ' + resultado.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -1692,11 +1653,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 return; 
             }
         }
-
         prevdevInput.value = 'R$ 0,00';
         prevpagTd.textContent = 'R$ 0,00';
     }
-
     basePrevInput.addEventListener('input', calcularResultado);
     previdenciaInput.addEventListener('input', calcularResultado);
 
@@ -1728,7 +1687,6 @@ document.addEventListener("DOMContentLoaded", function() {
             aliqirElement.value = '';
             return;
         }
-
         var valorCalculado = baseirValue / rraValue;
         var imposto = 0;
         var alquota = '';
@@ -1760,7 +1718,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
 //Deduções Acessórias
 
 function formatPorcentagem(input) {
@@ -1781,7 +1738,6 @@ function toggleAdvogadoInputs() {
     var hcontInputs = document.getElementById("hcontInputs");
     var tabela = document.getElementById("tabela2");
 
-    // Armazenar valores anteriores
     var valoresAnteriores = [];
     for (var i = 1; i <= numAdvogados; i++) {
         var nomeInput = document.getElementById(`nomeadv${i}`);
@@ -1795,10 +1751,8 @@ function toggleAdvogadoInputs() {
         });
     }
 
-    // Limpar conteúdo
     hcontInputs.innerHTML = '';
 
-    // Reconstruir elementos e preencher a tabela
     for (var i = 1; i <= numAdvogados; i++) {
         var advogadoInputs = `
             <div>
@@ -1815,7 +1769,6 @@ function toggleAdvogadoInputs() {
         hcontInputs.innerHTML += advogadoInputs;
     }
 
-    // Remover linhas extras da tabela se necessário
     var numRows = tabela.rows.length;
     for (var j = numRows - 1; j > parseInt(numAdvogados) + 1; j--) {
         tabela.deleteRow(j);
@@ -1824,7 +1777,6 @@ function toggleAdvogadoInputs() {
     if (numAdvogados === "0") {
         calcularMultiplicacao();
 
-    // Obtém o valor calculado de valordev após chamar calcularMultiplicacao()
     var outroValor = parseFloat(document.getElementById("valordev").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
 
     document.getElementById("valordev").textContent = "R$ " + outroValor.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -1834,13 +1786,10 @@ function toggleAdvogadoInputs() {
 
 
 function calcularMultiplicacaoPorcentagem(porcentagem) {
-    // Obter o valor total atual removendo o símbolo de moeda e qualquer separador de milhar
     var valorTotAtual = parseFloat(document.getElementById("valordev").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
 
-    // Calcular a multiplicação
     var multiplicacao = (valorTotAtual * porcentagem) / 100;
 
-    // Formatar o resultado com exatamente duas casas decimais
     var multiplicacaoFormatada = 'R$ ' + multiplicacao.toFixed(2).replace(".", ",");
 
     return multiplicacaoFormatada;
@@ -1849,7 +1798,6 @@ function calcularMultiplicacaoPorcentagem(porcentagem) {
 
 
 function calcularImpostoRenda(tipoDocumento, multiplicacaoPorcentagemStr) {
-    // Converter o valor de string para número
     var multiplicacaoPorcentagem = parseFloat(multiplicacaoPorcentagemStr.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
     
     if (!isNaN(multiplicacaoPorcentagem)) {
@@ -1870,7 +1818,6 @@ function calcularImpostoRenda(tipoDocumento, multiplicacaoPorcentagemStr) {
             }
         }
     }
-
     return 'R$ 0,00';
 }
 
@@ -1883,23 +1830,19 @@ function preencherTabela(index) {
     var cellIrPag = row.insertCell(3); 
     var cellTotExeq = row.insertCell(4); 
 
-    // Define o conteúdo das células
     var nomeAdvogado = document.getElementById(`nomeadv${index}`).value;
     var porcentagemAdvogado = parseFloat(document.getElementById(`porcentagemadv${index}`).value);
     var tipoDocumentoAdvogado = document.getElementById(`tipoDocumento${index}`).value;
     var multiplicacaoPorcentagem = calcularMultiplicacaoPorcentagem(porcentagemAdvogado);
     var impostoRenda = calcularImpostoRenda(tipoDocumentoAdvogado, multiplicacaoPorcentagem);
     
-     // Função para converter valores monetários em números
     function valorMonetarioParaNumero(valorMonetario) {
         return parseFloat(valorMonetario.replace('R$ ', '').replace(/\./g, '').replace(',', '.'));
     }
 
-    // Convertendo valores para números
     var valorPorcentagem = valorMonetarioParaNumero(multiplicacaoPorcentagem);
     var valorIrPag = valorMonetarioParaNumero(impostoRenda);
 
-    // Calculando o total exequente
     var totalExequente = valorPorcentagem - valorIrPag;
     
     cellNome.innerHTML = nomeAdvogado;
@@ -1909,7 +1852,6 @@ function preencherTabela(index) {
     cellTotExeq.innerHTML = 'R$ ' + totalExequente.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     cellTotExeq.classList.add("total-adv");
 
-    // Atualizar o valordev subtraindo a multiplicação da porcentagem do advogado
     var valorDevAtual = parseFloat(document.getElementById("valordev").textContent.replace("R$ ", "").replace(/\./g, "").replace(",", "."));
     var novaMultiplicacaoPorcentagem = valorMonetarioParaNumero(multiplicacaoPorcentagem);
     var novoValorDev = valorDevAtual - novaMultiplicacaoPorcentagem;
@@ -2025,5 +1967,5 @@ function adjustTextareaHeight(textarea) {
 }
 
 function cancelar() {
-    location.reload(); // Atualiza a página
+    location.reload(); 
 }
