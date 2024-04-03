@@ -1440,7 +1440,7 @@ fetch(url)
 
     var inputSelic = document.createElement("input");
     inputSelic.type = "number";
-    inputSelic.id = "selicInput";
+    inputSelic.id = "selicInputt";
     inputSelic.placeholder = "Informe a SELIC";
     inputSelic.style.marginTop = "5px";
 
@@ -1449,6 +1449,11 @@ fetch(url)
     document.getElementById("selic").appendChild(inputSelic);
 
     document.getElementById("selic1").appendChild(inputSelicCopy);
+
+    inputSelic.addEventListener("input", function() {
+        document.getElementById("selic1").querySelector("input").value = this.value;
+        calcularMultiplicacao();
+    });
 });
 
 function calcularMultiplicacaoPag() {
@@ -1504,7 +1509,11 @@ function calcularMultiplicacao() {
     document.getElementById("atuali").textContent = "R$ " + atuali.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
     var valorSelic = parseFloat(document.getElementById("selic").textContent.replace(",", "."));
-    
+
+    if (isNaN(valorSelic)) {
+        valorSelic = parseFloat(document.getElementById("selicInputt").value.trim());
+    }
+
     var atualizacao = somaa * valorSelic;
 
     document.getElementById("atualizacao").textContent = atualizacao.toFixed(2).replace(".", ",");
