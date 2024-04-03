@@ -1483,7 +1483,7 @@ function calcularMultiplicacaoPag() {
         atualizacaopag = somapag * valorSelicpag;
     } else {
         atualizacaopag = novoPagamento * valorSelicpag;
-    }    
+    }
 
     document.getElementById("atualizacaopag").textContent = atualizacaopag.toFixed(2).replace(".", ",");
 }
@@ -1505,7 +1505,7 @@ function calcularMultiplicacao() {
     document.getElementById("atuali").textContent = "R$ " + atuali.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
     var valorSelic = parseFloat(document.getElementById("selic").textContent.replace(",", "."));
-
+    
     var atualizacao = somaa * valorSelic;
 
     document.getElementById("atualizacao").textContent = atualizacao.toFixed(2).replace(".", ",");
